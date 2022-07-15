@@ -42,20 +42,21 @@ Minecraft中与运动相关的**实体运算**主要有以下六种：
 
 此处阻力的概念较为广泛，包括了空气阻力、流体阻力和地面阻力这三类在Mojang的设定中在某坐标轴上与该实体在该轴上速度大小成正比且反向的作用力。然而，如果试着将这一设定在牛顿力学中的表达式：
 
-$$\begin{matrix}
-\frac{dv}{dt} = - fv\#(2.1.1) \\
+$$\begin{matrix}\tag{2.1.2.a}\frac{dv}{dt} = a - fv
 \end{matrix}$$
 
-$$\begin{matrix}
-\frac{v}{v_{0}} = \lim_{t_{0} \rightarrow 0}\left( 1 - ft_{0} \right)^{\frac{t}{t_{0}}}\#(2.1.2) \\
+$$\begin{matrix}\tag{2.1.2.b}
+\frac{v}{v_{0}} = \lim_{t_{0} \rightarrow 0}\left( 1 - ft_{0} \right)^{\frac{t}{t_{0}}},a=0
 \end{matrix}$$
+
+$$\begin{matrix}\tag{2.1.2.c}v = v_0e^{-ft} + \frac{a}{f}(1-e^{-ft})\end{matrix}$$
 
 其中f是阻力系数。
 
 类推到Minecraft中你就会发现这一设定无法准确地被实现，因为*dt*和$t_{0}$不能小于1gt，更不能无限趋近于0。实际上，Mojang对这一运算的实现是将每个阻力作用时受阻力作用的各轴（一般含X、Y、Z轴，地面阻力一般只有X、Z轴）上的Motion减去对应轴上的阻力系数以$gt^{-1}$为单位的数值与对应轴上Motion的乘积，即
 
-$$\begin{matrix}
-M_{作用后} = M_{作用前} - f{t_{0}M}_{作用前} = M_{作用前}\left( 1 - ft_{0} \right)\#(2.1.3) \\
+$$\begin{matrix}\tag{2.1.3}
+M_{作用后} = M_{作用前} - f{t_{0}M}_{作用前} = M_{作用前}\left( 1 - ft_{0} \right)\\
 \end{matrix}$$
 
 其中*M*是某一受到阻力作用的轴上的Motion，*f*为对应的阻力系数，$t_{0} = 1gt$。
