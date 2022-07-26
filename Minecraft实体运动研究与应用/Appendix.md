@@ -19,10 +19,10 @@
 | 空中的恶魂和末影龙火球        | 0                  | 0.95***(3)*** | 1      | 1      | 0.85       | MAD      |
 | 空中的烈焰人火球/普通凋零之首 | 0         | 0.95***(3)*** | 0.3125 | 0.3125 | 0.265625   | MAD      |
 | 空中的鱼竿浮标     | 0.03               | 0.92            | 0.25   | 0.25   | 0.2125     | GMD      |
-| 空中的蓝色凋零之首            | 0                  | 0.73(3)  | 0.3125 | 0.3125 | 0.265625   | MAD      |
+| 空中的蓝色凋零之首            | 0                  | 0.73**(3)** | 0.3125 | 0.3125 | 0.265625   | MAD      |
 | 空中的羊驼唾沫                | 0.06***(3)*** | 0.99***(3)*** | 0.25   | 0.25   | 0.2125     | MDG      |
 | 无有效目标的潜影贝导弹  | 0.04               | 1               | 0.3125 | 0.3125 | 0.265625   | GM       |
-| 空中或地面上的玩家（除体积和眼部高度外也适用于大部分生物和盔甲架） | 0.08               | 水平0.91***(3)***，Y轴0.98***(3)*** | 站立时1.8，睡觉和濒死时0.2，鞘翅飞行和游泳和激流飞行时0.6，潜行时1.5 | > 站立、潜行、鞘翅飞行和游泳和激流飞行时0.6，睡觉和濒死时0.2 | > 睡觉时为0.2，游泳、鞘翅飞行和激流飞行时为0.4，潜行时为1.27，站立时为1.62 |              |
+| 空中或地面上的玩家（除体积和眼部高度外也适用于大部分生物和盔甲架） | 0.08               | 水平0.91***(3)***，Y轴0.98***(3)*** | 站立时1.8，睡觉和濒死时0.2，鞘翅飞行和游泳和激流飞行时0.6，潜行时1.5 | 站立、潜行、鞘翅飞行和游泳和激流飞行时0.6，睡觉和濒死时0.2 | 睡觉时为0.2，游泳、鞘翅飞行和激流飞行时为0.4，潜行时为1.27，站立时为1.62 |              |
 | 水中的玩家（除体积和眼部高度外也适用于大部分生物和盔甲架）         | 0.005              | 水平取决于深海探索者等级，Y轴0.8***(3)***  同上 | 同上  |    | 同上       | MDG      |
 | 较深熔岩中的玩家（除体积和眼部高度外也适用于大部分生物和盔甲架）   | 0.005              | 0.5| 同上| 同上 |   | 同上       |
 
@@ -39,178 +39,219 @@
 **MDA（移动-\>阻力-\>加速）**
 
 $$\begin{matrix}
-\Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n - 1} \right)}{1 - k}\#(B.1.1) \\
+\Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n - 1} \right)}{1 - k}
+\tag{B.1.1}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}\#(B.1.2) \\
+d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
+\tag{B.1.2}
 \end{matrix}$$
 
 $$\begin{matrix}
-v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}}{1 - k}\#(B.1.3) \\
+v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}}{1 - k}
+\tag{B.1.3}
 \end{matrix}$$
 
 $$\begin{matrix}
-n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack\#(B.1.4) \\
+n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
+\tag{B.1.4}
 \end{matrix}$$
 
 $$\begin{matrix}
-\Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}\#(B.1.5) \\
+\Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
+\tag{B.1.5}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{\max} = \frac{v_{0}t_{0}}{1 - k}\#(B.1.6) \\
+d_{\max} = \frac{v_{0}t_{0}}{1 - k}
+\tag{B.1.6}
 \end{matrix}$$
 
 $$\begin{matrix}
-{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n - 1} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}\#(B.1.7) \\
+{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n - 1} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
+\tag{B.1.7}
 \end{matrix}$$
 
 $${y = \frac{v_{y}(1 - k) - gt_{0}}{v_{x0}(1 - k)}x - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\lbrack 1 - \frac{x(1 - k)}{v_{x0}t_{0}}\rbrack y
 }\begin{matrix}
- = \frac{v_{y}(1 - k) - gt_{0}}{v_{z0}(1 - k)}z - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\left\lbrack 1 - \frac{z(1 - k)}{v_{z0}t_{0}} \right\rbrack\#(B.1.8) \\
+ = \frac{v_{y}(1 - k) - gt_{0}}{v_{z0}(1 - k)}z - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\left\lbrack 1 - \frac{z(1 - k)}{v_{z0}t_{0}} \right\rbrack
+\tag{B.1.8}
 \end{matrix}$$
 
 $$\begin{matrix}
-\tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( 1 - k^{n} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}\#(B.1.9) \\
+\tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( 1 - k^{n} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}
+\tag{B.1.9}
 \end{matrix}$$
 
 > **DMA（阻力-\>移动-\>加速）**
 
 $$\begin{matrix}
-\Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n} \right)}{1 - k}\#(B.2.1) \\
+\Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n} \right)}{1 - k}
+\tag{B.2.1}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}\#(B.2.2) \\
+d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
+\tag{B.2.2}
 \end{matrix}$$
 
 $$\begin{matrix}
-v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{k - k^{n + 1}} + \frac{at_{0}}{1 - k}\#(B.2.3) \\
+v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{k - k^{n + 1}} + \frac{at_{0}}{1 - k}
+\tag{B.2.3}
 \end{matrix}$$
 
 $$\begin{matrix}
-n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack\#(B.2.4) \\
+n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
+\tag{B.2.4}
 \end{matrix}$$
 
 $$\begin{matrix}
-\Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}\#(B.2.5) \\
+\Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}
+\tag{B.2.5}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{\max} = \frac{v_{0}t_{0}k}{1 - k}\#(B.2.6) \\
+d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
+\tag{B.2.6}
 \end{matrix}$$
 
 > **DAM（阻力-\>加速-\>移动）**
 
 $$\begin{matrix}
-\Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n} \right)}{1 - k}\#(B.3.1) \\
+\Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n} \right)}{1 - k}
+\tag{B.3.1}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}\#(B.3.2) \\
+d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}
+\tag{B.3.2}
 \end{matrix}$$
 
 $$\begin{matrix}
-v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{k - k^{n + 1}} + \frac{at_{0}}{1 - k}\#(B.3.3) \\
+v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{k - k^{n + 1}} + \frac{at_{0}}{1 - k}
+\tag{B.3.3}
 \end{matrix}$$
 
 $$\begin{matrix}
-n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}} \right\rbrack\#(B.3.4) \\
+n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}} \right\rbrack
+\tag{B.3.4}
 \end{matrix}$$
 
 $$\begin{matrix}
-\Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}\#(B.3.5) \\
+\Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
+\tag{B.3.5}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{\max} = \frac{v_{0}t_{0}k}{1 - k}\#(B.3.6) \\
+d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
+\tag{B.3.6}
 \end{matrix}$$
 
 > **MAD（移动-\>加速-\>阻力）**
 
 $$\begin{matrix}
-\Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n} \right)}{1 - k}\#(B.4.1) \\
+\Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n} \right)}{1 - k}
+\tag{B.4.1}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}\#(B.4.2) \\
+d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
+\tag{B.4.2}
 \end{matrix}$$
 
 $$\begin{matrix}
-v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{1 - k^{n}} + \frac{at_{0}k}{1 - k}\#(B.4.3) \\
+v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{1 - k^{n}} + \frac{at_{0}k}{1 - k}
+\tag{B.4.3}
 \end{matrix}$$
 
 $$\begin{matrix}
-n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k^{2}} \right\rbrack\#(B.4.4) \\
+n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k^{2}} \right\rbrack
+\tag{B.4.4}
 \end{matrix}$$
 
 $$\begin{matrix}
-\Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}\#(B.4.5) \\
+\Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}
+\tag{B.4.5}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{\max} = \frac{v_{0}t_{0}}{1 - k}\#(B.4.6) \\
+d_{\max} = \frac{v_{0}t_{0}}{1 - k}
+\tag{B.4.6}
 \end{matrix}$$
 
 > **AMD（加速-\>移动-\>阻力）**
 
 $$\begin{matrix}
-\Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n} \right)}{1 - k}\#(B.5.1) \\
+\Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n} \right)}{1 - k}
+\tag{B.5.1}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}\#(B.5.2) \\
+d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}
+\tag{B.5.2}
 \end{matrix}$$
 
 $$\begin{matrix}
-v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}k}{1 - k}\#(B.5.3) \\
+v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}k}{1 - k}
+\tag{B.5.3}
 \end{matrix}$$
 
 $$\begin{matrix}
-n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack\#(B.5.4) \\
+n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
+\tag{B.5.4}
 \end{matrix}$$
 
 $$\begin{matrix}
-\Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}\#(B.5.5) \\
+\Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
+\tag{B.5.5}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{\max} = \frac{v_{0}t_{0}}{1 - k}\#(B.5.6) \\
+d_{\max} = \frac{v_{0}t_{0}}{1 - k}
+\tag{B.5.6}
 \end{matrix}$$
 
 $$\begin{matrix}
-{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}\#(B.5.7) \\
+{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
+\tag{B.5.7}
 \end{matrix}$$
 
 $$\begin{matrix}
-\tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( k - k^{n + 1} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}\#(B.5.8) \\
+\tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( k - k^{n + 1} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}
+\tag{B.5.8}
 \end{matrix}$$
 
 > **ADM（加速-\>阻力-\>移动）**
 
 $$\begin{matrix}
-\Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n + 1} \right)}{1 - k}\#(B.6.1) \\
+\Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n + 1} \right)}{1 - k}
+\tag{B.6.1}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}\#(B.6.2) \\
+d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}
+\tag{B.6.2}
 \end{matrix}$$
 
 $$\begin{matrix}
-v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{k - k^{n + 1}} + \frac{at_{0}k}{1 - k}\#(B.6.3) \\
+v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{k - k^{n + 1}} + \frac{at_{0}k}{1 - k}
+\tag{B.6.3}
 \end{matrix}$$
 
 $$\begin{matrix}
-n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack\#(B.6.4) \\
+n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
+\tag{B.6.4}
 \end{matrix}$$
 
 $$\begin{matrix}
-\Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}\#(B.6.5) \\
+\Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}
+\tag{B.6.5}
 \end{matrix}$$
 
 $$\begin{matrix}
-d_{\max} = \frac{v_{0}t_{0}k}{1 - k}\#(B.6.6) \\
+d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
+\tag{B.6.6}
 \end{matrix}$$
 
 ## 附录C研究环境及辅助性工具
@@ -251,11 +292,7 @@ chunkmap是我主要在7月9-18日开发的一个用于可视化区块的加载�
 >
 > [https://www.mcbbs.net/thread-1225181-1-1.html](https://www.mcbbs.net/thread-1225181-1-1.html)。
 
-文中涉及所有源代码由minecraft fabric中genSources生成，mapping使用yarn-1.16.4+build.1-v6，如需要可以自行反编译。
-
-该报告的Word/PDF格式（并非最新）以及配套存档下载：
-
-> [https://wwz.lanzoui.com/b02iez40j](https://wwz.lanzoui.com/b02iez40j)  密码5a3e
+文中涉及所有源代码由minecraft fabric中genSources生成，mapping使用yarn-1.16.4+build.1-v2，如需要可以自行反编译。
 
 用到的一些小程序（请在classpath中包含反混淆的Minecraft及其运行库）：
 
@@ -295,196 +332,202 @@ chunkmap是我主要在7月9-18日开发的一个用于可视化区块的加载�
 
 ### **A**
 
-AI加速度
+AI加速度(6)
 
 ### **B**
 
-爆炸半径
+爆炸半径(5.15)
 
-爆炸半径利用率
+爆炸半径利用率(8.1)
 
-爆炸接触率
+爆炸接触率(5.15)
 
-爆炸利用率
+爆炸利用率(8.1)
 
-爆炸伤害半径 
+爆炸伤害半径(5.15)
 
-爆炸威力
+爆炸威力(5.15)
 
-爆炸影响力
+爆炸影响力(5.15)
 
-爆炸中心
+爆炸中心(5.15)
 
 ### **C**
 
-侧向加速度系数
+侧向加速度系数(6)
+
+冲量(2.1)
 
 ### **D**
 
-地面移动加速度
+地面移动加速度(6)
 
-地面阻力
+地面阻力(2.1)
 
 ### **F**
 
-FallDistance
+FallDistance(2.4)
 
-flyingSpeed
+flyingSpeed(6.2)
 
-forwardSpeed
+forwardSpeed(6.2)
 
-horizontalCollision
+horizontalCollision(2.4)
 
-方块网格
+方块网格(4.2)
 
-方块坐标
+方块坐标(2.1)
 
-飞行时间利用率
+飞行时间利用率(8.1)
 
-飞行移动加速度
+飞行移动加速度(6)
 
-俯仰角
+俯仰角(2.1)
 
 ### **G**
 
-根实体
+根实体(2.2)
 
-固体实体
+固体实体(4.1)
 
 ### **H**
 
-horizontalCollision 
+horizontalCollision(2.4)
 
-滑度
+滑度(5.4)
 
-火球类
+火球类(2.3)
 
 ### **J**
 
-加速度
+击退(5.13)
 
-加速度利用率
+加速度(2.1)
 
-检查方块网格碰撞
+加速度利用率(8.1)
 
-接触率利用率
+检查方块网格碰撞(5.1)
+
+接触率利用率(8.1)
 
 ### **K**
 
-可攀登方块
+可攀登方块(6)
 
-空气阻力
+空气阻力(2.1)
 
-空气阻力系数
+空气阻力系数(2.1)
 
 ### **L**
 
-LivingEntity
+LivingEntity(2.3)
 
-流体加速
+流体加速(2.1)
 
-流体流向向量
+流体流向向量(5.7)
 
-流体深度阀值
+流体深度阀值(6)
 
-流体阻力
+流体阻力(2.1)
 
 ### **M**
 
-Motion 
+Motion (2.1)
 
-movementMultiplier
+movementMultiplier(5.1)
 
-movementSpeed
+movementSpeed(2.1)
 
 ### **N**
 
-noClip
+noClip(2.4)
 
 ### **P**
 
-PersistentProjectileEntity
+PersistentProjectileEntity(2.3)
 
-pistonMovementDelta
+pistonMovementDelta(2.4)
 
-pistonMovementTick
+pistonMovementTick(2.4)
 
-碰撞箱
+碰撞箱(2.1)
 
-偏航角
+偏航角(2.1)
 
 ### **Q**
 
-前向加速度系数
+前向加速度系数(6.2)
 
-取样点
+取样点(5.15)
 
 ### **R**
 
-raycast
+raycast(4.2)
 
 ### **S**
 
-sidewaysSpeed
+sidewaysSpeed(6.2)
 
-stepHeight
+stepHeight(2.4)
 
-实际位移趋势
+实际位移趋势(4.1)
 
-实体ID
+实体ID(2.4)
 
-实体基础运算
+实体基础运算(2.4)
 
-实体挤压
+实体挤压(5.10)
 
-实体所处方块
+实体所处方块(5)
 
-实体下方方块
+实体下方方块(5)
 
-实体着陆方块
+实体着陆方块(5)
 
-输入位移
+输入位移(4.1)
 
-速度
+拴绳固定点(5.19)
 
-速度乘数
+速度(2.1)
+
+速度乘数(2.1)
 
 ### **T**
 
-同位实体 
+同位实体(2.2)
 
-弹射物
+弹射物(2.3)
 
-投掷物
+投掷物(2.3)
 
 ### **U**
 
-upwardSpeed
+upwardSpeed(6.2)
 
 ### **V**
 
-verticalCollision
+verticalCollision(2.4)
 
 ### **W**
 
-位移趋势
+位移趋势(4.1)
 
-位移趋势预处理
+位移趋势预处理(4.1)
 
-位移确定
+位移确定(2.1)
 
 ### **X**
 
-向上的加速度系数
+向上的加速度系数(6.2)
 
 ### **Y**
 
-沿轴移动
+沿轴移动(4.1)
 
-坐标
+坐标(2.1)
 
-移动
+移动(2.1)
 
 ### **Z**
 
-着地
+着地(2.4)

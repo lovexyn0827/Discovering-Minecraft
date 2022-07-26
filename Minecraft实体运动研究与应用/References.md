@@ -58,3 +58,17 @@
     
 20. [https://www.bilibili.com/video/BV1ML4y1g7sT](https://www.bilibili.com/video/BV1ML4y1g7sT)
 
+21. MC-73844
+
+22. generic_knockback_resistence Wiki
+
+23. Wiki 爆炸
+
+24. Wiki 下界
+
+25. Boat
+
+26. Lambert W
+
+27. Pearl Cannon Tutorial
+
