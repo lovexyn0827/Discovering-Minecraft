@@ -9,7 +9,7 @@ Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
 ### [Mixin疑难杂症解决记录](Mixin疑难杂症解决记录/Mixin疑难杂症解决记录.md)（持续更新）
 
-### TNT炮爆炸卡顿分析
+### [TNT炮爆炸卡顿分析](TNT炮爆炸卡顿分析/TNT炮爆炸卡顿分析.md)
 
 ### [Minecraft启动流程与常见崩溃的解决](Minecraft启动流程与常见崩溃的解决/Minecraft启动流程与常见崩溃的解决.md)（未完成）
 
