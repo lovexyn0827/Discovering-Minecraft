@@ -1,6 +1,6 @@
 # 参考文献
 
-1. [https://minecraft.fandom.com/zh/wiki/%E5%AE%9E%E4%BD%93](https://minecraft.fandom.com/zh/wiki/%E5%AE%9E%E4%BD%93)
+1. https://minecraft.fandom.com/zh/wiki/%E5%AE%9E%E4%BD%93](https://minecraft.fandom.com/zh/wiki/%E5%AE%9E%E4%BD%93)
 
 2. [https://t.bilibili.com/447368865911693871?tab=2](https://t.bilibili.com/447368865911693871?tab=2)
 
@@ -55,20 +55,19 @@
     [https://space.bilibili.com/31081302/channel/collectiondetail?sid=335880](https://space.bilibili.com/31081302/channel/collectiondetail?sid=335880)
 
     [https://www.bilibili.com/video/BV1vS4y1G7BU](https://www.bilibili.com/video/BV1vS4y1G7BU)
-    
+
 20. [https://www.bilibili.com/video/BV1ML4y1g7sT](https://www.bilibili.com/video/BV1ML4y1g7sT)
 
-21. MC-73844
+21. https://bugs.mojang.com/browse/MC-73884
 
-22. generic_knockback_resistence Wiki
+22. https://minecraft.fandom.com/zh/wiki/%E5%B1%9E%E6%80%A7
 
-23. Wiki 爆炸
+23. https://minecraft.fandom.com/zh/wiki/%E7%88%86%E7%82%B8
 
-24. Wiki 下界
+24. https://minecraft.fandom.com/zh/wiki/%E4%B8%8B%E7%95%8C%E4%BC%A0%E9%80%81%E9%97%A8
 
-25. Boat
+25. https://bugs.mojang.com/browse/MC-119369
 
-26. Lambert W
+26. https://file.scirp.org/pdf/AM_2013060409554653.pdf
 
-27. Pearl Cannon Tutorial
-
+27. https://www.bilibili.com/video/BV1vS4y1G7BU

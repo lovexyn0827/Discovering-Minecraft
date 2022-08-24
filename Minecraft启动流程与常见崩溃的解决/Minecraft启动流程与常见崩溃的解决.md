@@ -20,6 +20,272 @@ typora-copy-images-to: media
 
 ### 1.16.4
 
+````
+[14:25:43] [Render thread/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[14:25:44] [Render thread/ERROR]: Failed to verify authentication
+com.mojang.authlib.exceptions.AuthenticationUnavailableException: Cannot contact authentication server
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:125) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilSocialInteractionsService.checkPrivileges(YggdrasilSocialInteractionsService.java:94) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilSocialInteractionsService.<init>(YggdrasilSocialInteractionsService.java:40) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.createSocialInteractionsService(YggdrasilAuthenticationService.java:152) ~[authlib-2.1.28.jar:?]
+	at djz.a(SourceFile:625) [1.16.4%20Pure.jar:?]
+	at djz.<init>(SourceFile:409) [1.16.4%20Pure.jar:?]
+	at net.minecraft.client.main.Main.main(SourceFile:177) [1.16.4%20Pure.jar:?]
+Caused by: java.net.UnknownHostException: api.minecraftservices.com
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:184) ~[?:1.8.0_221]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[?:1.8.0_221]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:1.8.0_221]
+	at java.net.Socket.connect(Socket.java:589) ~[?:1.8.0_221]
+	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:666) ~[?:1.8.0_221]
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:175) ~[?:1.8.0_221]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463) ~[?:1.8.0_221]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1205) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1056) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1570) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1498) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:268) ~[?:1.8.0_221]
+	at com.mojang.authlib.HttpAuthenticationService.performGetRequest(HttpAuthenticationService.java:140) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:104) ~[authlib-2.1.28.jar:?]
+	... 6 more
+[14:25:44] [Render thread/INFO]: Setting user: 用户名
+[14:25:44] [Render thread/INFO]: Backend library: LWJGL version 3.2.2 build 10
+[14:25:46] [Render thread/INFO]: Narrator library for x64 successfully loaded
+[14:25:46] [Render thread/INFO]: Reloading ResourceManager: Default
+[14:25:57] [Render thread/INFO]: OpenAL initialized.
+[14:25:57] [Render thread/INFO]: Sound engine started
+[14:25:57] [Render thread/INFO]: Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 1024x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 1024x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[14:25:59] [Render thread/INFO]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[14:25:59] [Render thread/INFO]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[14:25:59] [Render thread/INFO]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[14:26:25] [Render thread/INFO]: Reloading ResourceManager: Default
+[14:26:27] [Render thread/INFO]: Loaded 7 recipes
+[14:26:28] [Render thread/INFO]: Loaded 927 advancements
+[14:26:30] [Render thread/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[14:26:31] [Server thread/INFO]: Starting integrated minecraft server version 1.16.4
+[14:26:31] [Server thread/INFO]: Generating keypair
+[14:26:33] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:37] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:38] [Render thread/INFO]: Preparing spawn area: 0%
+[14:26:38] [Render thread/INFO]: Preparing spawn area: 83%
+[14:26:39] [Render thread/INFO]: Time elapsed: 6431 ms
+[14:26:40] [Server thread/INFO]: Changing view distance to 11, from 10
+[14:26:42] [Server thread/INFO]: 用户名[local:E:7418ae32] logged in with entity id 11 at (-226.72908945804855, 40.651285253780195, -131.3296786500503)
+[14:26:42] [Server thread/INFO]: 用户名 joined the game
+[14:26:43] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 2246ms or 44 ticks behind
+[14:26:43] [Server thread/INFO]: Saving and pausing game...
+[14:26:44] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:overworld
+[14:26:44] [Worker-Main-10/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@361197db[id=5627dd98-e6be-3c21-b8a8-e92344183641,name=用户名,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationUnavailableException: Cannot contact authentication server
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:125) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:99) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:186) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:61) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:58) ~[authlib-2.1.28.jar:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3716) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2424) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2298) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2211) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:4154) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:4158) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:5147) ~[guava-21.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:5153) ~[guava-21.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:176) ~[authlib-2.1.28.jar:?]
+	at djz.K(SourceFile:2405) ~[1.16.4%20Pure.jar:?]
+	at eks.a(SourceFile:98) ~[1.16.4%20Pure.jar:?]
+	at java.util.concurrent.ForkJoinTask$RunnableExecuteAction.exec(ForkJoinTask.java:1402) [?:1.8.0_221]
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289) [?:1.8.0_221]
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1056) [?:1.8.0_221]
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1692) [?:1.8.0_221]
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157) [?:1.8.0_221]
+Caused by: java.net.UnknownHostException: sessionserver.mojang.com
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:184) ~[?:1.8.0_221]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[?:1.8.0_221]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:1.8.0_221]
+	at java.net.Socket.connect(Socket.java:589) ~[?:1.8.0_221]
+	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:666) ~[?:1.8.0_221]
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:175) ~[?:1.8.0_221]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463) ~[?:1.8.0_221]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1205) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1056) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1570) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1498) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:268) ~[?:1.8.0_221]
+	at com.mojang.authlib.HttpAuthenticationService.performGetRequest(HttpAuthenticationService.java:140) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:104) ~[authlib-2.1.28.jar:?]
+	... 20 more
+[14:26:44] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:the_nether
+[14:26:45] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:the_end
+[14:26:48] [Render thread/INFO]: Loaded 404 advancements
+[14:27:11] [Render thread/WARN]: Received passengers for unknown entity
+[14:27:11] [Render thread/WARN]: Received passengers for unknown entity
+[14:27:26] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 3514ms or 70 ticks behind
+[14:27:33] [Sound engine/WARN]: Maximum sound pool size 247 reached
+[14:27:33] [Render thread/WARN]: Failed to create new sound handle
+[14:27:42] [Server thread/INFO]: Saving and pausing game...
+[14:27:42] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:overworld
+[14:27:44] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:the_nether
+[14:27:44] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:the_end
+[14:27:45] [Server thread/INFO]: 用户名 lost connection: Disconnected
+[14:27:45] [Server thread/INFO]: 用户名 left the game
+[14:27:45] [Server thread/INFO]: Stopping singleplayer server as player logged out
+[14:27:45] [Server thread/INFO]: Stopping server
+[14:27:45] [Server thread/INFO]: Saving players
+[14:27:45] [Server thread/INFO]: Saving worlds
+[14:27:45] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:overworld
+[14:27:46] [Server thread/INFO]: ThreadedAnvilChunkStorage (Entity): All chunks are saved
+[14:27:46] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:the_nether
+[14:27:46] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[14:27:46] [Server thread/INFO]: Saving chunks for level 'ServerLevel[珍珠炮研究档（原Entity）]'/minecraft:the_end
+[14:27:46] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[14:27:46] [Server thread/INFO]: ThreadedAnvilChunkStorage (Entity): All chunks are saved
+[14:27:46] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[14:27:46] [Server thread/INFO]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[14:27:48] [Render thread/INFO]: Stopping!
+````
+
+随便选其日志中的一行，如下
+
+````
+[14:25:44] [Render thread/INFO]: Backend library: LWJGL version 3.2.2 build 10
+````
+
+可以将这样一行分为以下几个部分
+
+````
+[时间] [线程/日志类型]: 正文
+````
+
+其中，常见的线程有以下几种
+
+- Render thread，渲染线程，也是游戏的主线程
+- Server thread，服务端线程，仅在运行单人游戏或开设局域网服务器等情形中存在
+- Netty Local Client IO #编号，客户端网络线程
+- Netty Server IO #编号，服务端网络线程
+- Sound engine，声音线程
+
+接下来我们来逐段分析整个日志
+
+````
+[14:25:43] [Render thread/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[14:25:44] [Render thread/ERROR]: Failed to verify authentication
+com.mojang.authlib.exceptions.AuthenticationUnavailableException: Cannot contact authentication server
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:125) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilSocialInteractionsService.checkPrivileges(YggdrasilSocialInteractionsService.java:94) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilSocialInteractionsService.<init>(YggdrasilSocialInteractionsService.java:40) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.createSocialInteractionsService(YggdrasilAuthenticationService.java:152) ~[authlib-2.1.28.jar:?]
+	at djz.a(SourceFile:625) [1.16.4%20Pure.jar:?]
+	at djz.<init>(SourceFile:409) [1.16.4%20Pure.jar:?]
+	at net.minecraft.client.main.Main.main(SourceFile:177) [1.16.4%20Pure.jar:?]
+Caused by: java.net.UnknownHostException: api.minecraftservices.com
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:184) ~[?:1.8.0_221]
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172) ~[?:1.8.0_221]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[?:1.8.0_221]
+	at java.net.Socket.connect(Socket.java:589) ~[?:1.8.0_221]
+	at sun.security.ssl.SSLSocketImpl.connect(SSLSocketImpl.java:666) ~[?:1.8.0_221]
+	at sun.net.NetworkClient.doConnect(NetworkClient.java:175) ~[?:1.8.0_221]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:463) ~[?:1.8.0_221]
+	at sun.net.www.http.HttpClient.openServer(HttpClient.java:558) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsClient.<init>(HttpsClient.java:264) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsClient.New(HttpsClient.java:367) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.getNewHttpClient(AbstractDelegateHttpsURLConnection.java:191) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect0(HttpURLConnection.java:1205) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.plainConnect(HttpURLConnection.java:1056) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:177) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1570) ~[?:1.8.0_221]
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1498) ~[?:1.8.0_221]
+	at sun.net.www.protocol.https.HttpsURLConnectionImpl.getInputStream(HttpsURLConnectionImpl.java:268) ~[?:1.8.0_221]
+	at com.mojang.authlib.HttpAuthenticationService.performGetRequest(HttpAuthenticationService.java:140) ~[authlib-2.1.28.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:104) ~[authlib-2.1.28.jar:?]
+	... 6 more
+````
+
+由于没有网络连接，正版验证报错，联网后会不会出现。
+
+````
+[14:25:44] [Render thread/INFO]: Setting user: 用户名
+````
+
+正版验证过程结束的标志
+
+````
+[14:25:44] [Render thread/INFO]: Backend library: LWJGL version 3.2.2 build 10
+````
+
+开始准备渲染系统和输入设备。这是游戏启动过程中的一大鬼门关，很多游戏崩溃就发生在这里，如LWJGL本地库链接异常，发现不支持的显卡和一些难以解释的JVM崩溃。
+
+````
+[14:25:46] [Render thread/INFO]: Narrator library for x64 successfully loaded
+````
+
+复述功能初始化完成。这条日志具体输出位置出现的很隐蔽，应该是打开进度条界面时（MinecraftClient:855, openScreen()）`NarratorManager`类被加载进而引发了复述功能初始化。
+
+````
+[14:25:46] [Render thread/INFO]: Reloading ResourceManager: Default
+````
+
+加载资源包，此时开始出现启动画面。
+
+````
+[14:25:57] [Render thread/INFO]: OpenAL initialized.
+[14:25:57] [Render thread/INFO]: Sound engine started
+````
+
+声音引擎初始化，属于资源包加载的一部分。
+
+````
+[14:25:57] [Render thread/INFO]: Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 1024x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 1024x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[14:25:57] [Render thread/INFO]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[14:25:59] [Render thread/INFO]: Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[14:25:59] [Render thread/INFO]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[14:25:59] [Render thread/INFO]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+````
+
+创建可用于渲染过程的贴图，还是资源包加载的一部分。至此，标题画面出现。
+
+````
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[14:26:25] [Render thread/WARN]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+````
+
+指令存在一些问题？
+
 
 
 ### 1.18.2
@@ -56,11 +322,11 @@ typora-copy-images-to: media
 
 
 
-## 各环节中类的加载
+### 各环节中类的加载
 
 
 
-## 纯服务端的运行流程
+### 纯服务端的运行流程
 
 
 
