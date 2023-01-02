@@ -237,7 +237,7 @@ java.lang.OutOfMemoryError: unable to create new native thread
 - [FileNotFoundException](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/FileNotFoundException.html)：找不到文件或文件名不合理，有时可能与中文路径有关。
 - [IllegalAccessError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/IllegalAccessError.html)：非法访问，通常是java版本过高，（也有可能是Minecraft安装或Mod兼容问题？）。
 - [NoSuchFieldError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NoSuchFieldError.html)和[NoSuchMethodError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NoSuchMethodError.html)：找不到方法或字段，Java版本过高，Mod不兼容，和误用未混淆Mod都有可能造成这一问题。
-- [NoClassDefFoundError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NoClassDefFoundError.html)：通常是Java版本过低或过高，也有可能是Mod兼容问题或Minecraf安装错误。
+- [NoClassDefFoundError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/NoClassDefFoundError.html)：通常是Java版本过低或过高，也有可能是Mod兼容问题或Minecraft安装错误。
 - [UnsatisfiedLinkError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/UnsatisfiedLinkError.html)：本地库丢失或损坏，通常是Minecraft安装出现问题。
 - [ExceptionInInitializerError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/ExceptionInInitializerError.html)：类初始化失败，原因很多样。
 - [OutOfMemoryError](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/OutOfMemoryError.html)：内存溢出。
@@ -293,11 +293,7 @@ at com.replaymod.simplepathing.ReplayModSimplePathing.onReplayClosing(ReplayModS
 at carpet.utils.SpawnReporter.registerSpawn(SpawnReporter.java:86)
 ```
 
-也许你也猜到了，不过，如果这里出现的名称是一个更加小众化的呢？我们可以在[Github](https://github.com/)上进行搜索。
-
-![1672309660059](media\1672309660059.png)
-
-我们搜索“`carpet.utils.SpawnReporter`”，在Code或Commits两栏中我们可能会找到疑似与之相关的Mod出处。
+也许你也猜到了，不过，如果这里出现的名称是一个更加小众化的呢？在后面常用维修技巧一节中，我们会更深入地探讨这一话题。
 
 当然，堆栈踪迹中还有这样一类：
 
