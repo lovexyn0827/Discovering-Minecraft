@@ -6,7 +6,7 @@
 
 这一次的问题很令人摸不到头脑，而解决后又像是水贴一般。
 
-崩溃堆栈如下
+崩溃堆栈如下：
 
 ````
 ......（略略略）
@@ -154,3 +154,76 @@ AbstractMinecartEntity abstractMinecartEntity = AbstractMinecartEntity.create(wo
 ````
 
 其实解决起来也很容易，另找合适的注入点即可。但是，这一问题确实是一个大坑，还请大家注意。
+
+## 2023.1.1：眀查字段，暗调方法——当你attach了错误的源码包
+
+```java
+if (environment.dedicated) {
+	BanIpCommand.register(this.dispatcher);
+}
+```
+
+当时需要在Minecraft客户端上按照用户配置启用服务端上专有的指令，如/ban、/save-all等。翻了一下源码，上面写的是那些指令只有在`Environment`枚举的字段`dedicated`为`true`时才会被注册。于是，注入代码似乎应该是下面这样：
+
+```java
+	@Redirect(method = "<init>", 
+    		at = @At(
+    				value = "FIELD", 
+    				target = "net/minecraft/server/command/CommandManager$RegistrationEnvironment"
+    						+ ".dedicated:Z“, 
+                	opcode = Opcodes.GETFIELD
+    		)
+    )
+    private boolean modifyDedicated(CommandManager.RegistrationEnvironment env) {
+    	return ((CommandManagerRegistrationEnvironmentAccessor)(Object) env).isDedicated() 
+    			|| OptionManager.dedicatedServerCommands;
+    }
+```
+
+但是，运行时报错了。
+
+```
+Caused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure: Redirector modifyDedicated(Lnet/minecraft/server/command/CommandManager$RegistrationEnvironment;)Z in messmod.mixins.json:CommandMixin failed injection check, (0/1) succeeded. Scanned 1 target(s). No refMap loaded.
+    at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.postInject(InjectionInfo.java:408)
+    at org.spongepowered.asm.mixin.transformer.MixinTargetContext.applyInjections(MixinTargetContext.java:1291)
+    at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyInjections(MixinApplicatorStandard.java:1042)
+    at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.applyMixin(MixinApplicatorStandard.java:395)
+    at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:320)
+    at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:345)
+    at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:569)
+    at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:351)
+    ... 41 more
+```
+
+报错本身很常见，是说找不到要求的注入位置，而这通常由字段名或类名拼写错误造成。但是，当时哪些内容我是直接复制粘贴过去再加以修改使其符合格式得到的，怎可能会有拼写错误那种问题？
+
+确认了两遍并尝试了另外几种target的格式后，我怀疑开始内部类的反编译问题（错误的猜想就不多解释了）。解包反混淆的类文件，用javap反汇编了一下要注入的类，打算去查找那一个字段出现的位置来确定问题原因。然而，我根本没有找到对那个字段的引用，只找到对一个类似的方法的调用：
+
+```asm
+425: aload_1
+426: invokestatic  #227                // Method net/minecraft/server/command/CommandManager$RegistrationEnvironment.isDedicated:(Lnet/minecraft/server/command/CommandManager$RegistrationEnvironment;)Z
+429: ifeq          523
+432: aload_0
+433: getfield      #40                 // Field dispatcher:Lcom/mojang/brigadier/CommandDispatcher;
+436: invokestatic  #230                // Method net/minecraft/server/dedicated/command/BanIpCommand.register:(Lcom/mojang/brigadier/CommandDispatcher;)V
+...
+```
+
+这时我才意识到，是源码出现了问题。用FernFlower重新反编译了一下，果真如此：
+
+```java
+if (RegistrationEnvironment.isDedicated(environment)) {
+	BanIpCommand.register(this.dispatcher);
+	...
+}
+```
+
+于是，修正思路就很明显了。
+
+但问题是，源码为什么会出现错误？也不知道，反混淆得到类的jar和源码包的jar修改时间都是相近的，应该不存在后期误修改的问题（也没有谁会闲到改那些东西），姑且说是是反编译器忙中出错吧，尽管凭空出现对那样一个字段的引用甚至还符合逻辑确实令人细思极恐。
+
+所以，和上一期一样，如果在写Mixin时遇到了一些莫名其妙的问题，翻源码怎样都解释不通，那此时不妨翻看一下类文件中最原始的内容，也许会有让你意想不到的答案。
+
+
+
+这次真的太水了，就先发到茶馆吧。
