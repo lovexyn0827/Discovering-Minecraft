@@ -2,6 +2,8 @@
 
 ### 什么是崩溃报告
 
+![1674374074044](media\1674374074044.png)
+
 崩溃报告时Minecraft在遇到可以被其发现并处理的致命错误时生成的报告，报告中给出了错误发生的直接原因以及故障发生的环境。
 
 注意“可以被其发现并处理”，这意味着如果有崩溃报告出现，那么问题很可能是游戏本体及其Mod本身的Bug而不是Java本身的错误。
@@ -22,28 +24,28 @@ Time: 19-6-29 上午1:27
 Description: Exception in server tick loop
 
 java.lang.OutOfMemoryError: unable to create new native thread
-	at java.lang.Thread.start0(Native Method)
-	at java.lang.Thread.start(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.createWorker(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.tryAddWorker(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.signalWork(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.externalPush(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.execute(Unknown Source)
-	at agk.f(SourceFile:108)
-	at agk.a(SourceFile:101)
-	at uu.a(SourceFile:102)
-	at uz$d.a(SourceFile:439)
-	at uz.a(SourceFile:123)
-	at ve.l(SourceFile:198)
-	at ve.b(SourceFile:44)
-	at ve$a.p(SourceFile:434)
-	at ve.d(SourceFile:194)
-	at net.minecraft.server.MinecraftServer.aW(SourceFile:708)
-	at net.minecraft.server.MinecraftServer.p(SourceFile:696)
-	at agh.bf(SourceFile:99)
-	at net.minecraft.server.MinecraftServer.o(SourceFile:680)
-	at net.minecraft.server.MinecraftServer.run(SourceFile:636)
-	at java.lang.Thread.run(Unknown Source)
+    at java.lang.Thread.start0(Native Method)
+    at java.lang.Thread.start(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.createWorker(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.tryAddWorker(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.signalWork(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.externalPush(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.execute(Unknown Source)
+    at agk.f(SourceFile:108)
+    at agk.a(SourceFile:101)
+    at uu.a(SourceFile:102)
+    at uz$d.a(SourceFile:439)
+    at uz.a(SourceFile:123)
+    at ve.l(SourceFile:198)
+    at ve.b(SourceFile:44)
+    at ve$a.p(SourceFile:434)
+    at ve.d(SourceFile:194)
+    at net.minecraft.server.MinecraftServer.aW(SourceFile:708)
+    at net.minecraft.server.MinecraftServer.p(SourceFile:696)
+    at agh.bf(SourceFile:99)
+    at net.minecraft.server.MinecraftServer.o(SourceFile:680)
+    at net.minecraft.server.MinecraftServer.run(SourceFile:636)
+    at java.lang.Thread.run(Unknown Source)
 
 
 A detailed walkthrough of the error, its code path and all known details is as follows:
@@ -51,16 +53,16 @@ A detailed walkthrough of the error, its code path and all known details is as f
 
 -- System Details --
 Details:
-	Minecraft Version: 1.14
-	Operating System: Windows 7 (x86) version 6.1
-	Java Version: 1.8.0_211, Oracle Corporation
-	Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation
-	Memory: 227244656 bytes (216 MB) / 1073741824 bytes (1024 MB) up to 1073741824 bytes (1024 MB)
-	JVM Flags: 12 total; -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xss1M -Xmx1024m -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
-	Player Count: 1 / 8; [vh['love827'/315, l='新的世界827', x=-271.91, y=68.17, z=1769.16]]
-	Data Packs: vanilla
-	Type: Integrated Server (map_client.txt)
-	Is Modded: Probably not. Jar signature remains and both client + server brands are untouched.
+    Minecraft Version: 1.14
+    Operating System: Windows 7 (x86) version 6.1
+    Java Version: 1.8.0_211, Oracle Corporation
+    Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation
+    Memory: 227244656 bytes (216 MB) / 1073741824 bytes (1024 MB) up to 1073741824 bytes (1024 MB)
+    JVM Flags: 12 total; -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xss1M -Xmx1024m -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+    Player Count: 1 / 8; [vh['love827'/315, l='新的世界827', x=-271.91, y=68.17, z=1769.16]]
+    Data Packs: vanilla
+    Type: Integrated Server (map_client.txt)
+    Is Modded: Probably not. Jar signature remains and both client + server brands are untouched.
 ```
 
 主要分为以下几个部分：
@@ -98,28 +100,28 @@ Description: Exception in server tick loop
 
 ```
 java.lang.OutOfMemoryError: unable to create new native thread
-	at java.lang.Thread.start0(Native Method)
-	at java.lang.Thread.start(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.createWorker(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.tryAddWorker(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.signalWork(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.externalPush(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.execute(Unknown Source)
-	at agk.f(SourceFile:108)
-	at agk.a(SourceFile:101)
-	at uu.a(SourceFile:102)
-	at uz$d.a(SourceFile:439)
-	at uz.a(SourceFile:123)
-	at ve.l(SourceFile:198)
-	at ve.b(SourceFile:44)
-	at ve$a.p(SourceFile:434)
-	at ve.d(SourceFile:194)
-	at net.minecraft.server.MinecraftServer.aW(SourceFile:708)
-	at net.minecraft.server.MinecraftServer.p(SourceFile:696)
-	at agh.bf(SourceFile:99)
-	at net.minecraft.server.MinecraftServer.o(SourceFile:680)
-	at net.minecraft.server.MinecraftServer.run(SourceFile:636)
-	at java.lang.Thread.run(Unknown Source)
+    at java.lang.Thread.start0(Native Method)
+    at java.lang.Thread.start(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.createWorker(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.tryAddWorker(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.signalWork(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.externalPush(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.execute(Unknown Source)
+    at agk.f(SourceFile:108)
+    at agk.a(SourceFile:101)
+    at uu.a(SourceFile:102)
+    at uz$d.a(SourceFile:439)
+    at uz.a(SourceFile:123)
+    at ve.l(SourceFile:198)
+    at ve.b(SourceFile:44)
+    at ve$a.p(SourceFile:434)
+    at ve.d(SourceFile:194)
+    at net.minecraft.server.MinecraftServer.aW(SourceFile:708)
+    at net.minecraft.server.MinecraftServer.p(SourceFile:696)
+    at agh.bf(SourceFile:99)
+    at net.minecraft.server.MinecraftServer.o(SourceFile:680)
+    at net.minecraft.server.MinecraftServer.run(SourceFile:636)
+    at java.lang.Thread.run(Unknown Source)
 ```
 
 堆栈踪迹通常是崩溃报告中最有价值的内容，因为这里给出了崩溃发生的具体时机和原因。
@@ -132,21 +134,21 @@ A detailed walkthrough of the error, its code path and all known details is as f
 
 -- System Details --
 Details:
-	Minecraft Version: 1.14		//Minecraft版本
-	Operating System: Windows 7 (x86) version 6.1		//操作系统
-	Java Version: 1.8.0_211, Oracle Corporation		//Java版本
-	Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation		//Java虚拟机版本
-	Memory: 227244656 bytes (216 MB) / 1073741824 bytes (1024 MB) up to 1073741824 bytes (1024 MB)		//内存用量
-	JVM Flags: 12 total; -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xss1M -Xmx1024m -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump		//Java启动参数
-	Player Count: 1 / 8; [vh['love827'/315, l='新的世界827', x=-271.91, y=68.17, z=1769.16]]		//世界中的玩家信息，包括数量，实体ID，所在存档名称和坐标。
-	Data Packs: vanilla		//加载的数据包
-	Type: Integrated Server (map_client.txt)		//运行的Minecraft类型，是客户端还是专门的服务器，不必关注
-	Is Modded: Probably not. Jar signature remains and both client + server brands are untouched.		//客户端是否被修改
+    Minecraft Version: 1.14        //Minecraft版本
+    Operating System: Windows 7 (x86) version 6.1        //操作系统
+    Java Version: 1.8.0_211, Oracle Corporation        //Java版本
+    Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation        //Java虚拟机版本
+    Memory: 227244656 bytes (216 MB) / 1073741824 bytes (1024 MB) up to 1073741824 bytes (1024 MB)        //内存用量
+    JVM Flags: 12 total; -XX:+UnlockExperimentalVMOptions -XX:+UseG1GC -XX:G1NewSizePercent=20 -XX:G1ReservePercent=20 -XX:MaxGCPauseMillis=50 -XX:G1HeapRegionSize=16M -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xmn128m -Xss1M -Xmx1024m -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump        //Java启动参数
+    Player Count: 1 / 8; [vh['love827'/315, l='新的世界827', x=-271.91, y=68.17, z=1769.16]]        //世界中的玩家信息，包括数量，实体ID，所在存档名称和坐标。
+    Data Packs: vanilla        //加载的数据包
+    Type: Integrated Server (map_client.txt)        //运行的Minecraft类型，是客户端还是专门的服务器，不必关注
+    Is Modded: Probably not. Jar signature remains and both client + server brands are untouched.        //客户端是否被修改
 ```
 
-给出了问题发生的环境，此处只包含了系统信息。
+给出了问题发生的环境，上面只包含了系统信息。
 
-此处信息量很大，有时还会包含一些其他信息，如（但是除了Mod列表，大部分信息还是留给开发者去调试的）：
+此处信息量很大，有时还会包含一些其他信息，如（但是除了Mod列表和嫌疑Mod外，大部分信息还是留给开发者去调试的）：
 
 - Mod列表
 
@@ -154,8 +156,8 @@ Forge：
 
 ```
 Mod List: 
-		forge-1.16.5-36.1.4-client.jar                    |Minecraft                     |minecraft                     |1.16.5              |NONE      |NOSIGNATURE
-		forge-1.16.5-36.1.4-universal.jar                 |Forge                         |forge                         |36.1.4              |NONE      |22:af:21:d8:19:82:7f:93:94:fe:2b:ac:b7:e4:41:57:68:39:87:b1:a7:5c:c6:44:f9:25:74:21:14:f5:0d:90
+        forge-1.16.5-36.1.4-client.jar                    |Minecraft                     |minecraft                     |1.16.5              |NONE      |NOSIGNATURE
+        forge-1.16.5-36.1.4-universal.jar                 |Forge                         |forge                         |36.1.4              |NONE      |22:af:21:d8:19:82:7f:93:94:fe:2b:ac:b7:e4:41:57:68:39:87:b1:a7:5c:c6:44:f9:25:74:21:14:f5:0d:90
 ```
 
 Fabric：
@@ -164,6 +166,14 @@ Fabric：
 Fabric Mods: carpet: Carpet Mod in Fabric 1.4.17
                minecraft: Minecraft 1.16.4
 ```
+
+- 嫌疑Mod
+
+```
+Suspected Mods: Lithium (lithium)
+```
+
+一些崩溃处理Mod对导致问题的Mod的一个初步判断，但不是百分百准确的。
 
 - 崩溃时打开的界面
 
@@ -177,17 +187,17 @@ Fabric Mods: carpet: Carpet Mod in Fabric 1.4.17
 ```
 -- Affected level --
 Details:
-	All players: 1 total; [class_3222['lovexyn0827'/132, l='ServerLevel[1.16 Longterm]', x=-170.67, y=180.00, z=801.43]]		//玩家信息
-	Chunk stats: ServerChunkCache: 3874		//加载的区块数量
-	Level dimension: minecraft:overworld		//维度ID
-	Level spawn location: World: (208,67,0), Chunk: (at 0,4,0 in 13,0; contains blocks 208,0,0 to 223,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)		//出生点
-	Level time: 15378509 game time, 15634561 day time		//世界时间
-	Level name: 1.16 Longterm		//存档名称
-	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false		//游戏模式，是否启用极限或作弊
-	Level weather: Rain time: 5185 (now: true), thunder time: 122551 (now: false)		//天气信息
-	Known server brands: vanilla, fabric		//服务端类型
-	Level was modded: true		//是否在安装有Mod的情况下运行
-	Level storage version: 0x04ABD - Anvil		//存档格式
+    All players: 1 total; [class_3222['lovexyn0827'/132, l='ServerLevel[1.16 Longterm]', x=-170.67, y=180.00, z=801.43]]        //玩家信息
+    Chunk stats: ServerChunkCache: 3874        //加载的区块数量
+    Level dimension: minecraft:overworld        //维度ID
+    Level spawn location: World: (208,67,0), Chunk: (at 0,4,0 in 13,0; contains blocks 208,0,0 to 223,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)        //出生点
+    Level time: 15378509 game time, 15634561 day time        //世界时间
+    Level name: 1.16 Longterm        //存档名称
+    Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false        //游戏模式，是否启用极限或作弊
+    Level weather: Rain time: 5185 (now: true), thunder time: 122551 (now: false)        //天气信息
+    Known server brands: vanilla, fabric        //服务端类型
+    Level was modded: true        //是否在安装有Mod的情况下运行
+    Level storage version: 0x04ABD - Anvil        //存档格式
 ```
 
 - 崩溃时运算的实体
@@ -195,14 +205,14 @@ Details:
 ```
 -- Entity being ticked --
 Details:
-	Entity Type: twilightforest:redcap (twilightforest.entity.EntityTFRedcap)		//实体注册ID
-	Entity ID: 64958		//实体ID
-	Entity Name: Redcap Goblin		//实体名称
-	Entity's Exact location: 2049.66, 26.79, 1265.60		//实体坐标
-	Entity's Block location: World: (2049,26,1265), Chunk: (at 1,1,1 in 128,79; contains blocks 2048,0,1264 to 2063,255,1279), Region: (4,2; contains chunks 128,64 to 159,95, blocks 2048,0,1024 to 2559,255,1535)		//实体坐标，但是换了些表示方法
-	Entity's Momentum: 0.01, -0.20, 0.16		//实体动量，或者说速度
-	Entity's Passengers: []		//骑乘该实体的实体
-	Entity's Vehicle: ~~ERROR~~ NullPointerException: Cannot invoke "net.minecraft.entity.Entity.toString()" because the return value of "net.minecraft.entity.Entity.func_184187_bx()" is null		//实体骑乘的载具，此处载具不存在
+    Entity Type: twilightforest:redcap (twilightforest.entity.EntityTFRedcap)        //实体注册ID
+    Entity ID: 64958        //实体ID
+    Entity Name: Redcap Goblin        //实体名称
+    Entity's Exact location: 2049.66, 26.79, 1265.60        //实体坐标
+    Entity's Block location: World: (2049,26,1265), Chunk: (at 1,1,1 in 128,79; contains blocks 2048,0,1264 to 2063,255,1279), Region: (4,2; contains chunks 128,64 to 159,95, blocks 2048,0,1024 to 2559,255,1535)        //实体坐标，但是换了些表示方法
+    Entity's Momentum: 0.01, -0.20, 0.16        //实体动量，或者说速度
+    Entity's Passengers: []        //骑乘该实体的实体
+    Entity's Vehicle: ~~ERROR~~ NullPointerException: Cannot invoke "net.minecraft.entity.Entity.toString()" because the return value of "net.minecraft.entity.Entity.func_184187_bx()" is null        //实体骑乘的载具，此处载具不存在
 ```
 
 - 崩溃时更新的方块
@@ -210,9 +220,9 @@ Details:
 ```
 -- Block being updated --
 Details:
-	Source block type: ID #minecraft:powered_rail (block.minecraft.powered_rail // net.minecraft.class_2442)		//方块注册ID
-	Block: Block{minecraft:powered_rail}[powered=true,shape=east_west]		//方块状态
-	Block location: World: (77,72,-270), Chunk: (at 13,4,2 in 4,-17; contains blocks 64,0,-272 to 79,255,-257), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)		//方块位置
+    Source block type: ID #minecraft:powered_rail (block.minecraft.powered_rail // net.minecraft.class_2442)        //方块注册ID
+    Block: Block{minecraft:powered_rail}[powered=true,shape=east_west]        //方块状态
+    Block location: World: (77,72,-270), Chunk: (at 13,4,2 in 4,-17; contains blocks 64,0,-272 to 79,255,-257), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)        //方块位置
 ```
 
 ### 如何看懂崩溃报告
@@ -225,7 +235,7 @@ Details:
 java.lang.OutOfMemoryError: unable to create new native thread
 ```
 
-这里给出了导致崩溃的异常类型及一些附加信息。看到这里，相信一些英语比较好的读者就能看出问题所在了，即因为内存不足而无法创建新线程。
+这里给出了导致崩溃的异常类型OutOfMemoryError及一些附加信息。看到这里，相信一些英语比较好的读者就能看出问题所在了，即因为内存不足而无法创建新线程。
 
 这里给出几种常见的异常类型及其可能原因：
 
@@ -255,28 +265,28 @@ java.lang.OutOfMemoryError: unable to create new native thread
 刚才只是一个标题，接下来，才是堆栈踪迹的正文：
 
 ```
-	at java.lang.Thread.start0(Native Method)
-	at java.lang.Thread.start(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.createWorker(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.tryAddWorker(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.signalWork(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.externalPush(Unknown Source)
-	at java.util.concurrent.ForkJoinPool.execute(Unknown Source)
-	at agk.f(SourceFile:108)
-	at agk.a(SourceFile:101)
-	at uu.a(SourceFile:102)
-	at uz$d.a(SourceFile:439)
-	at uz.a(SourceFile:123)
-	at ve.l(SourceFile:198)
-	at ve.b(SourceFile:44)
-	at ve$a.p(SourceFile:434)
-	at ve.d(SourceFile:194)
-	at net.minecraft.server.MinecraftServer.aW(SourceFile:708)
-	at net.minecraft.server.MinecraftServer.p(SourceFile:696)
-	at agh.bf(SourceFile:99)
-	at net.minecraft.server.MinecraftServer.o(SourceFile:680)
-	at net.minecraft.server.MinecraftServer.run(SourceFile:636)
-	at java.lang.Thread.run(Unknown Source)
+    at java.lang.Thread.start0(Native Method)
+    at java.lang.Thread.start(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.createWorker(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.tryAddWorker(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.signalWork(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.externalPush(Unknown Source)
+    at java.util.concurrent.ForkJoinPool.execute(Unknown Source)
+    at agk.f(SourceFile:108)
+    at agk.a(SourceFile:101)
+    at uu.a(SourceFile:102)
+    at uz$d.a(SourceFile:439)
+    at uz.a(SourceFile:123)
+    at ve.l(SourceFile:198)
+    at ve.b(SourceFile:44)
+    at ve$a.p(SourceFile:434)
+    at ve.d(SourceFile:194)
+    at net.minecraft.server.MinecraftServer.aW(SourceFile:708)
+    at net.minecraft.server.MinecraftServer.p(SourceFile:696)
+    at agh.bf(SourceFile:99)
+    at net.minecraft.server.MinecraftServer.o(SourceFile:680)
+    at net.minecraft.server.MinecraftServer.run(SourceFile:636)
+    at java.lang.Thread.run(Unknown Source)
 ```
 
 可能会让人看起来一筹莫展，但我们并不需要完全理解这一大堆，那是开发者的任务，我们要做的应该是从中提取关键词。例如，下面看到这一行，你会想到哪一个Mod呢？
@@ -313,33 +323,33 @@ at net.minecraft.class_437.method_25423(class_437.java:325)
 
 ```
 java.lang.RuntimeException: Could not execute entrypoint stage 'main' due to errors, provided by 'mcwmem'!
-	at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils.invoke0(EntrypointUtils.java:53)
-	at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils.invoke(EntrypointUtils.java:36)
-	at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointClient.start(EntrypointClient.java:32)
-	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:437)
-	at net.minecraft.client.main.Main.main(Main.java:177)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.lang.reflect.Method.invoke(Unknown Source)
-	at net.fabricmc.loader.game.MinecraftGameProvider.launch(MinecraftGameProvider.java:226)
-	at net.fabricmc.loader.launch.knot.Knot.init(Knot.java:139)
-	at net.fabricmc.loader.launch.knot.KnotClient.main(KnotClient.java:27)
-	at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
+    at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils.invoke0(EntrypointUtils.java:53)
+    at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils.invoke(EntrypointUtils.java:36)
+    at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointClient.start(EntrypointClient.java:32)
+    at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:437)
+    at net.minecraft.client.main.Main.main(Main.java:177)
+    at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+    at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+    at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+    at java.lang.reflect.Method.invoke(Unknown Source)
+    at net.fabricmc.loader.game.MinecraftGameProvider.launch(MinecraftGameProvider.java:226)
+    at net.fabricmc.loader.launch.knot.Knot.init(Knot.java:139)
+    at net.fabricmc.loader.launch.knot.KnotClient.main(KnotClient.java:27)
+    at net.fabricmc.devlaunchinjector.Main.main(Main.java:86)
 Caused by: net.minecraft.util.crash.CrashException: Couldn't copy scarpet scripts
-	at lovexyn0827.mcwmem.MCWMEMod.onInitialize(MCWMEMod.java:49)
-	at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils.invoke0(EntrypointUtils.java:50)
-	... 12 more
+    at lovexyn0827.mcwmem.MCWMEMod.onInitialize(MCWMEMod.java:49)
+    at net.fabricmc.loader.entrypoint.minecraft.hooks.EntrypointUtils.invoke0(EntrypointUtils.java:50)
+    ... 12 more
 Caused by: java.lang.NullPointerException
-	at java.util.Objects.requireNonNull(Unknown Source)
-	at java.nio.file.Files.copy(Unknown Source)
-	at lovexyn0827.mcwmem.MCWMEMod.copyScript(MCWMEMod.java:57)
-	at lovexyn0827.mcwmem.MCWMEMod.onInitialize(MCWMEMod.java:45)
-	... 13 more
+    at java.util.Objects.requireNonNull(Unknown Source)
+    at java.nio.file.Files.copy(Unknown Source)
+    at lovexyn0827.mcwmem.MCWMEMod.copyScript(MCWMEMod.java:57)
+    at lovexyn0827.mcwmem.MCWMEMod.onInitialize(MCWMEMod.java:45)
+    ... 13 more
 ```
 
 注意里面的“Caused by”。直接造成崩溃的异常后面有时会跟着几个“Caused by”来引出那个异常背后更深层次的原因及那些深层异常的堆栈踪迹。一般来说，最后一个“Caused by”后的异常通常是该问题较为根本的原因。
 
 ### 防止从崩溃报告中泄露隐私信息
 
-崩溃报告中可能会包含一些不方便公开的信息，如用户名、存档名称甚至服务器IP等，如果需要的话，建议从崩溃报告中找到那些信息并将其删除或替换为某些值。
+崩溃报告中可能会包含一些不方便公开的信息，如用户名、存档名称甚至服务器IP等，如果需要的话，建议从崩溃报告中找到那些信息并将其删除或替换为某些不影响正常故障诊断的值。
