@@ -124,7 +124,7 @@ java.lang.OutOfMemoryError: unable to create new native thread
     at java.lang.Thread.run(Unknown Source)
 ```
 
-堆栈踪迹通常是崩溃报告中最有价值的内容，因为这里给出了崩溃发生的具体时机和原因。
+堆栈踪迹通常是崩溃报告中最有价值的内容，因为这里给出了崩溃发生的具体时机和原因，其分析方法见“如何看懂崩溃报告”一小节。
 
 #### 问题发生环境
 
