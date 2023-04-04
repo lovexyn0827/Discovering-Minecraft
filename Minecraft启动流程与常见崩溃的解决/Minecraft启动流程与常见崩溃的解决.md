@@ -6,7 +6,7 @@ typora-copy-images-to: media
 
 ### 前言
 
-![1674342019200](media\1674342019200.png)
+![1674342019200](media/1674342019200.png)
 
 **Game Crashed!**
 
