@@ -309,7 +309,7 @@ Vec3d finalVelocity = velocityInuptWithoutInaccuracy.normalize()
 4. 将现有坐标加上现有Motion与1gt的乘积确定目标坐标
 5. 进行基于raycast的碰撞检查以检查目前坐标到目标坐标的路径上有没有发生碰撞，若有则进行对应处理
 6. 如果实体与水接触，受到0.4$gt^{-1}$的流体阻力，否则受到0.01$gt^{-1}$的空气阻力
-7. 如果没有noGravity标签，受到大小为0.04$m/gt^2$的重力加速度
+7. 如果没有noGravity标签，受到大小为0.05$m/gt^2$的重力加速度
 8. 更新坐标和碰撞箱
 9. 检查方块网格碰撞（`checkBlockCollision()`）
 10. 如果箭矢为药箭且进入方块的连续时间超过600gt就清除效果
