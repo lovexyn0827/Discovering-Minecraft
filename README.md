@@ -1,6 +1,8 @@
 # Discovering-Minecraft
 Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
+在线阅读：https://lovexyn0827.github.io/Discovering-Minecraft/docs
+
 ## 目录（待定）
 
 ### [实体运动研究与应用](Minecraft实体运动研究与应用/0-Minecraft实体运动相关研究与应用.md)
