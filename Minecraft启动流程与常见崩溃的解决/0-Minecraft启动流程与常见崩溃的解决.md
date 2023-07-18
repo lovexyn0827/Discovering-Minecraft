@@ -26,7 +26,7 @@ https://github.com/lovexyn0827/Discovering-Minecraft
 
 ### [源码层面的原版Minecraft运行流程（高级内容暂时留空）](2-源码层面的原版Minecraft运行流程.md)
 
-### [Mod的加载](3-Mod的加载].md)
+### [Mod的加载](3-Mod的加载.md)
 
 ### [常见异常日志分析](4-常见异常日志分析.md)
 
