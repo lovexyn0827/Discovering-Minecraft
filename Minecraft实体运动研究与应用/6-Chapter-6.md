@@ -126,10 +126,10 @@ LivingEntity类定义了几个关于运动的字段：
 
 在无流体的地面上时，陆生生物实体和玩家的水平方向运算流程可表示为CMD（AI加速-\>移动-\>阻力），也就是AMD，假设sidewaysSpeed和upwardSpeed都为0，将上一节的结论代入对应公式，得出最终速度（由每gt的位移表示）的表达式及Ms·forwardSpeed = 1m/gt时的图像，其中Ms为地面移动加速度：
 
-$\begin{matrix}
+$$\begin{matrix}
 \Delta d_{\max} = \frac{0.216Ms \cdot forwardSpeed}{s^{3} - 0.91s^{4}}
 \tag{6.2.1}
-\end{matrix}$
+\end{matrix}$$
 
 ![slipernessToSpeed.PNG](media/image30.png)
 

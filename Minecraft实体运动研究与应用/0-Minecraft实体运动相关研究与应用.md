@@ -13,7 +13,7 @@ Github仓库：
 
 ## 目录
 
-1 [绪论](Chapter-1.md)
+1 [绪论](1-Chapter-1.md)
 
    1.1 研究背景与意义
 
@@ -25,7 +25,7 @@ Github仓库：
 
    1.5 一些特殊约定 
 
-2 [实体运动基础](Chapter-2.md)
+2 [实体运动基础](2-Chapter-2.md)
 
    2.1 实体运动基本属性及设定
 
@@ -37,13 +37,13 @@ Github仓库：
 
    2.5 误差和一个重要Bug
 
-3 [实体自由运动相关公式推导](Chapter-3.md)
+3 [实体自由运动相关公式推导](3-Chapter-3.md)
 
    3.1 符号定义及公式推导
 
    3.2 公式的直接及拓展应用
 
-4 [实体移动过程及碰撞机制](Chapter-4.md)
+4 [实体移动过程及碰撞机制](4-Chapter-4.md)
 
    4.1 基于Entity.move()方法
 
@@ -51,7 +51,7 @@ Github仓库：
 
    4.3 两种移动过程的对比
 
-5 [外界因素对运动的影响](Chapter-5.md)
+5 [外界因素对运动的影响](5-Chapter-5.md)
 
    5.1 蛛网和浆果丛的减速作用
 
@@ -93,7 +93,7 @@ Github仓库：
 
    5.20 蜜块侧面的减速作用
 
-6 [LivingEntity运动机制](Chapter-6.md)
+6 [LivingEntity运动机制](6-Chapter-6.md)
 
    6.1 LivingEntity的自由运动
 
@@ -101,7 +101,7 @@ Github仓库：
 
    6.3 鞘翅飞行
 
-7 [几类具体实体运动分析](Chapter-7.md)
+7 [几类具体实体运动分析](7-Chapter-7.md)
 
    7.1 TNT
 
@@ -123,7 +123,7 @@ Github仓库：
 
    7.10 玩家
 
-8 [实体运动应用举例](Chapter-8.md)
+8 [实体运动应用举例](8-Chapter-8.md)
 
    8.1 改造一种TNT大炮
 
@@ -137,17 +137,17 @@ Github仓库：
 
    8.3 解释一些奇葩现象
 
-[参考文献](References.md)
+[参考文献](9-References.md)
 
-[附录A常见实体运动属性](Appendix.md)
+[附录A常见实体运动属性](10-Appendix.md)
 
-[附录B完整公式](Appendix.md)
+[附录B完整公式](10-Appendix.md)
 
-[附录C研究环境及辅助性工具](Appendix.md)
+[附录C研究环境及辅助性工具](10-Appendix.md)
 
-[附录D主要符号及单位](Appendix.md)
+[附录D主要符号及单位](10-Appendix.md)
 
-[附录E 定义索引](Appendix.md)
+[附录E 定义索引](10-Appendix.md)
 
 ## 致谢
 
