@@ -1,7 +1,7 @@
 # Discovering-Minecraft
 Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
-在线阅读：https://lovexyn0827.github.io/Discovering-Minecraft/docs
+在线阅读：http://lovexyn0827.space/mcdocs
 
 ## 目录（待定）
 
@@ -17,7 +17,7 @@ Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
 ### [下界传送门机制详解](下界传送门机制详解/0-下界传送门机制详解.md)
 
-### 区块管理系统
+### 区块管理系统及其动态分析
 
 ### 三种卡顿及其应对策略
 
