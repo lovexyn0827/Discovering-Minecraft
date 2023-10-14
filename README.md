@@ -1,7 +1,7 @@
 # Discovering-Minecraft
 Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
-在线阅读：http://lovexyn0827.space/mcdocs
+在线阅读：http://lovexyn0827.space/mcdocs/docs
 
 ## 目录（待定）
 
