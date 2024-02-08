@@ -126,22 +126,20 @@ LivingEntity类定义了几个关于运动的字段：
 
 在无流体的地面上时，陆生生物实体和玩家的水平方向运算流程可表示为CMD（AI加速-\>移动-\>阻力），也就是AMD，假设sidewaysSpeed和upwardSpeed都为0，将上一节的结论代入对应公式，得出最终速度（由每gt的位移表示）的表达式及Ms·forwardSpeed = 1m/gt时的图像，其中Ms为地面移动加速度：
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{0.216Ms \cdot forwardSpeed}{s^{3} - 0.91s^{4}}
 \tag{6.2.1}
-\end{matrix}$$
-
+$$
 ![slipernessToSpeed.PNG](media/image30.png)
 
 > 图6.2 $Δd_{max}$与s之间关系曲线
 
 对其关于s求导，得
 
-$$\begin{matrix}
+$$
 \Delta{d_{\max}}_{s}^{'} = - \frac{0.216\left( 3s^{2} - 3.64s^{3} \right)Ms \cdot forwardSpeed}{(s^{3} - 0.91s^{4})^{2}}
 \tag{6.2.2}
-\end{matrix}$$
-
+$$
 求得其\[0,1\]间的零点只有一个，约在s=$\frac{75}{91}$（约为0.82418）处，此时最终速度大小最小，约为1.54331Ms·forwardSpeed。另外还可求得s等于各常见方块滑度时的情形：
 
 (1) s=0.6时，最终速度大小约为2.20264Ms·forwardSpeed；
@@ -178,7 +176,7 @@ E.  实体跳跃冷却时间已经结束
 
 (3) D成立或A、B均不成立
 
-写成布尔代数式就是$CE(\overline{A} \bullet \overline{B} + D)$
+写成布尔代数式就是$CE(\overline{A} \cdot \overline{B} + D)$
 
 如果下列条件成立，则尝试执行从水中向上游的行为（即将Y轴Motion加上0.04m/gt，蜜蜂为将Y轴Motion加上0.01m/gt）
 
@@ -186,7 +184,7 @@ E.  实体跳跃冷却时间已经结束
 
 (2) C、D中至少有一个不成立
 
-写成布尔表达式就是$A \bullet (\overline{C} + \overline{D})$
+写成布尔表达式就是$A \cdot (\overline{C} + \overline{D})$
 
 如果满足下列条件，则尝试执行从熔岩向上游的行为（即将Y轴Motion加上0.04m/gt，蜜蜂为将Y轴Motion加上0.01m/gt，岩浆怪较为复杂）
 
@@ -194,11 +192,29 @@ E.  实体跳跃冷却时间已经结束
 
 (2) C、D中至少有一个不成立
 
-(3) 写成布尔表达式就是$B \bullet (\overline{C} + \overline{D})$
+(3) 写成布尔表达式就是$B \cdot (\overline{C} + \overline{D})$
 
 如果跳跃运算进行时发现实体中断了对跳跃的尝试，跳跃冷却会立即结束。
 
-实际上目前不是很确定这些条件是正确的，因为找不到合适的实验方案来验证。
+实际上目前不是很确定这些条件是正确的，因为找不到合适的实验方案来验证。故此处给出相关代码实现如下以供参考（`LivingEntity.tickMovement()`：2169-2183）：
+
+````java
+if (this.jumping && this.method_29920()) {
+	double k = this.isInLava() ? this.getFluidHeight(FluidTags.LAVA) : this.getFluidHeight(FluidTags.WATER);
+	boolean bl = this.isTouchingWater() && k > 0.0;
+	double l = this.getStandingEyeHeight() < 0.4 ? 0.0 : 0.4;
+	if (bl && (!this.onGround || k > l)) {
+		this.swimUpward(FluidTags.WATER);
+	} else if (this.isInLava() && (!this.onGround || k > l)) {
+		this.swimUpward(FluidTags.LAVA);
+	} else if ((this.onGround || bl && k <= l) && this.jumpingCooldown == 0) {
+		this.jump();
+		this.jumpingCooldown = 10;
+	}
+} else {
+	this.jumpingCooldown = 0;
+}
+````
 
 上面说到，`generic_movement_speed`属性与实体的AI加速度的确定有关，进而影响着实体的行走速度。（**玩家速度与它成正比，生物速度与它的平方成正比**，不知道这一差异是否为有意为之的。）余下的部分主要将说明一下这一属性的确定方式。
 
@@ -233,44 +249,42 @@ E.  实体跳跃冷却时间已经结束
 
 这里我们主要研究视线平视或斜向下的情形,不考虑其它加速，此时：
 
-$$\begin{matrix}
+$$
 a_{y} = gt_{0}\left( 0.75\cos^{2}pitch - 1 \right)
 \tag{6.3.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 k_{y} = 0.98\left( 1 - 0.1\cos^{2}pitch \right)
 \tag{6.3.2}
-\end{matrix}$$
+$$
 
 我们也可以看出，在Y轴上，实体的运动明显是ADM型，带入对应公式，有
 
-$$\begin{matrix}
+$$
 \Delta y_{\max} = \frac{gt_{0}\left( 0.75\cos^{2}pitch - 1 \right)\left( 98 - 9.8\cos^{2}pitch \right)}{9.8\cos^{2}pitch + 2}
 \tag{6.3.3}
-\end{matrix}$$
-
+$$
 由源码也可以得出:
 
-$$\begin{matrix}
+$$
 a_{xzmax} = - \frac{0.09\Delta y_{\max}\cos^{2}pitch}{t_{0}k_{y}}
 \tag{6.3.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 k_{x} = k_{z} = 0.99
 \tag{6.3.5}
-\end{matrix}$$
+$$
 
 其中$a_{xz\max}$为实体在水平方向上的最大合加速度，
 
 我们发现，鞘翅飞行的实体在X、Z轴上的运动也是ADM型，代入对应公式，又有：
 
-$$\begin{matrix}
-\sqrt{\Delta_{x}^{2} + \Delta_{z}^{2}} = \frac{891gt_{0}\left( \cos^{2}pitch - 0.75\cos^{4}pitch \right)}{9.8\cos^{2}pitch + 2}
+$$
+\sqrt{(\Delta x)^{2} + (\Delta z)^{2}} = \frac{891gt_{0}\left( \cos^{2}pitch - 0.75\cos^{4}pitch \right)}{9.8\cos^{2}pitch + 2}
 \tag{6.3.6}
-\end{matrix}$$
-
+$$
 这时，我们得到了在视线水平或斜向下时由视线俯仰角得到最终水平合速度以及最终竖直速度的方法。至于斜向上的情况个人能力不足，只能写段小程序做出图像，没有得出表达式。
 
 下面是实体在由静止飞行72000gt后水平速度与俯仰角的关系图：
@@ -280,6 +294,6 @@ $$\begin{matrix}
 > 图6.3.2 水平速度与俯仰角的关系图
 >
 
-在表达式(6.3.6)中求出$\sqrt{\Delta_{x}^{2} + \Delta_{z}^{2}}$关于$\cos^{2}pitch$的导函数，求得其在定义域上仅有一个零点$\frac{\sqrt{67.8} - 3}{14.7}$，也就是说图中那个最高点对应俯仰角正切的平方就是这个值，可以求得此时俯仰角约为53.366度。将其带入式(6.3.6)，求得此时实体飞行速度约为3.3888m/gt,即67.776m/s，与实验值3.38879125m/gt高度接近，也明显高于52度俯冲的速度3.38383913m/gt，所以，Wiki上那个说52度俯冲最快的那些个地方又得改了。
+在表达式(6.3.6)中求出$\sqrt{(\Delta x)^{2} + (\Delta z)^{2}}$关于$\cos^{2}pitch$的导函数，求得其在定义域上仅有一个零点$\frac{\sqrt{67.8} - 3}{14.7}$，也就是说图中那个最高点对应俯仰角正切的平方就是这个值，可以求得此时俯仰角约为53.366度。将其带入式(6.3.6)，求得此时实体飞行速度约为3.3888m/gt,即67.776m/s，与实验值3.38879125m/gt高度接近，也明显高于52度俯冲的速度3.38383913m/gt，所以，Wiki上那个说52度俯冲最快的那些个地方又得改了。
 
 如果希望更加详细地了解一些其它方面的实验数据、仰视时的情况和一些实际问题，可以查阅这两个专栏**\[12\]**。

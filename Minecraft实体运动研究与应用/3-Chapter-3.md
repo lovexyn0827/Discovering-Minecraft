@@ -10,29 +10,28 @@
 
 在该实体的第1 gt即将开始而未开始时，实体在x、y、z轴上的坐标分别为$x_{0}$、$y_{0}$、$z_{0}$，在x、y、z轴的上Motion分别为$v_{x0}$、$v_{y0}$、$v_{z0}$。一游戏刻长度
 
-$$\begin{matrix}
+$$
 t_{0} = 1gt
 \tag{3.1.1}
-\end{matrix}$$
-
+$$
 在该实体的第n gt结束时，实体在x、y、z轴上的坐标与$x_{0}$、$y_{0}$、$z_{0}$的差分别为$x_{n}$、$y_{n}$、$z_{n}$，在x、y、z轴的上Motion分别为$v_{xn}$、$v_{yn}$、$v_{zn}$。
 
 在该实体的的第*n* gt内，实体在x、y、z轴上的位移分别为
 
-$$\begin{matrix}
+$$
 \Delta x_{n} = x_{n} - x_{n - 1}
 \tag{3.1.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta y_{n} = y_{n} - y_{n - 1}
 \tag{3.1.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta z_{n} = z_{n} - z_{n - 1}
 \tag{3.1.4}
-\end{matrix}$$
+$$
 
 其值与$t_{0}$的比值分别为该实体在其第n gt中在x、y、z轴上的平均速度。
 
@@ -42,316 +41,295 @@ $$\begin{matrix}
 
 为实现速度乘数与**wiki**中阻力系数的转换，有
 
-$$\begin{matrix}
+$$
 k = 1 - ft_{0}
 \tag{3.1.5}
-\end{matrix}$$
-
+$$
 无论何时。
 
 以MDA型实体为例：
 
 对任意自然数$n_{0}$，有
 
-$$\begin{matrix}
+$$
 v_{n_{0} + 1} = kv_{n_{0}} + at_{0}
 \tag{3.1.6}
-\end{matrix}$$
-
+$$
 令$n_0=0$，则可以得出
 
-$$\begin{matrix}
+$$
 v_{1} = kv_{0} - gt_{0}
 \tag{3.1.7}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{2} = k^{2}v_{0} - gt_{0}k - gt_{0}
 \tag{3.1.8}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{3} = k^{3}v_{0} - gt_{0}k^{2} - gt_{0}k - gt_{0}
 \tag{3.1.9}
-\end{matrix}$$
+$$
 
-$$\vdots$$
+$$
+\vdots
+$$
 
-$$\begin{matrix}
+$$
 v_{n} = k^{n}v_{0} - gt_{0}\sum_{i = 0}^{n - 1}k^{i}
 \tag{3.1.10}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
-\because(1 - k)\sum_{i = q}^{r}k^{i}
+因为
+$$
+\begin{eqnarray}
+&&(1 - k)\sum_{i = q}^{r}k^{i}\\
+&=&k^{q} + k^{q + 1} + \cdots + k^{r - 1} + k^{r} - k^{q + 1} - k^{q + 2} - \cdots - k^{r} - k^{r + 1}\\
+&=&k^{q} - k^{r + 1}
+\end{eqnarray}
 \tag{3.1.11}
-\end{matrix}$$
-
-$$= k^{q} + k^{q + 1} + \cdots + k^{r - 1} + k^{r} - k^{q + 1} - k^{q + 2} - \cdots - k^{r} - k^{r + 1}$$
-
-$$= k^{q} - k^{r + 1}$$
-
-$$\begin{matrix}
-\therefore\sum_{i = q}^{r}k^{i} = \frac{k^{q} - k^{r + 1}}{1 - k}
+$$
+所以
+$$
+\sum_{i = q}^{r}k^{i} = \frac{k^{q} - k^{r + 1}}{1 - k}
 \tag{3.1.12}
-\end{matrix}$$
-
+$$
 令式(3.1.12)中$q=0$，$r=n-1$，代入式(3.1.10)中，得
 
-$$\begin{matrix}
+$$
 v_{n} = k^{n}v_{0} + \frac{at_{0}\left( 1 - k^{n} \right)}{1 - k}
 \tag{3.1.13}
-\end{matrix}$$
-
+$$
 由运算过程可知
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = v_{n - 1}t_{0}
 \tag{3.1.14}
-\end{matrix}$$
-
+$$
 将式(3.1.13)代入其中，有
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n - 1} \right)}{1 - k}
 \tag{3.1.15}
-\end{matrix}$$
-
+$$
 易知
 
-$$\begin{matrix}
+$$
 d_{n} = \sum_{i = 1}^{n}{\Delta d_{i}}
 \tag{3.1.16}
-\end{matrix}$$
-
+$$
 将式(3.1.15)带入其中，有
 
-$$\begin{matrix}
+$$
 d_{n} = v_{0}t_{0}\sum_{i = 1}^{n}k^{i - 1} + \frac{a{t_{0}}^{2}n}{1 - k} + \frac{a{t_{0}}^{2}}{1 - k}\sum_{i = 1}^{n}k^{i - 1}
 \tag{3.1.17}
-\end{matrix}$$
-
+$$
 令式(3.1.12)中$q=0$，$r=n-1$，并将其代入式(3.1.17)中，有
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{3.1.18}
-\end{matrix}$$
-
+$$
 解得
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}}{1 - k}
 \tag{3.1.19}
-\end{matrix}$$
-
+$$
 令式(3.1.15)中$\Delta d_{n} = 0$，解得
 
-$$\begin{matrix}
+$$
 n = 1 - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}} \right\rbrack
 \tag{3.1.20}
-\end{matrix}$$
-
+$$
 可以证明，将求得$n$下取整**\[4\]**（取不大于$n$的最大整数），代入式(3.1.18)中，可求得运动折返点（若有）
 
 令$n \rightarrow + \infty$，则有$k^{n} \rightarrow 0$（0\<*k*\<1）
 
 则可得恒定加速度与阻力共同作用下$\Delta d_{n}$的最终稳定在
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
 \tag{3.1.21}
-\end{matrix}$$
-
+$$
 若此时$a=0$，位移$d_{n}$最终趋向于
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}}{1 - k}
 \tag{3.1.22}
-\end{matrix}$$
-
+$$
 此时$d_{n}$的绝对值亦取得最大值。
 
 若
 
-$$\begin{matrix}
+$$
 a_{x} = a_{z} = 0,a_{y} = - g
 \tag{3.1.23}
-\end{matrix}$$
-
-$$\begin{matrix}
+$$
+而且
+$$
 k = k_{x} = k_{y} = k_{z}
 \tag{3.1.24}
-\end{matrix}$$
-
+$$
 则有
 
-$$\begin{matrix}
+$$
 \Delta x_{n} = k^{n - 1}v_{x0}t_{0}
 \tag{3.1.25}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta y_{n} = k^{n - 1}v_{y0}t_{0} - \frac{g{t_{0}}^{2}\left( 1 - k^{n - 1} \right)}{1 - k}
 \tag{3.1.26}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta z_{n} = k^{n - 1}v_{z0}t_{0}
 \tag{3.1.27}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 x_{n} = \frac{v_{x0}t_{0}\left( 1 - k^{n} \right)}{1 - k}
 \tag{3.1.28}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 y_{n} = \frac{v_{y0}t_{0}\left( 1 - k^{n} \right)}{1 - k} - \frac{g{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{3.1.29}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 z_{n} = \frac{v_{z0}t_{0}\left( 1 - k^{n} \right)}{1 - k}
 \tag{3.1.30}
-\end{matrix}$$
+$$
 
-易知实体第*n*gt中位移俯仰角正切值
+易知实体第$n$gt中位移俯仰角正切值
 
-$$\begin{matrix}
-{tan\alpha}_{n} = - \frac{\Delta y_{n}}{\sqrt{\Delta{x_{n}}^{2} + \Delta{z_{n}}^{2}}}
+$$
+{\tan\alpha}_{n} = - \frac{\Delta y_{n}}{\sqrt{\Delta{x_{n}}^{2} + \Delta{z_{n}}^{2}}}
 \tag{3.1.31}
-\end{matrix}$$
-
+$$
 将式(3.1.25)、(3.1.26)、(3.1.27)代入式(3.1.31)，得
 
-$$\begin{matrix}
-{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n - 1} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
+$$
+{\tan\alpha}_{n} = \frac{gt_{0}\left( k^{n - 1} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
 \tag{3.1.32}
-\end{matrix}$$
-
+$$
 由式(3.1.28)得
 
-$$\begin{matrix}
+$$
 \frac{v_{x0}t_{0}\left( 1 - k^{n} \right)}{1 - k} = x_{n}
 \tag{3.1.33}
-\end{matrix}$$
-
+$$
 将式(3.1.33)与式(3.1.30)相乘，得
 
-$$\begin{matrix}
+$$
 zv_{x0} = xv_{z0}
 \tag{3.1.34}
-\end{matrix}$$
-
+$$
 即运动轨迹始终在同一垂直$xOz$平面的一平面$θ$上；
 
 由式(3.1.28)、(3.1.30)分别解得
 
-$$\begin{matrix}
+$$
 n = \log_{k}\left\lbrack 1 - \frac{x(1 - k)}{v_{x0}t_{0}} \right\rbrack
 \tag{3.1.35}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = \log_{k}\left\lbrack 1 - \frac{z(1 - k)}{v_{z0}t_{0}} \right\rbrack
 \tag{3.1.36}
-\end{matrix}$$
+$$
 
 分别代入式(3.1.29)中得
 
-$$\begin{matrix}
+$$
 y = \frac{v_{y0}(1 - k) + gt_{0}}{v_{x0}(1 - k)}x - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\left\lbrack 1 - \frac{x(1 - k)}{v_{x0}t_{0}} \right\rbrack
 \tag{3.1.37}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 y = \frac{v_{y0}(1 - k) + gt_{0}}{v_{z0}(1 - k)}z - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\left\lbrack 1 - \frac{z(1 - k)}{v_{z0}t_{0}} \right\rbrack
 \tag{3.1.38}
-\end{matrix}$$
+$$
 
 可以证明，式(3.1.37)对应曲面与平面θ的交线=式(3.1.38)对应曲面与平面θ的交线=式(3.1.37)对应曲面与式(3.1.38)对应曲面的交线，且运动轨迹点全部在该曲线上
 
-设初速度仰俯仰角为α，偏航角为β，大小为$v_0$，则各轴分量
+设初速度仰俯仰角为$α$，偏航角为$β$，大小为$v_0$，则各轴分量
 
-$$\begin{matrix}
+$$
 v_{x0} = - v_{0}\cos\alpha\sin\beta
 \tag{3.1.39}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{y0} = - v_{0}\sin\alpha
 \tag{3.1.40}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{z0} = v_0\cos\alpha\cos\beta
 \tag{3.1.41}
-\end{matrix}$$
+$$
 
 分别代入式(3.1.28)、(3.1.29)、(3.1.30)中，有
 
-$$\begin{matrix}
+$$
 x_{n} = - \frac{v_{0}\cos\alpha\sin\beta t_{0}\left( 1 - k^{n} \right)}{1 - k}
 \tag{3.1.42}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 y_{n} = - \frac{v_{0}\sin\alpha t_{0}\left( 1 - k^{n} \right)}{1 - k} - \frac{g{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{3.1.43}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 z_{n} = \frac{v_{0}\cos\alpha\cos\beta t_{0}\left( 1 - k^{n} \right)}{1 - k}
 \tag{3.1.44}
-\end{matrix}$$
+$$
 
 下面认为
 
-$$\begin{matrix}
+$$
 v_{y0} = - a_{0}t_{0}\sin\alpha + v_{y0}^{'}
 \tag{3.1.45}
-\end{matrix}$$
-
+$$
 其中$a_{0}$是合初始加速度（如爆炸推进加速度），$v_{y0}^{'}$是加速前的y轴Motion，由此可得
 
-$$\begin{matrix}
+$$
 y_{n} = - \frac{t_{0}\left( - a_{0}t_{0}\sin\alpha + v_{y0}^{'} \right)\left( 1 - k^{n} \right)}{1 - k} - \frac{g{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{3.1.46}
-\end{matrix}$$
-
+$$
 可以证明
 
-$$\begin{matrix}
+$$
 a_{0}t_{0} = \frac{(1 - k)\sqrt{{x_{n}}^{2} + {z_{n}}^{2}}}{\cos\alpha t_{0}\left( 1 - k^{n} \right)}
 \tag{3.1.47}
-\end{matrix}$$
-
+$$
 代入式(3.1.46)并解得
 
-$$\begin{matrix}
+$$
 \tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( 1 - k^{n} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}
 \tag{3.1.48}
-\end{matrix}$$
-
+$$
 对所有有效实体，式(3.1.12)、(3.1.16)、(3.1.31)通用；若式(3.1.23)和(3.1.24)成立 (3.1.34) 、(3.1.39) 、(3.1.40) 、(3.1.41)、(3.1.45)式也通用。
 
 对于DA型实体，式(3.1.13)通用
 
 对于DF型实体，有
 
-$$\begin{matrix}
+$$
 v_{n} = k^{n}v_{0} + \frac{at_{0}\left( k - k^{n + 1} \right)}{1 - k}
 \tag{3.1.49}
-\end{matrix}$$
-
+$$
 对于M（速度不变，仅移动），N（无法移动）型实体，有
 
-$$\begin{matrix}
+$$
 v_{n} = v_{0}
 \tag{3.1.50}
-\end{matrix}$$
-
+$$
 所有其它运动形式对应的公式可由式(3.1.13)，(3.1.49)或(3.1.50)与下表中各式结合推导出。
 
 > 表2.1运动形式对应tick末位移与tick末Motion关系式
@@ -420,28 +398,25 @@ v_{n} = v_{0}
 
 若要解决这个问题，我们不妨暂时忽略移动这一步骤，先将其下一刻的水平某轴上Motion用一个式子表示出来，其中$a_{f}$为流体加速度在该轴上的分量，$a_{c}$为动力加速度在该轴上的分量，k为步骤三后与步骤三前该轴上Motion的比值，$v_{0}$、$v_{1}$分别为原Motion与下一刻该轴上的Motion：
 
-$$\begin{matrix}
+$$
 v_{1} = k\left( v_{0} + a_{f}t_{0} \right) + a_{c}t_{0} = kv_{0} + \left( a_{f}k + a_{c} \right)t_{0}
 \tag{3.2.1}
-\end{matrix}$$
-
+$$
 现在下一刻的Motion已经被表示成一个关于$v_{0}$的一次代数式，可以发现这与前面公式推导时DA（先阻力后加速）型实体的相似。所以，我们将式$a_{f}k + a_{c}$作为a，k作为k带入DA型式的Motion公式，也就是式(3.1.13)中，有
 
-$$\begin{matrix}
+$$
 v_{n} = k^{n}v_{0} + \frac{t_{0}\left( a_{f}k + a_{c} \right)\left( 1 - k^{n} \right)}{1 - k}
 \tag{3.2.2}
-\end{matrix}$$
-
+$$
 易知这里
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = v_{n}t_{0}
 \tag{3.2.3}
-\end{matrix}$$
-
+$$
 这与DAM和ADM型实体相同。因为上面的推导过程中我们假定$v_{1}$是由$v_{0}$先通过阻力作用，再经过加速得到的（也就是先乘以k，再加上$at_0$），所以这里我们选择DAM型实体，此后余下的公式也可以类似地代入使用。
 
-有时候，多个加速度或阻力都是连在一起的（中间有移动过程时也认为它们是连在一起的），这时我们甚至可以不用求$v_{1}$的表达式，直接用加法合并加速度，用乘法合并阻力的k值就可以了。例如，某个实体每gt运算顺序是$MA_1A_2A_3D_1D_2D_3$，这时可以将$A_1A_2A_3$过程中的加速度相加，将$D_1D_2D_3$中速度乘数（k值）相乘分别得到a和k。可以发现这个实体的运动过程在化简后实际上就是MAD，将求得a和k带入对应公式中即可。
+有时候，多个加速度或阻力都是连在一起的（中间有移动过程时也认为它们是连在一起的），这时我们甚至可以不用求$v_{1}$的表达式，直接用加法合并加速度，用乘法合并阻力的$k$值就可以了。例如，某个实体每gt运算顺序是$MA_1A_2A_3D_1D_2D_3$，这时可以将$A_1A_2A_3$过程中的加速度相加，将$D_1D_2D_3$中速度乘数（k值）相乘分别得到$a$和$k$。可以发现这个实体的运动过程在化简后实际上就是MAD，将求得$a$和$k$带入对应公式中即可。
 
 实体的移动过程可能在多个加速或阻力作用过程中间，可能不能直接带入任何与位移相关的现有公式，这时就需要对现有公式进行变形或直接推出一套新公式才能代入使用。再举一例，某实体的运动运算过程为$A_1D_1MA_2DA_3$，我们想要从某个初速度求得任意时刻的位移，也就是要推导出(3.1.18)式的对应版本。利用前面的方法我们可以很轻松的得到这种实体的加速度和阻力，以及
 
@@ -463,14 +438,16 @@ $$\begin{matrix}
 
 易知周期内玩家在空中的运动时长为${(n}_{0} - 1)\ gt$，地面上移动时长为1gt，结合玩家的运动运算顺序可以导出周期末水平Motion：
 
-$$v_{next} = (v_{0 +}{a_{g}t_{0})k_{g}k}_{a}^{n_{0} - 1} + \frac{a_{a}t_{0}\left( k_{a} - k_{0}^{n_{0}} \right)}{1 - k_{a}} + a_{g}t_{0}
-\tag{3.2.6}$$
-
+$$
+v_{next} = (v_{0 +}{a_{g}t_{0})k_{g}k}_{a}^{n_{0} - 1} + \frac{a_{a}t_{0}\left( k_{a} - k_{0}^{n_{0}} \right)}{1 - k_{a}} + a_{g}t_{0}
+\tag{3.2.6}
+$$
 令$v_{next} = v_{0}$，解得
 
-$$v_{0} = \frac{a_{a}t_{0}\left( k_{a} - k_{a}^{n_{0}} \right)}{\left( 1 - k_{a} \right)(1 - k_{g}k_{a}^{n_{0} - 1})} + \frac{a_{g}t_{0}k_{g}k_{a}^{n_{0} - 1}}{1 - k_{g}k_{0}^{n_{0} - 1}}
-\tag{3.2.7}$$
-
+$$
+v_{0} = \frac{a_{a}t_{0}\left( k_{a} - k_{a}^{n_{0}} \right)}{\left( 1 - k_{a} \right)(1 - k_{g}k_{a}^{n_{0} - 1})} + \frac{a_{g}t_{0}k_{g}k_{a}^{n_{0} - 1}}{1 - k_{g}k_{0}^{n_{0} - 1}}
+\tag{3.2.7}
+$$
 接下来，可以得出玩家在周期内的水平Motion变化情况。
 
 可以发现，$1-k^{n}$似乎是一个有特殊意义的值。实际上，在一些实体运动的过程中，*$1-k^{n}$*等于原来的一半的意义还是比较丰富的（不止这些）：

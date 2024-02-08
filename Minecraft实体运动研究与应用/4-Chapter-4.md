@@ -52,6 +52,37 @@
 
 然后，如果实体在移动前着地，或在移动中Y轴唯一向下且发生了竖直方向上的碰撞，游戏会进行实体直接走上方块的相关调整，大概就是在保证不会出现实体走过去高度（顶部Y坐标与实体原坐标的Y坐标的差值）大于stepHeight的障碍和穿过小于实体碰撞体积的洞的现象且水平位移不多于输入位移的情况下尽可能让水平位移更远，并在不使实际Y轴位移多于输入趋势的情况下的让实体尽可能着地。好吧，通俗地完全解释还是比较难的，大家直接按经验来也好，不过还是给出一些例子，图4.1.3中红框和蓝框为移动前后的实体碰撞箱，灰色部分是固体方块，绿色实线标明了实体的stepHeight，绿色虚线标明了实体一次最高能移上的高度，紫色实线标明了实体的实际位移趋势。前三幅都较好理解，第四幅有时可能算是一个Bug，需要注意。理论上，所有实体都可以有这个能力，但大多数实体的stepHeight被设为0从而没有外在表现，未被骑乘或未被控制的猪和未被骑乘或未被控制的赤足兽为0.5，可以迈上或被推上半个方块；客户端玩家和大部分生物则是0.6，可以迈上或被推上部分不完整方块和船；末影人、溺尸、铁傀儡、马类（HorseBase及其子类）、服务端玩家（目的可能是实现被活塞推上方块的机制）、被骑乘且被控制的猪和被骑乘且被控制的赤足兽为1，可以迈上或被推上完整方块。
 
+此处给出直接走上方块这一机制的实现代码以供参考（`Entity.adjustMovementForCollisions()`：675-685）：
+
+````java
+if (this.stepHeight > 0.0f && bl4 && (bl || bl3)) {
+	Vec3d vec3d4;
+	Vec3d vec3d2 = Entity.adjustMovementForCollisions(this, 
+			new Vec3d(movement.x, this.stepHeight, movement.z), 
+             box, this.world, shapeContext, reusableStream);
+	Vec3d vec3d3 = Entity.adjustMovementForCollisions(this, 
+             new Vec3d(0.0, this.stepHeight, 0.0), 
+             box.stretch(movement.x, 0.0, movement.z), this.world, 
+             shapeContext, reusableStream);
+    vec3d4 = Entity.adjustMovementForCollisions(this, 
+             		new Vec3d(movement.x, 0.0, movement.z), 
+             		ox.offset(vec3d3), this.world, shapeContext, reusableStream
+             ).add(vec3d3);
+	if (vec3d3.y < (double)this.stepHeight 
+        	&& Entity.squaredHorizontalLength(vec3d4) > Entity.squaredHorizontalLength(vec3d2)) {
+		vec3d2 = vec3d4;
+	}
+    
+	if (Entity.squaredHorizontalLength(vec3d2) > Entity.squaredHorizontalLength(vec3d)) {
+		return vec3d2.add(
+            	Entity.adjustMovementForCollisions(this, 
+                		new Vec3d(0.0, -vec3d2.y + movement.y, 0.0), 
+                         box.offset(vec3d2), this.world, shapeContext, 
+                         reusableStream));
+	}
+}
+````
+
 脚手架和熔岩有一些特殊机制，这使得它们对不同种类或状态实体可以有不同的碰撞箱。脚手架倒好说，估计大家都试过了。对于熔岩，这一设定使它对赤足兽有了一个0.5m高的碰撞箱，这是为了使赤足兽可以稳定地走在上面。
 
 1.18前，在碰撞运算中，流体会被忽略，这使路径上的流体不会对该实体产生影响，除非在移动结束后实体仍有部分碰撞箱与其相交。1.18及之后，一个raycast被加入到move()方法中用于摔落伤害的计算（这使得move()方法也会加载沿途区块），但变速等影响仍不会发生。

@@ -38,223 +38,226 @@
 
 这是第3节中部分公式对于不同实体类型的各种形式，除MDA类实体对应各式和求出$\Delta d_{n}$、$d_{n}$、$v_{0}$、$\Delta d_{\max}$和$d_{\max}$的各式以及"万能方程组"基本确定无误外，其它公式不排除仍存在推导错误或录入错误，但缺少检验方法，希望有人帮忙检查一下。
 
-**MDA（移动-\>阻力-\>加速）**
+### MDA（移动-\>阻力-\>加速）
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n - 1} \right)}{1 - k}
 \tag{B.1.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{B.1.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}}{1 - k}
 \tag{B.1.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
 \tag{B.1.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
 \tag{B.1.5}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}}{1 - k}
 \tag{B.1.6}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
-{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n - 1} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
+$$
+{\tan\alpha}_{n} = \frac{gt_{0}\left( k^{n - 1} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
 \tag{B.1.7}
-\end{matrix}$$
+$$
 
-$${y = \frac{v_{y}(1 - k) - gt_{0}}{v_{x0}(1 - k)}x - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\lbrack 1 - \frac{x(1 - k)}{v_{x0}t_{0}}\rbrack y
-}\begin{matrix}
- = \frac{v_{y}(1 - k) - gt_{0}}{v_{z0}(1 - k)}z - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\left\lbrack 1 - \frac{z(1 - k)}{v_{z0}t_{0}} \right\rbrack
+$$
+\begin{cases}y = \frac{v_{y}(1 - k) - gt_{0}}{v_{x0}(1 - k)}x - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\lbrack 1 - \frac{x(1 - k)}{v_{x0}t_{0}}\rbrack \\
+y = \frac{v_{y}(1 - k) - gt_{0}}{v_{z0}(1 - k)}z - \frac{g{t_{0}}^{2}}{1 - k}\log_{k}\left\lbrack 1 - \frac{z(1 - k)}{v_{z0}t_{0}} \right\rbrack
+\end{cases}
 \tag{B.1.8}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( 1 - k^{n} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}
 \tag{B.1.9}
-\end{matrix}$$
+$$
 
-> **DMA（阻力-\>移动-\>加速）**
+### DMA（阻力-\>移动-\>加速）
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n} \right)}{1 - k}
 \tag{B.2.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{B.2.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{k - k^{n + 1}} + \frac{at_{0}}{1 - k}
 \tag{B.2.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
 \tag{B.2.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}
 \tag{B.2.5}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
 \tag{B.2.6}
-\end{matrix}$$
+$$
 
-> **DAM（阻力-\>加速-\>移动）**
+### DAM（阻力-\>加速-\>移动）
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n} \right)}{1 - k}
 \tag{B.3.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}
 \tag{B.3.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{k - k^{n + 1}} + \frac{at_{0}}{1 - k}
 \tag{B.3.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}} \right\rbrack
 \tag{B.3.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
 \tag{B.3.5}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
 \tag{B.3.6}
-\end{matrix}$$
+$$
 
-> **MAD（移动-\>加速-\>阻力）**
+### MAD（移动-\>加速-\>阻力）
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n} \right)}{1 - k}
 \tag{B.4.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
 \tag{B.4.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{1 - k^{n}} + \frac{at_{0}k}{1 - k}
 \tag{B.4.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = - \log_{k}\left\lbrack \frac{1}{k} - \frac{v_{0}(1 - k)}{at_{0}k^{2}} \right\rbrack
 \tag{B.4.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}
 \tag{B.4.5}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}}{1 - k}
 \tag{B.4.6}
-\end{matrix}$$
+$$
 
-> **AMD（加速-\>移动-\>阻力）**
+### AMD（加速-\>移动-\>阻力）
 
-$$\begin{matrix}
+$$
 \Delta d_{n} = k^{n - 1}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( 1 - k^{n} \right)}{1 - k}
 \tag{B.5.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}
 \tag{B.5.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}n}{1 - k^{n}} + \frac{at_{0}k}{1 - k}
 \tag{B.5.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
 \tag{B.5.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
 \tag{B.5.5}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}}{1 - k}
 \tag{B.5.6}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
-{tan\alpha}_{n} = \frac{gt_{0}\left( k^{n} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
+$$
+{\tan\alpha}_{n} = \frac{gt_{0}\left( k^{n} - 1 \right)}{k^{n - 1}(1 - k)\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}} - \frac{v_{y0}}{\sqrt{{v_{x0}}^{2} + {v_{z0}}^{2}}}
 \tag{B.5.7}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( k - k^{n + 1} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}
 \tag{B.5.8}
-\end{matrix}$$
+$$
 
-> **ADM（加速-\>阻力-\>移动）**
 
-$$\begin{matrix}
+
+### ADM（加速-\>阻力-\>移动）
+
+$$
 \Delta d_{n} = k^{n}v_{0}t_{0} + \frac{a{t_{0}}^{2}\left( k - k^{n + 1} \right)}{1 - k}
 \tag{B.6.1}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{n} = \frac{v_{0}t_{0}\left( k - k^{n + 1} \right)}{1 - k} + \frac{a{t_{0}}^{2}k\left\lbrack k^{n + 1} + n(1 - k) - k \right\rbrack}{(1 - k)^{2}}
 \tag{B.6.2}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 v_{0} = \frac{d_{n}{t_{0}}^{- 1}(1 - k) - at_{0}kn}{k - k^{n + 1}} + \frac{at_{0}k}{1 - k}
 \tag{B.6.3}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 n = - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}k} \right\rbrack
 \tag{B.6.4}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 \Delta d_{\max} = \frac{a{t_{0}}^{2}k}{1 - k}
 \tag{B.6.5}
-\end{matrix}$$
+$$
 
-$$\begin{matrix}
+$$
 d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
 \tag{B.6.6}
-\end{matrix}$$
+$$
 
 ## 附录C研究环境及辅助性工具
 
@@ -272,15 +275,19 @@ d_{\max} = \frac{v_{0}t_{0}k}{1 - k}
 
 (6) tweakeroo-fabric-1.16.4-0.10.0-dev.20201110.132827
 
-mcwmem全称为Minecraft World Manipulation Enchantment Mod（Minecraft世界控制增强，似乎名称起的太大了），是我临时赶工期开发的一个用于进行世界数据访问和修改的Mod，内容很乱，当时目前功能较不完善且仅支持1.16.4和1.16.5，但是够研究使用。最近又对此进行了一些进一步开发，较新版本可以在以下地址下载：
+mcwmem全称为Minecraft World Manipulation Enchantment Mod（Minecraft世界控制增强，似乎名称起的太大了，现已重命名为MessMod），是我临时赶工期开发的一个用于进行世界数据访问和修改的Mod，内容很乱，当时功能较不完善且仅支持1.16.4和1.16.5，但是够研究使用。最近又对此进行了一些进一步开发，较新版本可以在以下地址下载：
 
 > MOD:
+>
+> [https://modrinth.com/mod/messmod](https://modrinth.com/mod/messmod)
 >
 > [https://github.com/lovexyn0827/MessMod/releases/tag/1.16.4-20220408](https://github.com/lovexyn0827/MessMod/releases/tag/1.16.4-20220408)
 >
 > README:
 >
 > [https://github.com/lovexyn0827/MessMod/blob/main/README.md](https://github.com/lovexyn0827/MessMod/blob/main/README.md)。
+>
+> [https://github.com/lovexyn0827/MessMod/blob/master/README_zh_cn.md](https://github.com/lovexyn0827/MessMod/blob/master/README_zh_cn.md)
 
 实体运动研究中不能过于相信贴图（或者说是客户端上显示出的实体以及碰撞箱），因为贴图位置比在服务端上实体的真正位置通常是滞后的，研究过程中太相信贴图那么可以认为第一步就输了，而这个Mod个人认为最大的功能就是正确地显示服务端上实体的碰撞箱位置，防止被客户端欺骗。
 
@@ -289,6 +296,8 @@ chunkmap是我主要在7月9-18日开发的一个用于可视化区块的加载�
 > 最新版本下载地址：
 >
 > [https://github.com/lovexyn0827/Chunkmap/releases/tag/v20210825](https://github.com/lovexyn0827/Chunkmap/releases/tag/v20210825)
+>
+> [https://modrinth.com/mod/chunkmap](https://modrinth.com/mod/chunkmap)
 >
 > MCBBS上的介绍贴：
 >
