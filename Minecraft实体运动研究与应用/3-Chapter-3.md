@@ -96,7 +96,7 @@ $$\begin{matrix}
 \tag{3.1.12}
 \end{matrix}$$
 
-令式(3.1.12)中*q*=0，*r*=*n*-1，代入式(3.1.10)中，得
+令式(3.1.12)中$q=0$，$r=n-1$，代入式(3.1.10)中，得
 
 $$\begin{matrix}
 v_{n} = k^{n}v_{0} + \frac{at_{0}\left( 1 - k^{n} \right)}{1 - k}
@@ -120,7 +120,7 @@ $$\begin{matrix}
 易知
 
 $$\begin{matrix}
-d_{n} = \sum_{i = 1}^{n}{\Delta d_{i}t_{0}}
+d_{n} = \sum_{i = 1}^{n}{\Delta d_{i}}
 \tag{3.1.16}
 \end{matrix}$$
 
@@ -131,7 +131,7 @@ d_{n} = v_{0}t_{0}\sum_{i = 1}^{n}k^{i - 1} + \frac{a{t_{0}}^{2}n}{1 - k} + \fra
 \tag{3.1.17}
 \end{matrix}$$
 
-令式(3.1.12)中*q*=0，*r*=*n*-1，并将其代入式(3.1.17)中，有
+令式(3.1.12)中$q=0$，$r=n-1$，并将其代入式(3.1.17)中，有
 
 $$\begin{matrix}
 d_{n} = \frac{v_{0}t_{0}\left( 1 - k^{n} \right)}{1 - k} + \frac{a{t_{0}}^{2}\left\lbrack k^{n} + n(1 - k) - 1 \right\rbrack}{(1 - k)^{2}}
@@ -152,23 +152,25 @@ n = 1 - \log_{k}\left\lbrack 1 - \frac{v_{0}(1 - k)}{at_{0}} \right\rbrack
 \tag{3.1.20}
 \end{matrix}$$
 
-可以证明，将求得*n*向下取整**\[4\]**（取不大于*n*的最大整数），代入式(3.1.18)中，可求得运动折返点（若有）
+可以证明，将求得$n$下取整**\[4\]**（取不大于$n$的最大整数），代入式(3.1.18)中，可求得运动折返点（若有）
 
 令$n \rightarrow + \infty$，则有$k^{n} \rightarrow 0$（0\<*k*\<1）
 
-则使$\Delta d_{n}$绝对值最大的
+则可得恒定加速度与阻力共同作用下$\Delta d_{n}$的最终稳定在
 
 $$\begin{matrix}
 \Delta d_{\max} = \frac{a{t_{0}}^{2}}{1 - k}
 \tag{3.1.21}
 \end{matrix}$$
 
-若此时*a*=0，使$d_{n}$绝对值最大的
+若此时$a=0$，位移$d_{n}$最终趋向于
 
 $$\begin{matrix}
 d_{\max} = \frac{v_{0}t_{0}}{1 - k}
 \tag{3.1.22}
 \end{matrix}$$
+
+此时$d_{n}$的绝对值亦取得最大值。
 
 若
 
@@ -242,7 +244,7 @@ zv_{x0} = xv_{z0}
 \tag{3.1.34}
 \end{matrix}$$
 
-即运动轨迹始终在同一垂直xOz平面的一平面θ上；
+即运动轨迹始终在同一垂直$xOz$平面的一平面$θ$上；
 
 由式(3.1.28)、(3.1.30)分别解得
 
