@@ -1,5 +1,7 @@
 # Mod的加载
 
+<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:3"> </span>
+
 ### Fabric Loader
 
 #### 加载Mod信息并验证兼容性

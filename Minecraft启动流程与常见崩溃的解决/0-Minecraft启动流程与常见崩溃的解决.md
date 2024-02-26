@@ -1,5 +1,7 @@
 # Minecraft启动流程与常见崩溃的解决
 
+<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:0"> </span>
+
 ### 前言
 
 ![1674342019200](media/1674342019200.png)

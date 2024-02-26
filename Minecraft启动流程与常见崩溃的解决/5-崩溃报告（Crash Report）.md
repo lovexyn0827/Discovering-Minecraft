@@ -1,5 +1,7 @@
 # 崩溃报告（Crash Report）
 
+<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:5"> </span>
+
 ### 什么是崩溃报告
 
 ![1674374074044](media/1674374074044.png)

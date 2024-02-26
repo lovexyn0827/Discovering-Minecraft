@@ -1,5 +1,7 @@
 # 实体自由运动相关公式推导
 
+<span id="lovexyn0827-page-metadata" class="motion_of_entities:3" onload="queryPageview()"> </span>
+
 ## 符号定义及公式推导
 
 首先，再次强调一下那个很让人迷惑的事实，Motion不是速度，至少不完全是。
@@ -308,8 +310,38 @@ $$
 a_{0}t_{0} = \frac{(1 - k)\sqrt{{x_{n}}^{2} + {z_{n}}^{2}}}{\cos\alpha t_{0}\left( 1 - k^{n} \right)}
 \tag{3.1.47}
 $$
-代入式(3.1.46)并解得
+>(3.1.42)、(3.1.44)两边平方并相加得
+>$$
+>\sqrt{x_n^2+z_n^2}=\frac{v_0t_0\cos\alpha(1-k^n)}{1-k}(\sin^2\beta+\cos^2\beta)=\frac{v_0t_0\cos\alpha(1-k^n)}{1-k}
+>$$
+>因为加速前认为
+>$$
+>v_{x0}'=v_{y0}'=0
+>$$
+>加速过程后
+>$$
+>v_{x_0}=v_{x_0}'+\Delta{v_x}=a_0\cos\alpha(-\sin\beta)
+>$$
+>
+>$$
+>v_{z0}=v_{z_0}'+\Delta{v_z}=a_0\cos\alpha(\cos\beta)
+>$$
+>
+>由此可得
+>$$
+>v_{x_0}^2+v_{z0}^2=v_0^2\cos^2\alpha=a_0^2\cos\alpha
+>$$
+>即
+>$$
+>v_0\cos\alpha=a_0\cos\alpha
+>$$
+>代入开始处的方程有
+>$$
+>\sqrt{x_n^2+z_n^2}=\frac{a_0t_0\cos\alpha(1-k^n)}{1-k}
+>$$
+>整理可得(3.1.47)
 
+代入式(3.1.46)并解得
 $$
 \tan\alpha\sqrt{{x_{n}}^{2} + {z_{n}}^{2}} = \frac{g{t_{0}}^{2}\left( 1 - k^{n} \right)}{(1 - k)^{2}} - \frac{g{t_{0}}^{2}n - v_{y0}^{'}t_{0}\left( 1 - k^{n} \right)}{1 - k} - y_{n}
 \tag{3.1.48}

@@ -1,5 +1,7 @@
 # 外界因素对运动的影响
 
+<span id="lovexyn0827-page-metadata" class="motion_of_entities:5" onload="queryPageview()"> </span>
+
 在开始说明前需要先解释一下：
 
 **实体所处方块**是指实体的实体`blockPos`字段（即实体坐标处的方块坐标）指定位置的方块。

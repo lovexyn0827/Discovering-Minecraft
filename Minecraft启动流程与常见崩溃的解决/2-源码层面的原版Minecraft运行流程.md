@@ -1,5 +1,7 @@
 # 源码层面的原版Minecraft运行流程
 
+<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:2"> </span>
+
 ### 概览
 
 

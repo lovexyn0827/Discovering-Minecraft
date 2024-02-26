@@ -1,5 +1,7 @@
 # 实体运动基础
 
+<span id="lovexyn0827-page-metadata" class="motion_of_entities:2" onload="queryPageview()"> </span>
+
 ## 实体运动基本属性及设定
 
 在Minecraft中，所有可运动实体都有以下**运动相关属性**：
@@ -44,7 +46,6 @@ Minecraft中与运动相关的**实体运算**主要有以下六种：
 
 $$
 \frac{dv}{dt} = a - fv\\\tag{2.1.1}
-
 $$
 
 $$

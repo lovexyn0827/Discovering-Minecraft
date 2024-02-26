@@ -1,10 +1,10 @@
 # TNT炮爆炸卡顿分析
 
+<span id="lovexyn0827-page-metadata" class="explosion_lag:0" onload="queryPageview()"> </span>
+
 ## 前言
 
 在较大型TNT炮的设计过程中，爆炸卡顿是一个不可忽视的重要事项，对其进行一定分析有助于评估一个设计的可行性，有时还可以作为爆炸卡顿优化的理论依据。
-
-
 
 本次研究采用如下环境：
 

@@ -1,3 +1,7 @@
+# 附录
+
+<span id="lovexyn0827-page-metadata" class="motion_of_entities:10" onload="queryPageview()"> </span>
+
 ## 附录A常见实体运动属性
 
 下面总结一些常见的实体的运动相关属性，其中运算顺序含义见3.1节，A为重力之外的某种加速。为了方便实际应用，这里给出的是实体的速度乘数，也就是公式中用到的"k"，阻力系数并未直接给出。

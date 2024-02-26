@@ -1,5 +1,7 @@
 # Mixin疑难杂症解决记录
 
+<span id="lovexyn0827-page-metadata" class="mixin_tricks_problems:0" onload="queryPageview()"> </span>
+
 在编写CoreMod的过程中，调试Mixin无疑是最烦人的一个部分（之一），这里我将以解决我在实际Mod开发过程中遇到的问题为背景解释一些在Mixin开发过程中的一些疑难杂症，供大家参考。
 
 ## 2022.7.15：Redirect注入过程中出现数组访问越界
