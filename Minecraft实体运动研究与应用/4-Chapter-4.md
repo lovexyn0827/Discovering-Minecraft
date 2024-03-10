@@ -1,6 +1,11 @@
-# 实体移动过程及碰撞机制
+---
+keywords: Minecraft, 实体, 移动, 碰撞, 机制, lovexyn0827
+desc: Minecraft实体移动过程及碰撞机制
+id: motion_of_entities:4
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:4" onload="queryPageview()"> </span>
+# 实体移动过程及碰撞机制
 
 ## 基于Entity.move()方法
 

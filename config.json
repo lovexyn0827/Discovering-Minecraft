@@ -1,0 +1,22 @@
+{
+    "import": "config",
+    "name": "Discovering-Minecraft",
+    "navbar": {
+        "title": "Discovering-Minecraft",
+        "home_url": "/mcdocs/docs/"
+    },
+    "footer":{
+        "top":[
+            {
+                "label": "",
+                "items": [
+                    {
+                        "label": "Github仓库",
+                        "url": "https://github.com/lovexyn0827/Discovering-Minecraft",
+                        "target": "_blank"
+                    }
+                ]
+            }
+        ]
+    }
+}

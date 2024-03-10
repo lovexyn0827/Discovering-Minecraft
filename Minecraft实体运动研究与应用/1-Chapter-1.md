@@ -1,6 +1,11 @@
-# 绪论
+---
+keywords: Minecraft, 实体, 运动, 机制, lovexyn0827
+desc: Minecraft实体运动研究与应用绪论
+id: motion_of_entities:1
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:1" onload="queryPageview()"> </span>
+# 绪论
 
 ## 研究背景与意义
 

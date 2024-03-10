@@ -1,6 +1,11 @@
-# 实体运动基础
+---
+keywords: Minecraft, 实体, 运动, 概念, lovexyn0827
+desc: Minecraft实体运动基础知识与概念
+id: motion_of_entities:2
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:2" onload="queryPageview()"> </span>
+# 实体运动基础
 
 ## 实体运动基本属性及设定
 

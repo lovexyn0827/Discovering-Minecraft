@@ -1,6 +1,11 @@
-# 源码层面的原版Minecraft运行流程
+---
+keywords: Minecraft, 源码, 流程, 原版, lovexyn0827
+desc: 源码层面的原版Minecraft运行流程
+id: fix_minecraft_crash:2
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:2"> </span>
+# 源码层面的原版Minecraft运行流程
 
 ### 概览
 

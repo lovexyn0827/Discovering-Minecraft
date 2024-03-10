@@ -1,6 +1,11 @@
-# 参考文献
+---
+keywords: Minecraft, 实体, 运动, 参考, lovexyn0827
+desc: Minecraft实体运动研究与应用的参考文献
+id: motion_of_entities:9
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:9" onload="queryPageview()"> </span>
+# 参考文献
 
 1. https://minecraft.fandom.com/zh/wiki/%E5%AE%9E%E4%BD%93](https://minecraft.fandom.com/zh/wiki/%E5%AE%9E%E4%BD%93)
 

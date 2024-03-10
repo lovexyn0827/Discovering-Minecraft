@@ -1,6 +1,11 @@
-# Mod的加载
+---
+keywords: Minecraft, Mod, 流程, 加载, lovexyn0827
+desc: Minecraft的Mod的加载流程
+id: fix_minecraft_crash:3
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:3"> </span>
+# Mod的加载
 
 ### Fabric Loader
 

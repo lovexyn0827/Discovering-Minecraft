@@ -1,6 +1,11 @@
-# 实体运动应用举例
+---
+keywords: Minecraft, 实体, 运动, 应用, 珍珠炮, lovexyn0827
+desc: TNT大炮、珍珠炮等Minecraft实体运动应用举例
+id: motion_of_entities:8
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:8" onload="queryPageview()"> </span>
+# 实体运动应用举例
 
 只纸上谈兵还是不行的，下面给出几种大家可能比较熟悉的实体运动理论的应用。
 

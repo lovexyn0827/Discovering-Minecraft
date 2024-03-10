@@ -1,8 +1,13 @@
+---
+keywords: Minecraft, 实体, 运动, 机制, lovexyn0827
+desc: Minecraft实体运动研究与应用
+id: motion_of_entities:0
+draft: false
+---
+
 # Minecraft实体运动研究与应用
 
 ## 20240209 lovexyn0827
-
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:0" onload="queryPageview()"> </span>
 
 该报告的Word（并非最新）/PDF格式以及配套存档下载：
 

@@ -1,5 +1,11 @@
+---
+keywords: Minecraft, 机制, 研究, 模组, 分析, lovexyn0827
+desc: Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
+id: home_page:0
+draft: false
+---
+
 # Discovering-Minecraft
-<span id="lovexyn0827-page-metadata" class="home_page:0" onload="queryPageview()"> </span>
 
 Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
@@ -17,7 +23,7 @@ Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 
 ### [Minecraft启动流程与常见崩溃的解决](Minecraft启动流程与常见崩溃的解决/0-Minecraft启动流程与常见崩溃的解决.md)
 
-### [低区块生成量边境炮研究报告](理论应用（一）：区块生成量极低的边境炮\0-理论应用（一）：区块生成量极低的边境炮.md) 
+### [低区块生成量边境炮研究报告](理论应用（一）：区块生成量极低的边境炮/0-理论应用（一）：区块生成量极低的边境炮.md) 
 
 ### 下界传送门机制详解（未完成）
 

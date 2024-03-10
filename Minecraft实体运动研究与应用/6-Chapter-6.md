@@ -1,6 +1,11 @@
-# LivingEntity运动机制
+---
+keywords: Minecraft, 玩家, 生物, LivingEntity, 运动, 机制, lovexyn0827
+desc: LivingEntity是实体中的一大类，包括了玩家、生物和盔甲架。本文将对LivingEntity的运动机制进行介绍。
+id: motion_of_entities:6
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="motion_of_entities:6" onload="queryPageview()"> </span>
+# LivingEntity运动机制
 
 LivingEntity是实体中的一大类，包括了玩家、生物和盔甲架。虽说这里搞理论计算没有弹射物和TNT实用，但见外国跑酷理论已经有所发展了**\[10\]**，我们也不能落后对吧。本节内实体若无特殊说明均指LivingEntity。视线水平投影方向如无特殊说明均指保持偏航角不变平视时的视线方向。
 

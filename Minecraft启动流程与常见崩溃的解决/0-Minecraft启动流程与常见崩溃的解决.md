@@ -1,6 +1,11 @@
-# Minecraft启动流程与常见崩溃的解决
+---
+keywords: Minecraft, 崩溃, 修复, 启动, lovexyn0827
+desc: Minecraft启动流程与常见崩溃的解决
+id: fix_minecraft_crash:0
+draft: false
+---
 
-<span id="lovexyn0827-page-metadata" class="fix_minecraft_crash:0"> </span>
+# Minecraft启动流程与常见崩溃的解决
 
 ### 前言
 
@@ -32,7 +37,7 @@ https://github.com/lovexyn0827/Discovering-Minecraft
 
 ### [常见异常日志分析](4-常见异常日志分析.md)
 
-### [崩溃报告（Crash Report）](5-崩溃报告（Crash Report）.md)
+### [崩溃报告（CrashReport）](5-崩溃报告（CrashReport）.md)
 
 ### [常见崩溃的解决（欢迎补充）](6-常见崩溃的解决（欢迎补充）.md)
 
