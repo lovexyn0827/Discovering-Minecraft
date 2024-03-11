@@ -1,4 +1,6 @@
 ---
+title: 参考文献
+date: false
 keywords: Minecraft, 实体, 运动, 参考, lovexyn0827
 desc: Minecraft实体运动研究与应用的参考文献
 id: motion_of_entities:9

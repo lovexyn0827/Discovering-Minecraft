@@ -1,4 +1,6 @@
 ---
+title: 实体自由运动相关公式推导
+date: false
 keywords: Minecraft, 实体, 运动, 公式, 计算, lovexyn0827
 desc: Minecraft实体自由运动相关公式推导
 id: motion_of_entities:3

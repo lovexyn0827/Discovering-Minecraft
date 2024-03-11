@@ -1,4 +1,6 @@
 ---
+title: 实体运动应用举例
+date: false
 keywords: Minecraft, 实体, 运动, 应用, 珍珠炮, lovexyn0827
 desc: TNT大炮、珍珠炮等Minecraft实体运动应用举例
 id: motion_of_entities:8

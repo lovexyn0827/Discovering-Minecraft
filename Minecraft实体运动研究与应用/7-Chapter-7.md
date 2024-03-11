@@ -1,4 +1,6 @@
 ---
+title: 几类具体实体运动分析
+date: false
 keywords: Minecraft, 实体, 运动, 机制, 分析, lovexyn0827
 desc: 从创建、运算、对外界影响和移除四方面对Minecraft中10类常见的实体的运动机制的具体分析。
 id: motion_of_entities:7

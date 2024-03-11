@@ -1,4 +1,6 @@
 ---
+title: Mixin疑难杂症解决记录
+date: false
 keywords: Mixin, 模组, 解决, 开发, lovexyn0827
 desc: 在编写CoreMod的过程中，调试Mixin无疑是最烦人的一个部分（之一），这里我将以解决我在实际Mod开发过程中遇到的问题为背景解释一些在Mixin开发过程中的一些疑难杂症，供大家参考。
 id: mixin_tricks_problems:0

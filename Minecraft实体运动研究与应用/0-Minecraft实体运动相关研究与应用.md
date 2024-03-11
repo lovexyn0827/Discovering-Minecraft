@@ -1,4 +1,6 @@
 ---
+title: Minecraft实体运动研究与应用
+date: false
 keywords: Minecraft, 实体, 运动, 机制, lovexyn0827
 desc: Minecraft实体运动研究与应用
 id: motion_of_entities:0

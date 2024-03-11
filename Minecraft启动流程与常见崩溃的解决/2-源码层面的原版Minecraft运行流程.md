@@ -1,4 +1,6 @@
 ---
+title: 源码层面的原版Minecraft运行流程
+date: false
 keywords: Minecraft, 源码, 流程, 原版, lovexyn0827
 desc: 源码层面的原版Minecraft运行流程
 id: fix_minecraft_crash:2

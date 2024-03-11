@@ -1,4 +1,6 @@
 ---
+title: Minecraft启动流程与常见崩溃的解决
+date: false
 keywords: Minecraft, 崩溃, 修复, 启动, lovexyn0827
 desc: Minecraft启动流程与常见崩溃的解决
 id: fix_minecraft_crash:0

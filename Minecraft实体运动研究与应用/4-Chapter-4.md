@@ -1,4 +1,6 @@
 ---
+title: 实体移动过程及碰撞机制
+date: false
 keywords: Minecraft, 实体, 移动, 碰撞, 机制, lovexyn0827
 desc: Minecraft实体移动过程及碰撞机制
 id: motion_of_entities:4

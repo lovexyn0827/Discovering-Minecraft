@@ -1,4 +1,6 @@
 ---
+title: Discovering-Minecraft
+date: false
 keywords: Minecraft, 机制, 研究, 模组, 分析, lovexyn0827
 desc: Minecraft研究报告 & Mod开发教程， 天知道要写到什么时候
 id: home_page:0

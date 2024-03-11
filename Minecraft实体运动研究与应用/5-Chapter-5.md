@@ -1,4 +1,6 @@
 ---
+title: 外界因素对运动的影响
+date: false
 keywords: Minecraft, 实体, 外部, 影响, 运动, lovexyn0827
 desc: Minecraf中爆炸、活塞推动、实体挤压、方块减速等多种外界因素对实体运动的影响
 id: motion_of_entities:5

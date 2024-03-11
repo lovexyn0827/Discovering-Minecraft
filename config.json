@@ -1,6 +1,7 @@
 {
     "import": "config",
     "name": "Discovering-Minecraft",
+    "source": "https://github.com/lovexyn0827/Discovering-Minecraft/blob/master/", 
     "navbar": {
         "title": "Discovering-Minecraft",
         "home_url": "/mcdocs/docs/"

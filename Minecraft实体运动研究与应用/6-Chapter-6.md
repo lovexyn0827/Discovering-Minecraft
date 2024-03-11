@@ -1,4 +1,6 @@
 ---
+title: LivingEntity运动机制
+date: false
 keywords: Minecraft, 玩家, 生物, LivingEntity, 运动, 机制, lovexyn0827
 desc: LivingEntity是实体中的一大类，包括了玩家、生物和盔甲架。本文将对LivingEntity的运动机制进行介绍。
 id: motion_of_entities:6

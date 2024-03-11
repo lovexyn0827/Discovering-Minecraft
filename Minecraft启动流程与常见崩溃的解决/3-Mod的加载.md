@@ -1,4 +1,6 @@
 ---
+title: Mod的加载
+date: false
 keywords: Minecraft, Mod, 流程, 加载, lovexyn0827
 desc: Minecraft的Mod的加载流程
 id: fix_minecraft_crash:3

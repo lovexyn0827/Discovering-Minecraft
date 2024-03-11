@@ -1,4 +1,6 @@
 ---
+title: 实体运动基础
+date: false
 keywords: Minecraft, 实体, 运动, 概念, lovexyn0827
 desc: Minecraft实体运动基础知识与概念
 id: motion_of_entities:2

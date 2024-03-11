@@ -1,4 +1,6 @@
 ---
+title: 附录
+date: false
 keywords: Minecraft, 实体, 运动, 公式, 数据, lovexyn0827
 desc: Minecraft实体运动数据与计算公式，以及文中用到的辅助模组等。
 id: motion_of_entities:10

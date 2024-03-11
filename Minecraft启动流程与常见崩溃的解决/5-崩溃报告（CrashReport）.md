@@ -1,4 +1,6 @@
 ---
+title: 崩溃报告（Crash Report）
+date: false
 keywords: Minecraft, 崩溃报告, 分析, 修复, lovexyn0827
 desc: Minecraft崩溃报告讲解
 id: fix_minecraft_crash:5
