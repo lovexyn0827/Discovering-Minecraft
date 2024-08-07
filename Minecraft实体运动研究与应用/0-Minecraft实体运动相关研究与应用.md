@@ -9,7 +9,7 @@ draft: false
 
 # Minecraft实体运动研究与应用
 
-## 20240209 lovexyn0827
+## 20240802 lovexyn0827
 
 该报告的Word（并非最新）/PDF格式以及配套存档下载：
 
@@ -18,7 +18,10 @@ draft: false
 Github仓库：
 
 > https://github.com/lovexyn0827/Discovering-Minecraft
->
+
+在线版本及更多文章
+
+> [https://lovexyn0827.space/mcdocs/docs/](https://lovexyn0827.space/mcdocs/docs/)
 
 ## 目录
 
