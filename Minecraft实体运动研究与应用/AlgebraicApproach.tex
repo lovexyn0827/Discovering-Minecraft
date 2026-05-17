@@ -98,6 +98,30 @@ Furthermore, a universal model for world and ticking is established, and will le
 
 \chapter{Foundations}
 
+\section{General Notations}
+
+\begin{definition}
+	The $k$-th component of a list / vector $L$ is denoted $L[k]$.
+\end{definition}
+
+\begin{definition}
+	The length of a list / vector $L$ is denoted $|L|$.
+\end{definition}
+
+\begin{definition}
+	The concatenation of a finite sequence of lists / vectors $L_1, \dots, L_k$ is denoted $\operatorname{concat}(L_1, \dots, L_k)$.
+\end{definition}
+
+\begin{definition}
+	Given a list $L$, set $\bigcup_{k = 1}^{|L|} \{L[k]\}$ shares the same notation as $L$.
+\end{definition}
+
+\subsection*{Exercises}
+
+Too easy to assign exercises.
+
+% ============================ The End Of Section ============================
+
 \section{Motion Operators}
 
 \begin{definition}
@@ -123,7 +147,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{remark}
 
 \begin{remark}
-	If the right component of an united value is the identity of underlying unit group, it is regarded to be equal to its left component for convenience.
+	If the unit of an united value is the identity of underlying unit group, it is regarded to equal its magnitude for convenience. If the magnitude of an united value is the additive identity and multiplicative zero, then one is free to take any value for its unit to make expressions involved sensible.
 \end{remark}
 
 \begin{definition}
@@ -487,13 +511,13 @@ Furthermore, a universal model for world and ticking is established, and will le
 	The {\bf{finite IEEE floating point set of $e$ exponential bits and $s$ significant bits}} is a subset of $\mathbb{R}$
 	
 	\begin{equation*}
-		\mathcal{F}(e, s) = \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^s \land  2^{-2^{e - 1} + 2 - s} \le e \le 2^{2^{e - 1} - s}  \}
+		\mathcal{F}(e, s) = \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^s \land  2^{-2^{e - 1} + 2 - s} \le k \le 2^{2^{e - 1} - s}  \}
 	\end{equation*}
 	
 	Where $e, s \in \mathbb{N}_+\cup \{\infty\}$. In particular, the {\bf{upper unbounded floating point set with $e$ exponential bits and $s$ significant bits}} is
 	
 	\begin{equation*}
-		\hat{\mathcal{F}}(e, s) = \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^ s \land e \ge 2^{-2^{e - 1} + 2 - s}\}
+		\hat{\mathcal{F}}(e, s) = \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^ s \land k \ge 2^{-2^{e - 1} + 2 - s}\}
 	\end{equation*}
 	
 	And the {\bf{(bidirectional) unbounded floating point set with $s$ significant bits}} is
@@ -510,6 +534,16 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{remark}
 
 \begin{definition}
+	The \index{order function}{\bf{order function}} $\mathcal o_{e, s}$ on $\mathcal{F}(e, s)$ or $\hat{\mathcal{F}}(e, s)$ is defined as
+	
+	\begin{equation*}
+		\mathcal o_{e, s}(x) = -s + \max\left\{\left\lfloor \log_2 |x| \right\rfloor, 2 - 2^{e - 1}\right\}
+	\end{equation*}
+	
+	And $x$ is said to have an \index{order}{\bf{order}} $k$ in $\mathcal F(e, s)$ or $\hat{\mathcal F}(e, s)$ if $\mathcal o_{e, s}(x) = k$.
+\end{definition}
+
+\begin{definition}
 	Given a floating point set $\mathcal{F}$, a \index{rounding function}{\bf{rounding function on $\mathcal{F}$}} is a monotonically increasing function $f: \mathbb{R} \to \mathcal{F}$ such that $\forall x(x\in \mathcal F \implies f(x) = x)$.
 	
 	In particular, the \index{default rounding function}{\bf{default rounding function on $\mathcal{F}$}} with $s$ significant bits is defined as follows
@@ -518,7 +552,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 		\begin{cases}
 			x & x \in \mathcal{F}\\
 			\argmin\limits_{t\in \mathcal{F}} |x - t| & |\mathcal{M}(\mathcal{F}, x)| = 1\\
-			\argmin\limits_{t\in\mathcal{M}(\mathcal{F}, x)} \left(|t| \cdot 2^{s - \left\lfloor \log_2 |t| \right\rfloor + 1} \mod 2\right) & |\mathcal{M}(\mathcal{F}, x)| = 2
+			\argmin\limits_{t\in\mathcal{M}(\mathcal{F}, x)} \left(|t| \cdot 2^{-\mathcal o_{e, s}(x)} \mod 2\right) & |\mathcal{M}(\mathcal{F}, x)| = 2
 		\end{cases}
 	\end{equation*}
 	
@@ -1023,8 +1057,11 @@ Furthermore, a universal model for world and ticking is established, and will le
 	\begin{enumerate}
 		\item Have a unique and distinct name: There is exactly one name $N$ in $L$, and for any $w\in \mathcal W$, $|\{<S', L'>: <S', L'>\in E(w)\land N\in L'\}| \le 1$;
 		\item Have a unique type: There is exactly one coarse type and one type in $L$;
-		\item Fields has distinct names: $\forall x(|\{<K, V>\in L: K = x\}|\le 1)$.
+		\item Fields has distinct names: $\forall x(|\{<K, V>\in L: K = x\}|\le 1)$;
+		\item Has all required fields with valid values, which is specified later.
 	\end{enumerate}
+	
+	If a coarse type (or type) $T \in L$, $<S, L>$ is said to be a(n) $T$.
 \end{definition}
 
 \begin{definition}
@@ -1035,6 +1072,16 @@ Furthermore, a universal model for world and ticking is established, and will le
 	\end{enumerate}
 \end{definition}
 
+\begin{definition}
+	A \index{version number}{\bf{version number}} is a string of characters.
+\end{definition}
+
+\begin{definition}
+	The \index{Minecraft downloader}{\bf{Minecraft downloader}} is the function $\mathscr D$ which maps a version to a Minecraft tick generator.
+\end{definition}
+
+\section{Structure of $\mathscr{D}(1.16.4)$}
+
 % ============================ The End Of Section ============================
 
 % ============================ The End Of Chapter ============================
@@ -1044,7 +1091,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \section{Free Entities}
 
 \begin{definition}
-	Given a non-definite ticker $\mathcal t_{f, I}(w)$ on $\mathcal W$ and $\mathcal W'\subset W$ then for $N\in \mathcal N$, a \index{kinematically free entity}{\bf{kinematically $N$-free entity in $\mathcal W'$}}, or \index{free entity}{\bf{$N$-free entity in $\mathcal W'$}}, is a kinematic entity $<S_0, L_0>$ with name $K\in L$ such that
+	Given a non-definite ticker $\mathcal t_{f, I}(w)$ on $\mathcal W$, a set of external impact sequences, a inspect function $g$, and $\mathcal W'\subset W$, then for $N\in \mathcal N$, a \index{kinematically free entity}{\bf{kinematically $g, N$-free entity in $\mathcal W'$}}, or \index{free entity}{\bf{$g, N$-free entity in $\mathcal W'$}}, is a kinematic entity $<S_0, L_0>$ with name $K\in L$ such that
 	
 	\begin{equation*}
 		\forall n (n\in\mathbb N\land n \le N\implies(\exists S_n\exists L_n\forall w \forall I(p(w) \implies q(n, w, S_n, L_n, I))))
@@ -1053,10 +1100,12 @@ Furthermore, a universal model for world and ticking is established, and will le
 	Where
 	
 	\begin{align*}
-		p &= w\in \mathcal W' \land <S_0, L_0>\in E(w)\\
+		p &= w\in \mathcal W' \land <S_0, L_0>\in E(w) \land I_1, \dots, I_n \in \mathcal I\\
 		q &= <S_n, L_0>\in E(\mathcal t_{f, I_1, \dots, I_n}(w)) \land  S_n\in \mathcal S\land K\in L_n\\
 		I &= I_1, \dots, I_n
 	\end{align*}
+	
+	In particular, if $g = \nu$, the entity is $N$-free; if $g = \nu_p$, the entity is positionally $N$-free; if $g = \nu_v$, the entity is velocitically $N$-free; if $g(<x_1, v_1>, <x_2, v_2>) \mapsto x_1[k] = x_2[k] \land v_1[k] = v_2[k]$, the entity is $N$-free on the $k$-th axis; if $g(<x_1, v_1>, <x_2, v_2>) \mapsto x_1[k] = x_2[k]$, the entity is positionally $N$-free on the $k$-th axis; and if $g(<x_1, v_1>, <x_2, v_2>) \mapsto v_1[k] = v_2[k]$, the entity is velocitically $N$-free on the $k$-th axis.
 \end{definition}
 
 \begin{remark}
@@ -1064,7 +1113,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{remark}
 
 \begin{definition}
-	Given a non-definite ticker $\mathcal t_{t, I}$ on $\mathcal W$, $w\in \mathcal W'\subset \mathcal W$, and a $N$-free entity $<S, L>\in E(w)$ in $\mathcal W'$, if for all $n\in \mathbb N \land n \le N$, there is and motion operator $f$ such that for the entity $<S_n, L_n>$ sharing the same name as $<S, L>$ in $E(\mathcal t_{f, I_1, \dots, I_n}(w))$, $S_n = f^n(S)$, the free entity is \index{cyclic free entity}{\bf{cyclic}}, and $f$ is the \index{intrinsic operator}{\bf{intrinsic operator} of $<S, L>$ under $\mathcal t_{t, I}$ in $\mathcal W'$}.
+	Given a non-definite ticker $\mathcal t_{t, I}$ on $\mathcal W$, $w\in \mathcal W'\subset \mathcal W$, and a $g, N$-free entity $<S, L>\in E(w)$ in $\mathcal W'$, if for all $n\in \mathbb N \land n \le N$, there is and motion operator $f$ such that for the entity $<S_n, L_n>$ sharing the same name as $<S, L>$ in $E(\mathcal t_{f, I_1, \dots, I_n}(w))$, $g(S_n, f^n(S)) = 1$, the free entity is \index{cyclic free entity}{\bf{$g$-cyclic}}, and $f$ is the \index{intrinsic operator}{\bf{$g$-intrinsic operator} of $<S, L>$ under $\mathcal t_{t, I}$ in $\mathcal W'$}.
 	
 	Furthermore, if $f$ is \index{elementary free entity}elementary or \index{simple free entity}simple, so is the free entity.
 \end{definition}
@@ -1085,19 +1134,19 @@ Furthermore, a universal model for world and ticking is established, and will le
 \section{Kinematics On Continuous State Spaces}
 
 \begin{definition}
-	Given a non-definite ticker $\mathcal t_{t, I}(w)$ on $\mathcal W$, $w\in \mathcal W'\subset \mathcal W$, and a $N$-free entity $<S, L>\in E(w)$ in $\mathcal W'$, for any $n\in \mathbb N$ and $0\le n\le N$, the entity $<S_n, L_n>$ is supposed to share the same name as $<S_0, L_0>$ in $E(\mathcal t_{f, I_1, \dots, I_n}(w))$, $S_n = f^n(S)$, and thus notations $v_n = V(S_n)$ and $x_n = P(S_n)$ are adopted in this section.
+	Given a non-definite ticker $\mathcal t_{t, I}(w)$ on $\mathcal W$, $w\in \mathcal W'\subset \mathcal W$, and a $g, N$-free entity $<S, L>\in E(w)$ in $\mathcal W'$, for any $n\in \mathbb N$ and $0\le n\le N$, the entity $<S_n, L_n>$ is supposed to share the same name as $<S_0, L_0>$ in $E(\mathcal t_{f, I_1, \dots, I_n}(w))$, $S_n = f^n(S)$, and thus defining notations $v_n = V(S_n)$ and $x_n = P(S_n)$ which are adopted in this section.
 	
-	For conciseness, unless otherwise stated, intrinsic operators in this section are supposed to be under $\mathcal t_{t, I}$ and in $\mathcal W'$, and the world state(s) where entity states resides in is supposed to be defined upon $S_{\mathbb R, \mathbb R, m, m\cdot gt^{-1}, d}$ where $m$ and $gt$ are meter and game tick respectively and $d\in \mathbb N$.
+	For conciseness, unless otherwise stated, intrinsic operators in this section are supposed to be a $g$-intrinsic operators for some inspect function $g$ under $\mathcal t_{t, I}$ and in $\mathcal W'$, and the world state(s) where entity states resides in is supposed to be defined upon $S_{\mathbb R, \mathbb R, m, m\cdot gt^{-1}, d}$ where $d\in \mathbb N$, $m$ and $gt$ are meter and game tick respectively.
 \end{definition}
 
 \begin{theorem}\label{thm:vel-formula}
-	If $<S_0, L_0>$ has an intrinsic operator that is velocitically tail equivalent to $D_k \circ A_I$ for some $k\in R_1$ with $k \ne 1$ and $I \in \mathbb R_{m\cdot gt^{-1}}^d$, then
+	If $<S_0, L_0>$ has an $\nu_v$-intrinsic operator that is velocitically tail equivalent to $D_k \circ A_I$ for some $k\in R_1$ with $k \ne 1$ and $I \in \mathbb R_{m\cdot gt^{-1}}^d$, then
 	
 	\begin{equation}
 		v_n = k^{n} v_0 + \frac{I(1 - k^{n})}{1 - k}
 	\end{equation}
 	
-	If the intrinsic operator is velocitically tail equivalent to $A_I \circ D_k$ for some $k\in \mathbb R$ with $k \ne 1$ and $I \in \mathbb R_{m\cdot gt^{-1}}^d$, then
+	If the intrinsic operator is $\nu_v$-velocitically tail equivalent to $A_I \circ D_k$ for some $k\in \mathbb R$ with $k \ne 1$ and $I \in \mathbb R_{m\cdot gt^{-1}}^d$, then
 	
 	\begin{equation}
 		v_n = k^{n} v_0 + \frac{I(k - k^{n + 1})}{1 - k}
@@ -1109,7 +1158,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{proof}
 
 \begin{theorem}\label{thm:disp-formula}
-	If $<S_0, L_0>$ has an intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k\in \mathbb R_1$, $t_0 \in \mathbb R_{gt}$ and $I\in R_{m\cdot gt^{-1}}^d$, then
+	If $<S_0, L_0>$ has an $\nu_p$-intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k\in \mathbb R_1$, $t_0 \in \mathbb R_{gt}$ and $I\in R_{m\cdot gt^{-1}}^d$, then
 	
 	\begin{equation}
 		v_n = \frac{v_0t_0(1 - k^n)}{1 - k} + \frac{It_0(k^n + n(1 - k) - 1)}{(1 - k)^2}
@@ -1121,7 +1170,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{proof}
 
 \begin{theorem}\label{thm:vel-convergence}
-	If $<S_0, L_0>$ has an intrinsic operator $f$ that is velocitically tail equivalent to $D_k \circ A_I$ or $A_I \circ D_k$ for some $t_0 \in \mathbb R_{gt}$, $k\in \mathbb R_1$ with $|k| \le 1$ and $I\in R_{m\cdot gt^{-1}}^d$, then
+	If $<S_0, L_0>$ has an $\nu_p$-intrinsic operator $f$ that is velocitically tail equivalent to $D_k \circ A_I$ or $A_I \circ D_k$ for some $t_0 \in \mathbb R_{gt}$, $k\in \mathbb R_1$ with $|k| \le 1$ and $I\in R_{m\cdot gt^{-1}}^d$, then
 	
 	\begin{equation}
 		\lim_{n \to \infty} v_n = \begin{cases}
@@ -1136,7 +1185,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{proof}
 
 \begin{theorem}\label{thm:max-disp}
-	If $<S_0, L_0>$ has an intrinsic operator $f$ that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k, t_0\in \mathbb R_1$ with $|k| \le 1$, $I = (0, at_0, 0)\in R_{m\cdot gt^{-1}}^3$, and $v_0 = (v_{x0}, v_{y0}, v_{z0}) \in \mathbb R_{m\cdot gt^{-1}}^3$, then the second component $x_n$ attains its maximal or minimal value $M$ at
+	If $<S_0, L_0>$ has an $\nu_p$-intrinsic operator $f$ that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k, t_0\in \mathbb R_1$ with $|k| \le 1$, $I = (0, at_0, 0)\in R_{m\cdot gt^{-1}}^3$, and $v_0 = (v_{x0}, v_{y0}, v_{z0}) \in \mathbb R_{m\cdot gt^{-1}}^3$, then the second component $x_n$ attains its maximal or minimal value $M$ at
 	
 	\begin{equation}
 		n_0 = 1 - \log_k\left(1 - \frac{v_0(1 - k)}{at_0}\right)
@@ -1160,7 +1209,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{proof}
 
 \begin{theorem}\label{thm:inverted-kinematic}
-	If all entity states in a subset $S$ of the angular entity state space defining $\mathcal W$ have a shared intrinsic operator $f$ that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k, t_0\in \mathbb R_1$ with $|k| \le 1$, $I\in R_{m\cdot gt^{-1}}^d$, then given $x\in \mathbb R_{m}$ and $n\in \mathbb N$, there is at most 1 $<S_0, L_0>\in S$ such that $x_n = x$. Further more, 
+	If all entity states in a subset $S$ of the angular entity state space defining $\mathcal W$ have a shared $\nu_p$-intrinsic operator $f$ that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k, t_0\in \mathbb R_1$ with $|k| \le 1$, $I\in R_{m\cdot gt^{-1}}^d$, then given $x\in \mathbb R_{m}$ and $n\in \mathbb N$, there is at most 1 $<S_0, L_0>\in S$ such that $x_n = x$. Further more, 
 	
 	\begin{equation}
 		v_0 = \frac{xt_0^{-1}(1 - k) - In}{1 - k^n} - \frac{I}{1 - k}
@@ -1174,9 +1223,9 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{proof}
 
 \begin{theorem}\label{thm:trace-theorem}
-	If $<S_0, L_0>$ has an intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k\in \mathbb R_1$, $t_0 \in \mathbb R_{gt}$ and $I\in R_{m\cdot gt^{-1}}^d$, then magnitude of all $x_n$'s lays in the same hyperplane in $\mathbb R^d$.
+	If $d\ge 2$ and $<S_0, L_0>$ has an $\nu_p$-intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k\in \mathbb R_1$, $t_0 \in \mathbb R_{gt}$ and $I\in R_{m\cdot gt^{-1}}^d$, then magnitudes of all $x_n$'s lays in the same hyperplane in $\mathbb R^d$.
 	
-	Furthermore, there is a unitary operator $T$ on $\mathbb R^3$ such that $T(\mu(I)) = \left(\left\Vert \mu(I)\right\Vert, 0, \dots, 0\right)$, then all $x_n$'s lays in the same hypersurface
+	Furthermore, there is a unitary operator $T$ on $\mathbb R^3$ such that $T(\mu(I)) = \left(\left\Vert \mu(I)\right\Vert, 0, \dots, 0\right)$, then magnitudes of all $x_n$'s lays in the same hypersurface
 	
 	\begin{align*}
 		T(\mu(x))[1] =& \frac{T(\mu(v_0))[1](1 - k) - T(\mu(I))}{(1 - k)\sqrt{\sum_{k = 2}^d T(\mu(v_0)))[k]}} \sqrt{\sum_{k = 2}^d T(\mu(x))[k]} \\
@@ -1195,7 +1244,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \begin{enumerate}
 	\item Generalize Theorems \ref{thm:vel-formula} and \ref{thm:disp-formula} for $k = 1$.
 	\item Generalize Theorems \ref{thm:disp-formula}, \ref{thm:max-disp} and \ref{thm:inverted-kinematic} to intrinsic operator that is positionally tail equivalent to compositions of other permutations of $M_{t_0}$, $D_k$ and $A_I$.
-	\item Show that $\lim_{n\to \infty} x_n$ exists if $<S_0, L_0>$ has an intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k$ or $D_k \circ M_{t_0}$ for some $k, t_0\in \mathbb R_1$ but $k\ne 1$. And evaluate the limit.
+	\item Show that $\lim_{n\to \infty} x_n$ exists if $<S_0, L_0>$ has an $\nu_p$-intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k$ or $D_k \circ M_{t_0}$ for some $k, t_0\in \mathbb R_1$ but $k\ne 1$. And evaluate the limit.
 \end{enumerate}
 
 % ============================ The End Of Section ============================
@@ -1211,6 +1260,10 @@ Furthermore, a universal model for world and ticking is established, and will le
 % ============================ The End Of Chapter ============================
 
 \chapter{Collision Detection}
+
+\section{Impact Theory}
+
+% ============================ The End Of Section ============================
 
 \section{The Raycast Algorithm}
 
