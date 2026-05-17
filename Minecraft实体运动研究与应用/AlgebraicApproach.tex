@@ -9,10 +9,11 @@
 \usepackage{tikz}
 \usepackage{fontspec}
 \usepackage{imakeidx}
+\usepackage{listings}
 
 \title{Motion Of Entities \\ {\small{An Algebraic Approach} \\ {\small{GTM Graduate Text In Minecraft 784}}}}
 
-\author{2717498529 @ Autumner}
+\author{2717498529 @ CNU}
 \date{May 7th, 2026}
 
 \newtheorem{definition}{Definition}
@@ -80,7 +81,7 @@ Therefore, we are writing the book to suggest a complete and mathematical rigoro
 		\item One for real numbers, to calculate and approximate;
 		\item Another for floating point numbers, to bound errors;
 	\end{enumerate}
-	\item Combine the special cases to establish a approximation along with a (hard or probabilistic) bound, for "physically" rigorous analysis.
+	\item Combine both to establish a approximation along with a (hard or probabilistic) bound, for "physically" rigorous analysis.
 \end{enumerate}
 
 Furthermore, a universal model for world and ticking is established, and will lead us to a novel paradigm of game mechanism analysis.
@@ -104,7 +105,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 \end{definition}
 
 \begin{definition}
-	An \index{united algebra}{\bf{united algebra on $A$ with unit $u$}}, notably $A_u$, is an algebraic structure of ordered pairs $<m, u>$, where $m \in A$ , $u\in U$ for some unit group $U$ and $A$ is an algebraic structure. An element in an united algebra is a \index{united value}{\bf{united value}}. Its left and right component are called its \index{magnitude}{\bf{magnitude}} and \index{unit}{\bf{unit}} respectively.
+	An \index{united algebra}{\bf{united algebra on $A$ with unit $u$}}, notably $A_u$, is an algebraic structure of ordered pairs $<m, u>$, where $m \in A$ , $u\in U$ for some unit group $U$ and $A$ is an algebraic structure. An element in an united algebra is a \index{united value}{\bf{united value}}. Its left and right component are called its \index{magnitude}{\bf{magnitude}} $\mu(<m, u>)$ and \index{unit}{\bf{unit}} $\upsilon(<m, u>)$ respectively.
 	
 	If addition and / or abstraction are defined on $A$, they are automatically defined on $A_u$ by $<m_1, u> \pm <m_2, u> = <m_1 \pm m_2, u>$.
 	
@@ -112,6 +113,10 @@ Furthermore, a universal model for world and ticking is established, and will le
 	
 	For $u_1$ and $u_2$ in the same unit group and $A$ with a multiplicative identity $1_A$, the \index{transition unit}{\bf{transition unit from $A_{u_1}$ to $A_{u_2}$}} is $<1_A, u_1^{-1}u_2>$.
 \end{definition}
+
+\begin{remark}
+	United algebra is not an algebra being "united" but an algebraic structure with units.
+\end{remark}
 
 \begin{remark}
 	Note that addition is closed on $A_u$ but multiplication is not necessarily.
@@ -316,6 +321,39 @@ Furthermore, a universal model for world and ticking is established, and will le
 	Recall that for a homomorphism $f: G \to H$, $\ker f$ is normal in $G$.
 \end{proof}
 
+\begin{definition}
+	Given two algebraic structures $F$, $G$ with addition and multiplication defined on both, three units $u_x$, $u_v$, $u_a$, a set of triangular functions $\sin, \cos: G_{u_a}\to F_1$, $\tan G_{u_a}'\to F_1$, and a set of anti-triangular functions $\arcsin: F_1'\to G_{u_a}$, $\arccos: F_1'\to G_{u_a}$, $\arctan F_1\to G_{u_a}$, $\arctan_2: F_1\times F_1 \to F_1$ with $F_1'\in F_1$ and $G_{u_a}'\in G_{u_a}$, a \index{angular entity state space}{\bf{$n$-dimensional angular entity state space on $F$ and $G$ with units $u_x$, $u_v$ and $u_a$}}, abbreviated angular state space and denoted $S_{F, G, u_x, u_v, u_a, n}$, is the set of tuples $<x, v, \alpha>$ where $x \in F_{u_x}^n$, $v\in F_{u_v}^n$ and $\alpha \in G^{n - 1}$.
+	
+	An object in a angular entity state space is a \index{angular entity state}{\bf{angular entity state}}, whose components is named as
+
+	\begin{enumerate}
+		\item {\bf{Position}}: $P(<x, v, \alpha>) = x$;
+		\item {\bf{Velocity}}: $V(<x, v, \alpha>) = v$;
+		\item {\bf{Orientation}}: $A(<x, v, \alpha>) = \alpha$;
+	\end{enumerate}
+	
+	The \index{point projection}{\bf{point projection}} of $S_{F, G, u_x, u_v, u_a, n}$ and $<x, v, \alpha>$ is $S_{F, u_x, u_v, n}$ and $<x, v>$ respectively.
+\end{definition}
+
+\begin{remark}
+	Elementary, simple, etc. motion operators can be defined on angular state spaces as operators on their point projections, which is left as an exercise.
+\end{remark}
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item Given a unit group $\left<\{m , s\}\right>$, explain the physical meaning of $S_{\mathbb R, m, ms^{-1}, 3}$.
+	\item Given a unit group $\left<\{m , s\}\right>$ and a state space $S = S_{\mathbb Z_2, m, ms^{-1}, 2}$, 
+	\begin{enumerate}
+		\item List all elements of $S$ and $\mathcal E_{S}$.
+		\item Give a definition of the binary operator on $\mathcal E_{S}$ as a table.
+	\end{enumerate}
+	\item Given a state space $S$ and $s\in S$, show that there is a group homomorphism $f: \mathcal E_{S} \to \{g(s): g\in \mathcal E_S\}$.
+	\item Show that if two sequences of motion operators, $f_1, \dots, f_n$ and $g_1, \dots, g_n$, are tail equivalent, then for each set $F$ of inspect functions on the implied state space, two lists are $F$-tail equivalent. 
+\end{enumerate}
+
+% ============================ The End Of Section ============================
+
 \section{Elementary Operators On Rings}
 
 \begin{lemma}\label{lmm:elem-im-form}
@@ -360,13 +398,27 @@ Furthermore, a universal model for world and ticking is established, and will le
 	Exercise.
 \end{proof}
 
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Given a unit group $<\{m , s\}>$ and a state space $S_{\mathbb R, m, ms^{-1}, 1}$, for each definition of $f$ shown below, find three (or fewer if possible) basic elementary operators whose composition is positionally tail equivalent to $f$.
+	\begin{enumerate}
+		\item $f = M_{1s}D_{0.9}D_{0.98}A_{0.013ms^{-1}}$
+		\item $f = M_{2s}D_{0.9}D_{0.98}A_{0.08ms^{-1}}D_{0.8}$
+		\item $f = A_{0.02ms^{-1}}M_{1s}D_{0.9}D_{0.98}A_{-0.02ms^{-1}}D_{0.8}$
+		\item $f = M_{0s}D_{0.9}A_{0.02ms^{-1}}A_{-0.08ms^{-1}}D_{0.8}$
+	\end{enumerate}
+\end{enumerate}
+
+% ============================ The End Of Section ============================
+
 \section{Elementary Operators On Fields}
 
 \begin{definition}
 	The $n$-th power of an motion operator $f$ is the composition of $n$ $f$'s, denoted $f^n$. We define $f^0$ as the identity mapping on the implied state space and $f^{-n}$ be $(f^{-1})^n$ as long as $f^{-1}$ exists.
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{thm:vel-formula-gen}
 	For any simple motion operator $f$ on $d$-dimensional state space $S$ on field $F$ with units $u_x$ and $u_v$, there exist some $k \in F_1$ and $b\in F_{u_v}^d$ such that at least one of following propositions would hold:
 	
 	\begin{enumerate}
@@ -413,6 +465,21 @@ Furthermore, a universal model for world and ticking is established, and will le
 \begin{theorem}
 	
 \end{theorem}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Find the $k, b$ as defined in Theorem \ref{thm:vel-formula-gen} for each simple motion operator $f$ on $S_{\mathbb R, 1, 1, 3}$:
+	\begin{enumerate}
+		\item $f = M_{1s}D_{0.9}D_{0.98}A_{0.013ms^{-1}}$
+		\item $f = M_{2s}D_{0.9}D_{0.98}A_{0.08ms^{-1}}D_{0.8}$
+		\item $f = A_{0.02ms^{-1}}M_{1s}D_{0.9}D_{0.98}A_{-0.02ms^{-1}}D_{0.8}$
+		\item $f = M_{0s}D_{0.9}A_{0.02ms^{-1}}A_{-0.08ms^{-1}}D_{0.8}$
+	\end{enumerate}
+	\item Show that for every state space $S = S_{F, u_x, u_v, d}$ defined on field $F$, $n\in \mathbb N$, $x_0\in F_{u_x}^d$, $x_n \in F_{u_x}^d$ and a bijective simple motion operator $f$ on $S$ with one of whose decomposition as basic elementary operators containing a sole movement operator $M_{t}$ such that $t$ has a non-zero magnitude, there is a unique pair $<v_0, v_n>\in (F_{u_v}^d)^2$ such that $f^n(<x_0, v_0>) = <x_n, v_n>$.
+\end{enumerate}
+
+% ============================ The End Of Section ============================
 
 \section{Motion Operators On Floating Point Sets}
 
@@ -752,34 +819,57 @@ Furthermore, a universal model for world and ticking is established, and will le
 \begin{theorem}
 	Given a entity state space $S$ with units $u_x$, $u_v$ on a basic algebraic structure on floating point set $\mathcal F$ and an elementary motion operator $f = f_1 \circ \cdot \circ f_n$ where $f_1, \dots, f_n$ are a sequence of basic elementary motion operators with a total number $m$ of acceleration ones $f_j = A_{I_j}$ for some $1\le j\le n$ and drag operators $f_j = D_{k_j}$ for some $1\le j\le n$, and $(n - m)$ movement operators $f_j = M_{t_j}$ for and only for $j_1, \dots, j_{n - m}$ , then, for every $i$ sensible, the magnitude of the $i-th$ component of $P(f(<x, v>))$ is the value of a $N$-step simplex arithmetic procedure $<\mathcal N, \mathcal O>$, where
 	
-	\begin{equation}
+	\begin{equation*}
 		N = \sum_{i = 1}^{n - m}(t_j - j)
-	\end{equation}
+	\end{equation*}
 \end{theorem}
 
 \begin{proof}
 	Exercise.
 \end{proof}
 
-\chapter{Motion Of Free Entities}
+\subsection*{Exercises}
 
-\chapter{Collision Detection}
+\begin{enumerate}
+	\item Find the element(s) in $\mathcal F(11, 52)$ with a maximal and minimal absolute value.
+	\item Show that if $s' \le s$ and $e' \le e$, then $\mathcal F(e', s')\subset \mathcal F(e, s)$.
+	\item For each case in the definition of $\mathcal R_{\mathcal F(8, 23)}$, give at least 3 inputs that would fall into the case, and evaluate $\mathcal R_{\mathcal F(8, 23)}$ at these inputs.
+	\item Show that for each floating point set $\mathcal F$, $\mathcal R_{\mathcal F}$ is an odd function.
+	\item Show that for each floating point set $\mathcal F$ and $x, y \in \mathcal F$, $x \pm_{\mathcal R_{\mathcal F}} y = x \pm y$ if $|x \pm y| < |x|, |y|$.
+	\item Evaluate $\sup \{M: \forall x(x\in [-M, M] \cap \mathbb Z \implies \mathcal R_{\mathcal F(e, s)})(x) = x\}$
+	\item Find a simple arithmetic procedure on a floating point set whose value equals Java expression $\mathtt{((0 + 0.08) * 0.98 + 0.08) * 0.98}$ and show that it has an error smaller than $10^{-10}$.
+	\item Find a stacked arithmetic procedure on a floating point set whose value equals the return value of
+	
+	\begin{lstlisting}[language=java, tabsize=4, numbers=left]
+	double func() {
+		double x = 0.0;
+		double v = 1.0;
+		for (int i = 0; i < 4; i++) {
+			x += v;
+			v = v * 0.99 - 0.04;
+		}
+		
+		return x;
+	}
+	\end{lstlisting}
+	
+	 And show that it has an error smaller than $10^{-10}$ without running the code above.
+	 \item Given $<x, y> \in S_{\mathcal F(11, 52), 1, 1, 1}$, find a stacked arithmetic procedure on $\mathcal F(11, 52)$ whose value equals $(M_{1}D_{\mathcal R_{\mathcal F(11, 52)}(0.99)}A_{\mathcal R_{\mathcal F(11, 52)}(-0.04)})^n<x, y>$ for $n = 4$, and give an upper bound of its error.
+	 \item Under the setting of previous exercise, give an upper bound for $|x - x'|$ where 
+	 \begin{align*}
+	 	x &= P((M_{1}D_{\mathcal R_{\mathcal F(11, 52)}(0.99)}A_{\mathcal R_{\mathcal F(11, 52)}(-0.04)})^n<x, y>)\\ 
+	 	x' &= P((M_{1}D_{\mathcal R_{\mathcal F(8, 23)}(0.99)}A_{\mathcal R_{\mathcal F(8, 23)}(-0.04)})^n<x, y>)
+	 \end{align*}
+	 Note that both $x$ and $x'$ is evaluated on the same algebraic structure, which is $\mathcal F(11, 52)$.
+\end{enumerate}
+
+% ============================ The End Of Section ============================
+
+% ============================ The End Of Chapter ============================
 
 \chapter{World and Ticking}
 
 \section{The World Space}
-
-\begin{definition}
-	Given two algebraic structures $F$, $G$ with addition and multiplication defined on both, three units $u_x$, $u_v$, $u_a$, a set of triangular functions $\sin, \cos: G_{u_a}\to F_1$, $\tan G_{u_a}'\to F_1$, and a set of anti-triangular functions $\arcsin: F_1'\to G_{u_a}$, $\arccos: F_1'\to G_{u_a}$, $\arctan F_1\to G_{u_a}$, $\arctan_2: F_1\times F_1 \to F_1$ with $F_1'\in F_1$ and $G_{u_a}'\in G_{u_a}$, a \index{angular entity state space}{\bf{$n$-dimensional angular entity state space on $F$ and $G$ with units $u_x$, $u_v$ and $u_a$}}, abbreviated angular state space, is the set of tuples $<x, v, \alpha>$ where $x \in F_{u_x}^n$, $v\in F_{u_v}^n$ and $\alpha \in G^{n - 1}$.
-	
-	An object in a angular entity state space is a \index{angular entity state}{\bf{angular entity state}}, whose components is named as
-	
-	\begin{enumerate}
-		\item {\bf{Position}}: $P(<x, v, \alpha>) = x$;
-		\item {\bf{Velocity}}: $V(<x, v, \alpha>) = v$;
-		\item {\bf{Orientation}}: $A(<x, v, \alpha>) = \alpha$;
-	\end{enumerate}
-\end{definition}
 
 \begin{definition}
 	A \index{global label set}{\bf{global label set}} is any set.
@@ -801,7 +891,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 	\begin{enumerate}
 		\item {\bf{Time}}: $T(<t, s, \mathcal E>) = t$;
 		\item {\bf{Random seed}}: $R(<t, s, \mathcal E>) = s$;
-		\item {\bf{Entity set}}: $E(<t, s, \mathcal E) = \mathcal E$.
+		\item {\bf{Entity set}}: $E(<t, s, \mathcal E>) = \mathcal E$.
 	\end{enumerate}
 \end{definition}
 
@@ -862,48 +952,303 @@ Furthermore, a universal model for world and ticking is established, and will le
 	
 	Where $N_k$ is the number of components in the ordered tuple $f(w, I_k)$ and $f(w, I_k)[1] \circ \cdots \circ f(w, I_k)[N_k]$ is the \index{non-definite tick}{\bf{non-definite tick at $w$ under $f$ and $I_k$}}.
 	
-	$\left(\mathcal t_{f, I_1}(w) \circ \cdots \circ \mathcal t_{f, I_n}\right)(w)$ is the \index{world state $n$ tick(s) after}{\bf{world state $n$ tick(s) after $w$ under $f$ and $I_1, \dots, I_k$}}.
+	$\left(\mathcal t_{f, I_1}(w) \circ \cdots \circ \mathcal t_{f, I_n}\right)(w)$ is the \index{world state $n$ tick(s) after}{\bf{world state $n$ tick(s) after $w$ under $f$ and $I_1, \dots, I_k$}}, which is also denoted $\mathcal t_{f, I_1, \dots, I_n}(w)$.
 \end{definition}
 
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Given a unit group $\left<\{m , s\}\right>$, explain the physical meaning of $S_{\mathbb R, \mathbb R, m, ms^{-1}, 1, 3}$.
+	\item Implement a simulator of balls (or planets) in 3D spaces with following behaviors in up to 200 lines of pseudo code:
+	
+	\begin{enumerate}
+		\item No ball is added initially;
+		\item Balls are added to a given position with a given velocity, radius and mass when requested;
+		\item Mutual gravity between balls are applied.
+		\item Colliding balls simply merges into a larger one, with mass (negative or infinite values are allowed), momentum and radius added up;
+		\item Users are allowed to explode balls, and the balls splits into two parts flying towards two random direction, with a given increase of kinematic energy and mass of each.
+	\end{enumerate}
+	
+	And model it with the definitions in this section. Visualization, details on interaction and simulation for relativity / quantum effects are not required.
+\end{enumerate}
+
+% ============================ The End Of Section ============================
+
 \section{The Minecraft World}
+
+\begin{definition}
+	An \index{identifier}{\bf{identifier}} is a non-empty string of letters in lower case (a - z), numbers (0 - 9) or underscores that is not begun with a number, which is any string matching regular expression $(a|\dots|z|\_)(a|\dots|z|\_|0|\dots|9)^*$.
+\end{definition}
+
+\begin{definition}
+	A \index{Minecraft label}{\bf{Minecraft label}} is one of followings:
+	
+	\begin{enumerate}
+		\item Name, which is an non-negative integer;
+		\item Coarse type, which is in $\{\mathtt{block}, \mathtt{entity}, \mathtt{chunk}, \mathtt{gstate}, \mathtt{config}\}$;
+		\item Type, which is in an identifier;
+		\item Field, which is a pair $<K, V>$ where $K$ is an identifier and $V$ is any object.
+	\end{enumerate}
+	
+	A \index{Minecraft label set}{\bf{Minecraft label set}} is a set of Minecraft labels.
+\end{definition}
+
+\begin{definition}
+	The \index{Minecraft time algebra}{\bf{Minecraft time algebra}} is $\{n: n\in \mathbb Z \land -2^{-63} \le n < 2^{63}\}$ with addition $\oplus$ defined upon:
+	
+	\begin{equation*}
+		x \oplus y = (x + y)\mod {2^{64}} - 2^{63}\left\lfloor\frac{(x + y)\mod {2^{64}} }{2^{63}}\right\rfloor
+	\end{equation*}
+\end{definition}
+
+\begin{definition}
+	The \index{Minecraft unit group}{\bf{Minecraft unit group}} is $\left<\{m, gt\}\right>$, where $m$ and $gt$ are named \index{meter}{\bf{meter}} and \index{game tick}{\bf{game tick}} respectively.
+\end{definition}
+
+\begin{definition}
+	The \index{Minecraft entity state space}{\bf{Minecraft entity state space}} is $S_{\mathcal F(11, 52), \mathcal F(8, 23), m, m\times gt^{-1}, 1, 3}$.
+\end{definition}
+
+\begin{definition}
+	A \index{Minecraft world space}{\bf{Minecraft world space}} $\mathcal W$ is a world space on:
+	
+	\begin{enumerate}
+		\item A Minecraft label set,
+		\item The Minecraft time algebra,
+		\item The Minecraft entity state space.
+	\end{enumerate}
+	
+	Such that each kinematic entity $<S, L>$ in $\bigcap_{w\in \mathcal W} E(w)$ must
+	
+	\begin{enumerate}
+		\item Have a unique and distinct name: There is exactly one name $N$ in $L$, and for any $w\in \mathcal W$, $|\{<S', L'>: <S', L'>\in E(w)\land N\in L'\}| \le 1$;
+		\item Have a unique type: There is exactly one coarse type and one type in $L$;
+		\item Fields has distinct names: $\forall x(|\{<K, V>\in L: K = x\}|\le 1)$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	A \index{single-dimensional Minecraft tick generator}{\bf{single-dimensional Minecraft tick generator}} is a non-definite tick generator $f$ that maps a world state $w$ to a list $L$ of update steps such that
+	
+	\begin{enumerate}
+		\item There is exactly one update step in $L$ that maps $<n, s, \mathcal E>$ to $<n', s, \mathcal E>$ such that $n \ne n'$, furthermore, the step maps $<n, s, \mathcal E>$ to $<n \oplus 1, s, \mathcal E>$;
+	\end{enumerate}
+\end{definition}
+
+% ============================ The End Of Section ============================
+
+% ============================ The End Of Chapter ============================
 
 \chapter{Motion of Free Entities}
 
 \section{Free Entities}
 
 \begin{definition}
-	Given a non-definite ticker $\mathcal t_{f, I}(w)$ on $\mathcal W$, a kinematically free entity is a named kinematic entity $<S_0, L_0>$ with name $K\in L$ such that
+	Given a non-definite ticker $\mathcal t_{f, I}(w)$ on $\mathcal W$ and $\mathcal W'\subset W$ then for $N\in \mathcal N$, a \index{kinematically free entity}{\bf{kinematically $N$-free entity in $\mathcal W'$}}, or \index{free entity}{\bf{$N$-free entity in $\mathcal W'$}}, is a kinematic entity $<S_0, L_0>$ with name $K\in L$ such that
 	
 	\begin{equation*}
-		\forall n (n\in\mathbb N\implies(\exists S_n\exists L_n\forall w \forall I(w\in \mathcal W \implies <S_n, L_0>\in \mathcal E(\mathcal t^n(w)) \land  S_n\in \mathcal S\land K\in L_n))
+		\forall n (n\in\mathbb N\land n \le N\implies(\exists S_n\exists L_n\forall w \forall I(p(w) \implies q(n, w, S_n, L_n, I))))
 	\end{equation*}
+	
+	Where
+	
+	\begin{align*}
+		p &= w\in \mathcal W' \land <S_0, L_0>\in E(w)\\
+		q &= <S_n, L_0>\in E(\mathcal t_{f, I_1, \dots, I_n}(w)) \land  S_n\in \mathcal S\land K\in L_n\\
+		I &= I_1, \dots, I_n
+	\end{align*}
 \end{definition}
 
-\section{Kinematic Formulas}
+\begin{remark}
+	For any $M \in \mathbb N$ and $M \le N$, and $\mathcal W'' \subset \mathcal W'$, if an entity is kinematically $N$-free in $\mathcal W'$, it is apparently also kinematically $M$-free in $\mathcal W''$.
+\end{remark}
+
+\begin{definition}
+	Given a non-definite ticker $\mathcal t_{t, I}$ on $\mathcal W$, $w\in \mathcal W'\subset \mathcal W$, and a $N$-free entity $<S, L>\in E(w)$ in $\mathcal W'$, if for all $n\in \mathbb N \land n \le N$, there is and motion operator $f$ such that for the entity $<S_n, L_n>$ sharing the same name as $<S, L>$ in $E(\mathcal t_{f, I_1, \dots, I_n}(w))$, $S_n = f^n(S)$, the free entity is \index{cyclic free entity}{\bf{cyclic}}, and $f$ is the \index{intrinsic operator}{\bf{intrinsic operator} of $<S, L>$ under $\mathcal t_{t, I}$ in $\mathcal W'$}.
+	
+	Furthermore, if $f$ is \index{elementary free entity}elementary or \index{simple free entity}simple, so is the free entity.
+\end{definition}
+
+\begin{remark}
+	An entity must be free to have an intrinsic motion operator.
+\end{remark}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Give some examples of $\infty$-free entities in an entire world state space.
+	\item Recall the previous exercise asking you to model a ball simulator, give some (non-trivial) examples of $e$ and $\mathcal W'$ such that $e$ is an $\infty$-free entity in the $\mathcal W'$, and determine the intrinsic motion operator of $e$ in $\mathcal W'$.
+\end{enumerate}
+
+% ============================ The End Of Section ============================
+
+\section{Kinematics On Continuous State Spaces}
+
+\begin{definition}
+	Given a non-definite ticker $\mathcal t_{t, I}(w)$ on $\mathcal W$, $w\in \mathcal W'\subset \mathcal W$, and a $N$-free entity $<S, L>\in E(w)$ in $\mathcal W'$, for any $n\in \mathbb N$ and $0\le n\le N$, the entity $<S_n, L_n>$ is supposed to share the same name as $<S_0, L_0>$ in $E(\mathcal t_{f, I_1, \dots, I_n}(w))$, $S_n = f^n(S)$, and thus notations $v_n = V(S_n)$ and $x_n = P(S_n)$ are adopted in this section.
+	
+	For conciseness, unless otherwise stated, intrinsic operators in this section are supposed to be under $\mathcal t_{t, I}$ and in $\mathcal W'$, and the world state(s) where entity states resides in is supposed to be defined upon $S_{\mathbb R, \mathbb R, m, m\cdot gt^{-1}, d}$ where $m$ and $gt$ are meter and game tick respectively and $d\in \mathbb N$.
+\end{definition}
+
+\begin{theorem}\label{thm:vel-formula}
+	If $<S_0, L_0>$ has an intrinsic operator that is velocitically tail equivalent to $D_k \circ A_I$ for some $k\in R_1$ with $k \ne 1$ and $I \in \mathbb R_{m\cdot gt^{-1}}^d$, then
+	
+	\begin{equation}
+		v_n = k^{n} v_0 + \frac{I(1 - k^{n})}{1 - k}
+	\end{equation}
+	
+	If the intrinsic operator is velocitically tail equivalent to $A_I \circ D_k$ for some $k\in \mathbb R$ with $k \ne 1$ and $I \in \mathbb R_{m\cdot gt^{-1}}^d$, then
+	
+	\begin{equation}
+		v_n = k^{n} v_0 + \frac{I(k - k^{n + 1})}{1 - k}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	More trivial than a high school homework.
+\end{proof}
+
+\begin{theorem}\label{thm:disp-formula}
+	If $<S_0, L_0>$ has an intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k\in \mathbb R_1$, $t_0 \in \mathbb R_{gt}$ and $I\in R_{m\cdot gt^{-1}}^d$, then
+	
+	\begin{equation}
+		v_n = \frac{v_0t_0(1 - k^n)}{1 - k} + \frac{It_0(k^n + n(1 - k) - 1)}{(1 - k)^2}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	Trivial.
+\end{proof}
+
+\begin{theorem}\label{thm:vel-convergence}
+	If $<S_0, L_0>$ has an intrinsic operator $f$ that is velocitically tail equivalent to $D_k \circ A_I$ or $A_I \circ D_k$ for some $t_0 \in \mathbb R_{gt}$, $k\in \mathbb R_1$ with $|k| \le 1$ and $I\in R_{m\cdot gt^{-1}}^d$, then
+	
+	\begin{equation}
+		\lim_{n \to \infty} v_n = \begin{cases}
+			\frac{I}{1 - k} & f \overset{\nu_v}{\sim} D_k \circ A_I\\
+			\frac{kI}{1 - k} & f \overset{\nu_v}{\sim} A_I \circ D_k
+		\end{cases}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	Even more trivial.
+\end{proof}
+
+\begin{theorem}\label{thm:max-disp}
+	If $<S_0, L_0>$ has an intrinsic operator $f$ that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k, t_0\in \mathbb R_1$ with $|k| \le 1$, $I = (0, at_0, 0)\in R_{m\cdot gt^{-1}}^3$, and $v_0 = (v_{x0}, v_{y0}, v_{z0}) \in \mathbb R_{m\cdot gt^{-1}}^3$, then the second component $x_n$ attains its maximal or minimal value $M$ at
+	
+	\begin{equation}
+		n_0 = 1 - \log_k\left(1 - \frac{v_0(1 - k)}{at_0}\right)
+	\end{equation}
+	
+	Furthermore, if $M$ is a maximal value,
+	
+	\begin{equation}
+		M \le \frac{v_0t_0(1 - k^{n_0})}{1 - k} + \frac{It_0(k^{n_0} + n_0(1 - k) - 1)}{(1 - k)^2}
+	\end{equation}
+	
+	Otherwise, if $M$ is a minimal value, 
+	
+	\begin{equation}
+		M \ge \frac{v_0t_0(1 - k^{n_0})}{1 - k} + \frac{It_0(k^{n_0} + n_0(1 - k) - 1)}{(1 - k)^2}
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	Trivial.
+\end{proof}
+
+\begin{theorem}\label{thm:inverted-kinematic}
+	If all entity states in a subset $S$ of the angular entity state space defining $\mathcal W$ have a shared intrinsic operator $f$ that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k, t_0\in \mathbb R_1$ with $|k| \le 1$, $I\in R_{m\cdot gt^{-1}}^d$, then given $x\in \mathbb R_{m}$ and $n\in \mathbb N$, there is at most 1 $<S_0, L_0>\in S$ such that $x_n = x$. Further more, 
+	
+	\begin{equation}
+		v_0 = \frac{xt_0^{-1}(1 - k) - In}{1 - k^n} - \frac{I}{1 - k}
+	\end{equation}
+	
+	Provided that such $<S_0, L_0>\in S$ exists.
+\end{theorem}
+
+\begin{proof}
+	A qualified reader is supposed to be able to complete it.
+\end{proof}
+
+\begin{theorem}\label{thm:trace-theorem}
+	If $<S_0, L_0>$ has an intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k \circ A_I$ for some $k\in \mathbb R_1$, $t_0 \in \mathbb R_{gt}$ and $I\in R_{m\cdot gt^{-1}}^d$, then magnitude of all $x_n$'s lays in the same hyperplane in $\mathbb R^d$.
+	
+	Furthermore, there is a unitary operator $T$ on $\mathbb R^3$ such that $T(\mu(I)) = \left(\left\Vert \mu(I)\right\Vert, 0, \dots, 0\right)$, then all $x_n$'s lays in the same hypersurface
+	
+	\begin{align*}
+		T(\mu(x))[1] =& \frac{T(\mu(v_0))[1](1 - k) - T(\mu(I))}{(1 - k)\sqrt{\sum_{k = 2}^d T(\mu(v_0)))[k]}} \sqrt{\sum_{k = 2}^d T(\mu(x))[k]} \\
+		&+ \frac{T(\mu(I))t_0}{1 - k}\log_k\left(1 - \frac{\sqrt{(1 - k)\sum_{k = 2}^d T(\mu(x))[k]})}{t_0\sum_{k = 2}^d T(\mu(x_0))[k]}\right)
+	\end{align*}
+	
+	Where $x$ is the coordination vector and $v[k]$ denotes the $k$-th component of $v\in \mathbb R^d$.
+\end{theorem}
+
+\begin{proof}
+	A undergraduate-level exercise.
+\end{proof}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Generalize Theorems \ref{thm:vel-formula} and \ref{thm:disp-formula} for $k = 1$.
+	\item Generalize Theorems \ref{thm:disp-formula}, \ref{thm:max-disp} and \ref{thm:inverted-kinematic} to intrinsic operator that is positionally tail equivalent to compositions of other permutations of $M_{t_0}$, $D_k$ and $A_I$.
+	\item Show that $\lim_{n\to \infty} x_n$ exists if $<S_0, L_0>$ has an intrinsic operator that is positionally tail equivalent to $M_{t_0} \circ D_k$ or $D_k \circ M_{t_0}$ for some $k, t_0\in \mathbb R_1$ but $k\ne 1$. And evaluate the limit.
+\end{enumerate}
+
+% ============================ The End Of Section ============================
 
 \section{Bounding Floating Point Errors}
 
+% ============================ The End Of Section ============================
+
 \section{Probabilistic Bound Theorems}
+
+% ============================ The End Of Section ============================
+
+% ============================ The End Of Chapter ============================
 
 \chapter{Collision Detection}
 
 \section{The Raycast Algorithm}
 
+% ============================ The End Of Section ============================
+
 \section{The $\mathtt{move}$ Method}
+
+% ============================ The End Of Section ============================
+
+% ============================ The End Of Chapter ============================
 
 \chapter{Selected Topics}
 
 \section{Explosions}
 
+% ============================ The End Of Section ============================
+
 \section{Piston Behavior}
 
-\section{Silperyness}
+% ============================ The End Of Section ============================
+
+\section{Sliperiness}
+
+% ============================ The End Of Section ============================
 
 \section{Entity Cramming}
 
+% ============================ The End Of Section ============================
+
 \section{Players and Living Entities}
 
-\section{Prefect Pearl Aligners}
+% ============================ The End Of Section ============================
+
+\section{Perfect Pearl Aligners}
+
+% ============================ The End Of Section ============================
+
+% ============================ The End Of Chapter ============================
 
 \appendix
 
