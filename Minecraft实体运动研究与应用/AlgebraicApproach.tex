@@ -70,7 +70,7 @@ Sets of kinematic formulas for specific types of entities of interest like TNTs 
 
 However, a unified framework isn't formulated until July 2021 when lovexyn0827 released their 70k words dissertation, the first complete discussion on our topic ever publicly available, which extensively covers from fundamental theoretical grounding and complete kinematic formulas different update orders, to detailed analysis on a range of mechanisms and almost every negligible corner cases ever practically related. Despite its fundamental contribution to theorists, it is commonly considered "too hard to begin with" due to its complex monolithic theoretical framework, and its sheer tediousity is enough to scare readers off. Nevertheless, it marks a mew era of researches on motion of entities.
 
-A newer book releases a few weeks ago by MCS\&E has adopted an axiomized approach to present mechanisms in a rigorous while pedagogically viable way. Asides from inheriting lovexyn0827's theoretical framework with radical optimization, it has employed its on educational strategies and introduced field analysis to its analytical toolkit to gain new a new insight by visualization and calculation. Well-structured and self-contained though, it lakes proper treatment to many topics like dimensionalities (a.k.a. units), collision detection, floating point errors and piston push, which is essential in engineering practices. Besides, it is suspected to abuse fancy mathematical concepts simply to show off, and ignored capture the discrete nature of Minecraft before diving to continuous approximations too deep, inspect of which its asymptotic analysis has contributed much to practices.
+A newer book releases a few weeks ago by MCS\&E has adopted an axiomized approach to present mechanisms in a rigorous while pedagogically viable way. Asides from inheriting lovexyn0827's theoretical framework with radical optimization, it has employed its on educational strategies and introduced field analysis to its analytical toolkit to gain new a new insight by visualization and calculation. Well-structured and self-contained though, it lakes proper treatment to many topics like dimensionalities (a.k.a. units), collision detection, floating point errors and piston push, which is essential in engineering practices. Besides, it has ignored the discrete nature of Minecraft before diving to continuous approximations too deep, inspect of which its asymptotic analysis has contributed much to practices.
 
 Therefore, we are writing the book to suggest a complete and mathematical rigorous framework applicable to both continuous approximation and machinery reality. Our approach to kinematics is:
 
@@ -103,6 +103,11 @@ Furthermore, a universal model for world and ticking is established, and will le
 \begin{definition}
 	The $k$-th component of a list / vector $L$ is denoted $L[k]$.
 \end{definition}
+
+\begin{definition}
+	The sublist / subvector of a list / vector $L$ consisting of $L$'s $p$-th, $(p + 1)$-th, $\dots$, $q$-th component is denoted $L[p:q]$.
+\end{definition}
+
 
 \begin{definition}
 	The length of a list / vector $L$ is denoted $|L|$.
@@ -671,16 +676,16 @@ Too easy to assign exercises.
 \end{proof}
 
 \begin{definition}
-	A \index{simple arithmetic procedure}{\bf{$n$-step simple arithmetic procedure on}} algebraic structure on a floating point set $\mathcal F$ and rounding function $f$ is a pair $<\mathcal N, \mathcal O>$ such that for some $n\in \mathbb N$:
+	A \index{simple arithmetic procedure}{\bf{$n$-step simple arithmetic procedure on}} a subset of $\mathbb R$ is a pair $<\mathcal N, \mathcal O>$ such that for some $n\in \mathbb N$:
 	
 	\begin{enumerate}
 		\item $\mathcal N \in \mathcal F^{n + 1}$;
 		\item $\mathcal O \in (\mathbb R^{\mathbb{R} \times \mathbb{R}})^{n}$;
 	\end{enumerate}
 	
-	In particular, the arithmetic procedure is \index{realistic simple arithmetic procedure}{\bf{realistic}} if $\mathcal O \in \{+_f, -_f, \times_f\}^n$.
+	In particular, the arithmetic procedure is \index{realistic simple arithmetic procedure}{\bf{realistic on a floating point set $\mathcal F$ and $f$}} if $f$ is a rounding function on $\mathcal F$ and $\mathcal O \in \{+_f, -_f, \times_f\}^n$.
 	
-	The \index{sub-procedure}{\bf{$k$-th (head) sub-procedure of $<\mathcal N, \mathcal O>$}}, denoted $<\mathcal N, \mathcal O>[1:n]$, is obtained by replacing the corresponding component in $<\mathcal N, \mathcal O>$ with the sublist of $\mathcal N$ of its leftmost $(k + 1)$ components and the sublist of $\mathcal N$ of its leftmost $k$ components.
+	The \index{sub-procedure}{\bf{$k$-th (head) sub-procedure of $<\mathcal N, \mathcal O>$}}, denoted $<\mathcal N, \mathcal O>[1:n]$, is obtained by replacing in $\mathcal N$, $\mathcal O>$ with the $\mathcal N[1:n + 1]$ and $\mathcal N[1:n]$ respectively.
 \end{definition}	
 
 \begin{definition}
@@ -693,9 +698,9 @@ Too easy to assign exercises.
 		\end{cases}
 	\end{equation*}
 	
-	Where $\mathcal{N}[1] \mathcal{O}[1] \mathcal{N}[2]$ is the image of $\mathcal{N}[1], \mathcal{N}[2]$ under operator $\mathcal{O}[1]$, and $\mathcal{N}[i], \mathcal{O}[i]$ is the $i$-th component of tuple $\mathcal{N}, \mathcal{O}$ respectively. 
+	Where $\mathcal{N}[1] \mathcal{O}[1] \mathcal{N}[2]$ is the image of $\mathcal{N}[1], \mathcal{N}[2]$ under operator $\mathcal{O}[1]$.
 	
-	For any integer $i$ such that $i \le i \le n$, the \index{intermediate value}{\bf{$i$-th intermediate value}} of $<\mathcal N, \mathcal O>$,  notably $\operatorname{immval_i}<\mathcal N, \mathcal O>$, is the value of the procedure obtained by keeping only the first $(i + 1)$ components in $\mathcal{N}$ and the first $i$ components in $\mathcal{O}$.
+	For any integer $i$ such that $i \le i \le n$, the \index{intermediate value}{\bf{$i$-th intermediate value}} of $<\mathcal N, \mathcal O>$,  notably $\operatorname{immval_i}<\mathcal N, \mathcal O>$, is the value of the $i$-th head subprocedure of $<\mathcal N, \mathcal O>$.
 	
 	The \index{exact value}{\bf{exact value}} of a realistic arithmetic procedure $<\mathcal N, \mathcal O>$ is the value of $<\mathcal N, \tilde{\mathcal O}>$ where $\tilde{\mathcal O}$ is the a tuple obtained by replacing operators in $\mathcal{O}$ with non-rounding ones, that is
 	
@@ -713,7 +718,7 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{remark}
-	The value of an realistic arithmetic procedure is contained in the underlying floating point set as one can verify; its exact value and the value of non-realistic arithmetic structures, however, needn't to.
+	The value of an realistic arithmetic procedure is contained in the underlying set as one can verify; its exact value and the value of non-realistic arithmetic structures, however, needn't to.
 \end{remark}
 
 \begin{definition}
@@ -725,7 +730,7 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{theorem}\label{thm:weak-fp-bound}
-	Given a default algebraic structure on $\hat{\mathcal {F}}(s)$ and a $n$-step realistic arithmetic procedure $<\mathcal N, \mathcal O>$ on it, if every exact intermediate value of it has a absolute value no greater than $M$, and for each $k$ for which $\mathcal O[k]$ is a multiplicative operator, $|\mathcal N[k + 1]| \le 1$, then there is an upper bound for the error:
+	Given a default algebraic structure on $\hat{\mathcal {F}}(s)$ and a $n$-step arithmetic procedure $<\mathcal N, \mathcal O>$ that is realistic on it, if every exact intermediate value of it has a absolute value no greater than $M$, and for each $k$ for which $\mathcal O[k]$ is a multiplicative operator, $|\mathcal N[k + 1]| \le 1$, then there is an upper bound for the error:
 	
 	\begin{equation*}
 		\operatorname{err} <\mathcal N, \mathcal O> \le 3M\left(\left(1 + 2^{1 - s}\right)^n - 1\right)
@@ -780,8 +785,6 @@ Too easy to assign exercises.
 	\begin{equation*}
 		<\mathcal N, \mathcal O> * <\mathcal N', \mathcal O'> = <\operatorname{concat}(\mathcal N, \mathcal N'), \operatorname{concat}(\mathcal O, (*), \mathcal O')>
 	\end{equation*}
-	
-	Where $\operatorname{concat}$ is the concatenating operator of lists.
 \end{definition}
 
 \begin{theorem}
@@ -797,7 +800,8 @@ Too easy to assign exercises.
 \end{proof}
 
 \begin{theorem}
-	Given a entity state space $S$ with units $u_x$, $u_v$ on a basic algebraic structure on floating point set $\mathcal F$ and an elementary motion operator $f = f_1 \circ \cdot \circ f_n$ where $f_1, \dots, f_n$ are a sequence of basic elementary motion operators with a total number $m$ of acceleration ones $f_j = A_{I_j}$ for some $1\le j\le n$ and drag operators $f_j = D_{k_j}$ for some $1\le j\le n$, then, for every $i$ sensible, the magnitude of the $i-th$ component of $V(f(<x, v>))$ is the value of a $m$-step simplex arithmetic procedure $<\mathcal N, \mathcal O>$ such that
+	Given a entity state space $S$ with units $u_x$, $u_v$ on a basic algebraic structure on floating point set $\mathcal F$ and an elementary motion operator $f = f_1 \circ \cdot \circ f_n$ where $f_1, \dots, f_n$ are a sequence of basic elementary motion operators with a total number $m$ of acceleration ones $f_j = A_{I_j}$ for some $\\
+	1\le j\le n$ and drag operators $f_j = D_{k_j}$ for some $1\le j\le n$, then, for every $i$ sensible, the magnitude of the $i-th$ component of $V(f(<x, v>))$ is the value of a $m$-step simplex arithmetic procedure $<\mathcal N, \mathcal O>$ such that
 	
 	\begin{enumerate}
 		\item $\mathcal O[1]$ is the magnitude of the $i$-th component of $v$;
@@ -811,7 +815,7 @@ Too easy to assign exercises.
 \end{proof}
 
 \begin{definition}
-	Given $n\in \mathbb N$ and a basic algebraic structure on floating point set $\mathcal F$ and one of its rounding function $f$, a \index{stacked arithmetic procedure}{\bf{stacked arithmetic procedure on $\mathcal F$}} is tuple $<\mathcal N, \mathcal O, \mathcal P>$, where $\mathcal N \in \mathcal F^{n + 1}$, $\mathcal O\in (\mathbb R^{\mathbb R \times \mathbb R})^n$ and $\mathcal P\in \{ P, C \}^{2n + 1}$ and that
+	Given $n\in \mathbb N$, a subset $\mathcal F\subset \mathbb R$, a \index{stacked arithmetic procedure}{\bf{stacked arithmetic procedure on $\mathcal F$}} is tuple $<\mathcal N, \mathcal O, \mathcal P>$, where $\mathcal N \in \mathcal F^{n + 1}$, $\mathcal O\in (\mathbb R^{\mathbb R \times \mathbb R})^n$ and $\mathcal P\in \{ P, C \}^{2n + 1}$ and that
 	
 	\begin{enumerate}
 		\item $P$ appears exactly $(n + 1)$ times in $\mathcal P$;
@@ -819,7 +823,7 @@ Too easy to assign exercises.
 		\item For the $k$-th $C$ in $\mathcal P$ from the left, there are at least $(k + 2)$ $Q$'s left to it.
 	\end{enumerate}
 	
-	In particular, $<\mathcal N, \mathcal O, \mathcal P>$ is \index{realistic}{\bf{realistic}} if $\mathcal O \in \{ +_f, -f, \times_f \}$.
+	In particular, $<\mathcal N, \mathcal O, \mathcal P>$ is \index{realistic}{\bf{realistic on $f$}} if $f$ is a rounding function and $\mathcal O \in \{ +_f, -f, \times_f \}$.
 \end{definition}
 
 \begin{definition}
@@ -970,7 +974,7 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{definition}
-	Given a world space $\mathcal W$ and an external impact set $\mathcal I$, a \index{non-definite tick generator}{\bf{non-definite tick generator for $\mathcal L$ on $\mathcal I$}} is a function
+	Given a world space $\mathcal W$ and an external impact set $\mathcal I$, a \index{non-definite tick generator}{\bf{non-definite tick generator for $\mathcal W$ on $\mathcal I$}} is a function
 		
 	\begin{equation*}
 		f: \mathcal W \times \bigcup_{n = 0}^{\infty} \mathcal I^n \to \bigcup_{n = 0}^{\infty} \left(\mathcal W^{\mathcal W}\right)^n
@@ -988,6 +992,10 @@ Too easy to assign exercises.
 	
 	$\left(\mathcal t_{f, I_1}(w) \circ \cdots \circ \mathcal t_{f, I_n}\right)(w)$ is the \index{world state $n$ tick(s) after}{\bf{world state $n$ tick(s) after $w$ under $f$ and $I_1, \dots, I_k$}}, which is also denoted $\mathcal t_{f, I_1, \dots, I_n}(w)$.
 \end{definition}
+
+\begin{remark}
+	This model only supports synchronized (in particular single threaded) ticks directly. Parallel behaviors can be modeled by external impacts when necessary.
+\end{remark}
 
 \subsection*{Exercises}
 
@@ -1065,7 +1073,7 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{definition}
-	A \index{single-dimensional Minecraft tick generator}{\bf{single-dimensional Minecraft tick generator}} is a non-definite tick generator $f$ that maps a world state $w$ to a list $L$ of update steps such that
+	A \index{Minecraft tick generator}{\bf{Minecraft tick generator}} is a non-definite tick generator $f$ that maps a world state $w$ to a list $L$ of update steps such that
 	
 	\begin{enumerate}
 		\item There is exactly one update step in $L$ that maps $<n, s, \mathcal E>$ to $<n', s, \mathcal E>$ such that $n \ne n'$, furthermore, the step maps $<n, s, \mathcal E>$ to $<n \oplus 1, s, \mathcal E>$;
@@ -1073,14 +1081,38 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{definition}
+	An \index{instruction set}{\bf{instruction set}} is a set. Members of a instruction set are \index{instruction}{\bf{instructions}}.
+\end{definition}
+
+\begin{definition}
+	A \index{Minecraft runner}{\bf{Minecraft runner}} is a function $\mathscr R$ that maps a list of instructions to another list of update steps.
+\end{definition}
+
+\begin{definition}
 	A \index{version number}{\bf{version number}} is a string of characters.
 \end{definition}
 
 \begin{definition}
-	The \index{Minecraft downloader}{\bf{Minecraft downloader}} is the function $\mathscr D$ which maps a version to a Minecraft tick generator.
+	For a Minecraft world space $\mathcal W$, an external impact set $\mathcal I$ and an instruction set $\mathcal J$, a \index{Minecraft tick specifier}{\bf{Minecraft tick specifier for $\mathcal W$, $\mathcal I$ in $\mathcal J$}} is a function
+	
+	\begin{equation*}
+		\mathscr S: \mathcal W \times \bigcup_{n = 0}^{\infty}\mathcal I^n\to \bigcup_{n = 0}^{\infty}\mathcal J^n
+	\end{equation*}
+	
+	$\mathscr S$ is \index{proper}{\bf{proper under}} Minecraft runner $\mathcal R$ if $\mathscr S \circ \mathscr R$ is a Minecraft tick generator.
+\end{definition}
+
+\begin{definition}
+	The \index{Minecraft downloader}{\bf{Minecraft downloader}} is the function $\mathscr D$ which maps a version to a Minecraft tick specifier.
 \end{definition}
 
 \section{Structure of $\mathscr{D}(1.16.4)$}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Finish this chapter on your own.
+\end{enumerate}
 
 % ============================ The End Of Section ============================
 
