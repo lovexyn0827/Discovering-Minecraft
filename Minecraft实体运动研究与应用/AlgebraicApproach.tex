@@ -19,6 +19,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
+\theoremstyle{definition}\newtheorem{mechanism}{Mechanism}
 \theoremstyle{remark}\newtheorem*{remark}{Remark}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -86,8 +87,49 @@ Therefore, we are writing the book to suggest a complete and mathematical rigoro
 
 Furthermore, a universal model for world and ticking is established, and will lead us to a novel paradigm of game mechanism analysis.
 
+The book will be separated to seven chapters, asides from the appendix:
+
+\begin{enumerate}
+	\item Introduction. Mathematical foundations from logic and set theory to floating point arithmetic and computer models which are used throughout following chapters are briefly mentioned here. For a maximum degree of rigor, we will start from first order languages and ZFC axioms of set theory, and gradually to algebraic structures, analysis and so on, where we will establish every definitions and theorems upon. 
+	
+	Covering every mathematical detail of this process is totally out of our scope and will lead the book to a dull construction log. Therefore, the prime goal of this introduction is to clarify ambiguous notations, regenerate intuition, and remind / inform the reader of what is supposed to be acquainted ahead, instead of proving every single lemmas that lead us from bedrocks to the ground. A qualified reader should complete this chapter smoothly without external references.
+	
+	\item Motion Operators. In this chapter, we will define two central concepts of our kinematic theory, kinematic state spaces and motion operators, and study the fundamental properties of them on three important algebraic structures (i.e. generic fields, real numbers, and floating point sets) like the possibility to simplify operators, closed-form expression for power of elementary operators or bounds for rounding errors. Our approach has embedded dimensionalities deep in its foundation, which is seemingly unreasonably troublesome at first but following investigations will prove its benefit in both verification and comprehension.
+	
+	One are expected to read at least the first section, State Spaces, to move on, and following sections are essentially optional since they are only occasionally used in only a few sections that follows, despite the emphasis on them in some undergraduate-level textbooks.
+	
+	\item World and Ticking. This chapter constitutes the center of our modern and rigorous paradigm to describe game mechanisms, by presenting a formal way to specify what a world / minecraft.jar mathematically is, and how to focus our attention to ignore irrelevant noises from distant in-game objects and runtime environments.
+	
+	A reader must finish all sections to establish a good grounding to read upcoming chapters.
+	
+	\item Free Entities. This is where we will start to integrate both frameworks, motion operators and world spaces, to formalize concrete motion mechanisms in Minecraft. The first section presents formalizes the criteria for an entity to be "free", which is intuitively to have a predictable way to move and / or accelerate in some subsets of external environments.
+	
+	This chapter is served as an intersect of theories in preceding two chapters, and a start-point for more sophisticated analysis to come. The only section that can be skipped is the second one, which is basically direct application or restatement of kinematic formulas in Motion Operators.
+	
+	\item Non-Free Entities. This chapter demonstrates a scheme to describe (predictable or unpredictable) external influences applied to entities whose motion may get altered directly or indirectly, and offers a general theory to find a suitable subset of environments and a "mask" (or information filter) to make entities free.
+	
+	One is free to read or skip depending on their practical needs due to the logical independence of this chapter, but a qualified graduate-level theorist or engineer is supposed to gain at least an intuition of all concepts.
+	
+	\item Advanced Continuous Analysis. This chapter, logically independent of all ones but Introduction and Motion Operators, is a further development of the kinematic formulas defined for state spaces on fields and real numbers, involving how to approximate motion mechanisms by their equivalent in Newton's framework, which leads us to more concise formulas in general and may benefit asymptotic analysis, and how could the discrete nature of Minecraft or generally simulated physics differ from their classical continuous counterpart.
+	
+	\item Selected Topics. We've carefully picked some specific mechanisms, entities and applications which is of arguably greatest theoretical importance in the last few years.
+	
+	This chapter is optional, and there is few interdependence between sections. Readers or instructors have the freedom to choose sections more interesting to them. Reading with more elementary references or source codes are advisable.
+\end{enumerate}
+
+Asides from conventional Lemma, Theorm, etc., we've adopted a dedicated typesetting environment called Mechanism, to define / state specific game behaviors in terms of their mathematical specification. For example, Newton's Second Law can be given as a mechanism in classical kinematics as follows:
+
+\begin{mechanism}
+	The position $\boldsymbol{x}$ of a point with mass $m$ and receiving force $\boldsymbol{F}$ satisfies following differential equation:
+	
+	\begin{equation*}
+		\boldsymbol{F} = m\frac{\mathrm{d}^2\boldsymbol{x}}{\mathrm dt^2}
+	\end{equation*}
+\end{mechanism}
+
 \begin{flushright}
-	May 14th, 2026
+	May. 14th, 2026
+	Jul. 24th, 2026 
 	
 	2717498529 @ Capital Normal University
 \end{flushright}
@@ -163,7 +205,7 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{remark}
-	As a idealized model, we define the \index{continuous entity state space}{\bf{$n$-dimensional continuous entity state space}} as $C_n = S_{\mathbb{R}, 1_U, 1_U, n}$, where $\mathbb{R}$ is the field of real numbers with conventional addition and multiplication and $1_U$ is the identity in an unit group $U$. Note that $C_n$ is the set of ordered pairs of $n$-dimensional real vectors.
+	As a idealized model, we define the \index{continuous entity state space}{\bf{$n$-dimensional simple continuous entity state space}} as $C_n = S_{\mathbb{R}, 1_U, 1_U, n}$, where $\mathbb{R}$ is the field of real numbers with conventional addition and multiplication and $1_U$ is the identity in an unit group $U$. Note that $C_n$ is the set of ordered pairs of $n$-dimensional real vectors.
 \end{remark}
 
 \begin{remark}
@@ -376,7 +418,9 @@ Too easy to assign exercises.
 	\begin{enumerate}
 		\item List all elements of $S$ and $\mathcal E_{S}$.
 		\item Give a definition of the binary operator on $\mathcal E_{S}$ as a table.
+		\item Show the structure of $\mathcal E_{S}$ by finding a group isomorphic to it.
 	\end{enumerate}
+	\item Show the structure of $\mathcal E_{S_{\mathbb R, m, ms^{-1}, 3}}$ by finding a group isomorphic to it.
 	\item Given a state space $S$ and $s\in S$, show that there is a group homomorphism $f: \mathcal E_{S} \to \{g(s): g\in \mathcal E_S\}$.
 	\item Show that if two sequences of motion operators, $f_1, \dots, f_n$ and $g_1, \dots, g_n$, are tail equivalent, then for each set $F$ of inspect functions on the implied state space, two lists are $F$-tail equivalent. 
 \end{enumerate}
@@ -868,10 +912,25 @@ Too easy to assign exercises.
 
 \subsection*{Exercises}
 
+\begin{proof}
+	By definition, 
+	\begin{align*}
+		\mathcal F(e, s) &=  \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^s \land  -2^{e - 1} + 2 - s \le k \le 2^{e - 1} - s  \}\\
+		&\supset \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^s \land  -2^{e' - 1} + 2 - s \le k \le 2^{e' - 1} - s\}\\
+		&= \{m \times 2^k: m, k \in \mathbb{Z} \land |m| < 2^{s'} \land  -2^{e' - 1} + 2 - s' \le k \le 2^{e' - 1} - s'\}\\
+		&= \mathcal F(e', s')
+	\end{align*}
+	Completing the proof.
+\end{proof}
+
 \begin{enumerate}
 	\item Find the element(s) in $\mathcal F(11, 52)$ with a maximal and minimal absolute value.
 	\item Show that if $s' \le s$ and $e' \le e$, then $\mathcal F(e', s')\subset \mathcal F(e, s)$.
+	
+	
+	
 	\item For each case in the definition of $\mathcal R_{\mathcal F(8, 23)}$, give at least 3 inputs that would fall into the case, and evaluate $\mathcal R_{\mathcal F(8, 23)}$ at these inputs.
+	\item Show that for all floating point $\mathcal F$ and all prime number $p \ne 2$, $p \notin \mathcal F$.
 	\item Show that for each floating point set $\mathcal F$, $\mathcal R_{\mathcal F}$ is an odd function.
 	\item Show that for each floating point set $\mathcal F$ and $x, y \in \mathcal F$, $x \pm_{\mathcal R_{\mathcal F}} y = x \pm y$ if $|x \pm y| < |x|, |y|$.
 	\item Evaluate $\sup \{M: \forall x(x\in [-M, M] \cap \mathbb Z \implies \mathcal R_{\mathcal F(e, s)})(x) = x\}$
@@ -938,6 +997,16 @@ Too easy to assign exercises.
 \end{remark}
 
 \begin{definition}
+	A \index{world projector}{\bf{world projector}} on world space $\mathcal{W}$ is a function defined on $\mathcal{W}$.
+	
+	Given a world projector $f$, two world spaces is \index{$f$-equivalent}{\bf{$f$-equivalent}} if they share the same image under $f$.
+\end{definition}
+
+\begin{remark}
+	This definition enable us to focus on specific, local details of world states (e.g. the position of the entity with ID $1107$).
+\end{remark}
+
+\begin{definition}
 	The \index{size of a finite kinematic world state}{\bf{size}} of a finite kinematic world state $<t, s, \mathcal E>$ is
 	
 	\begin{equation*}
@@ -994,6 +1063,10 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{remark}
+	It is clear that definite tick generators and tickers are also non-definite ones.
+\end{remark}
+
+\begin{remark}
 	This model only supports synchronized (in particular single threaded) ticks directly. Parallel behaviors can be modeled by external impacts when necessary.
 \end{remark}
 
@@ -1013,6 +1086,21 @@ Too easy to assign exercises.
 	
 	And model it with the definitions in this section. Visualization, details on interaction and simulation for relativity / quantum effects are not required.
 \end{enumerate}
+
+\begin{theorem}
+	Given a finite list of update steps $f_1, \dots, f_m$, a world projector $\pi$, and a subset $\mathcal W'$ of their underlying world space, there is a unique function $f$ such that:
+	
+	\begin{enumerate}
+		\item $\operatorname{dom} F = \mathcal W'$;
+		\item $\forall w(w \in \mathcal W' \implies \pi((f_1 \circ \dots \circ f_m)(w)) = \pi(f(w))$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+	Such $f$ is the \index{$f$-equivalent updater}{\bf{$f$-equivalent updater of $f_1, \dots, f_m$ on $\mathcal W'$ under $\pi$}}.
+	
+	We're adopting this notation to focus only on the behaviors we concern and mask out irrelevant complexity of update steps, tick generators, tickers and world spaces.
+\end{remark}
 
 % ============================ The End Of Section ============================
 
@@ -1103,15 +1191,68 @@ Too easy to assign exercises.
 \end{definition}
 
 \begin{definition}
+	Given a Minecraft tick specifier $S$, a \index{fuzzy micro time}{\bf{non-definite fuzzy micro time with respect to $S$}} is a function $(w, i_1, \cdot, i_n) \mapsto N$ on $\operatorname{dom} S$ such that $N\subset \mathcal N_+$ and $\max N < |S(w, i_1, \cdot, i_n)|$.
+\end{definition}
+
+\begin{definition}
 	The \index{Minecraft downloader}{\bf{Minecraft downloader}} is the function $\mathscr D$ which maps a version to a Minecraft tick specifier.
 \end{definition}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Define following useful world projectors formally:
+	
+	\begin{enumerate}
+		\item $\mathtt{GetEntity(w, i)}$: Get the unique entity in the world with id $i$;
+		\item $\mathtt{GetEntities(w, p)}$: Get the set of entities $e$ in the world such $p(e)$ is true;
+		\item $\mathtt{GetEntitiesSorted(w, p, c)}$: Get the list $L$ of entities $e$ in the world such $p(e) = 1$ and for all $1\le k < |L|$, $L[k] < L[k + 1]$ according to the linear ordering relation $c$ given as the third argument;
+		\item $\mathtt{GetEntityPos(w, i, f)}$: Get the position of the unique entity in the world with id $i$;
+		\item $\mathtt{GetEntityMotion(w, i, f)}$: Get the velocity of the unique entity in the world with id $i$;
+		\item $\mathtt{GetEntityField(w, i, f)}$: Get the value of field $f$ from the unique entity in the world with id $i$;
+	\end{enumerate}
+\end{enumerate}
+
+\section{Standard Behavior}
+
+\begin{definition}
+	The standard implementation of a instruction set $\mathcal J$ is the Minecraft runner denoted $\mathcal R_{\mathrm{Std}}(\mathcal J)$.
+\end{definition}
+
+\begin{definition}
+	Given a world projector $f$ on world space $\mathcal W$, two Minecraft runners $\mathcal R$, $\mathcal S$ on the same instruction set $\mathcal J$ are said $f$-equivalent if for all $P \in \bigcup_{i\in \mathbb N} \mathcal J^i$, and all $w\in \mathcal W$
+	
+	\begin{equation*}
+		\left(R[1] \circ \dots \circ R[|R|]\right)(w) = \left(S[1] \circ \dots \circ S[|S|]\right)(w)
+	\end{equation*}
+	
+	Where
+	
+	\begin{align*}
+		R &= \mathcal R(P)\\
+		S &= \mathcal S(P)
+	\end{align*}
+	
+	A Minecraft runner is $f$-proper if it is $f$-equivalent to $\mathcal R_{\mathrm{Std}}(\mathcal J)$.
+\end{definition}
+
+\begin{remark}
+	One are supposed to define specific game mechanisms with the behavior of tick generators under the standard implementation and thus automatically all proper runners (with respect to some appropriate world projectors).
+\end{remark}
+
+\subsection*{Exercises}
+
+\begin{enumerate}
+	\item Specify the motion mechanisms of the TNTs with respect to $\nu$ (ignoring external influences).
+	\item Specify the simulation loop in your ball simulators (if you've ever programmed it in previous exercise).
+\end{enumerate}
 
 \section{Structure of $\mathscr{D}(1.16.4)$}
 
 \subsection*{Exercises}
 
 \begin{enumerate}
-	\item Finish this chapter on your own.
+	\item Finish this section on your own.
 \end{enumerate}
 
 % ============================ The End Of Section ============================
@@ -1123,7 +1264,7 @@ Too easy to assign exercises.
 \section{Free Entities}
 
 \begin{definition}
-	Given a non-definite ticker $\mathcal t_{f, I}(w)$ on $\mathcal W$, a set of external impact sequences, a inspect function $g$, and $\mathcal W'\subset W$, then for $N\in \mathcal N$, a \index{kinematically free entity}{\bf{kinematically $g, N$-free entity in $\mathcal W'$}}, or \index{free entity}{\bf{$g, N$-free entity in $\mathcal W'$}}, is a kinematic entity $<S_0, L_0>$ with name $K\in L$ such that
+	Given a non-definite ticker $\mathcal t_{f, I}$ on $\mathcal W$, a set of external impact sequences $\mathcal I'$, a inspect function $g$, and $\mathcal W'\subset W$, then for $N\in \mathcal N$, a \index{kinematically free entity}{\bf{kinematically $g, N$-free entity in $\mathcal W'$ and $\mathcal I'$}}, or \index{free entity}{\bf{$g, N$-free entity in $\mathcal W'$ and $\mathcal I'$}}, is a kinematic entity $<S_0, L_0>$ with name $K\in L$ such that
 	
 	\begin{equation*}
 		\forall n (n\in\mathbb N\land n \le N\implies(\exists S_n\exists L_n\forall w \forall I(p(w) \implies q(n, w, S_n, L_n, I))))
@@ -1132,9 +1273,9 @@ Too easy to assign exercises.
 	Where
 	
 	\begin{align*}
-		p &= w\in \mathcal W' \land <S_0, L_0>\in E(w) \land I_1, \dots, I_n \in \mathcal I\\
+		p &= w\in \mathcal W' \land <S_0, L_0>\in E(w) \land I \in \mathcal I'\\
 		q &= <S_n, L_0>\in E(\mathcal t_{f, I_1, \dots, I_n}(w)) \land  S_n\in \mathcal S\land K\in L_n\\
-		I &= I_1, \dots, I_n
+		I &= (I_1, \dots, I_n)
 	\end{align*}
 	
 	In particular, if $g = \nu$, the entity is $N$-free; if $g = \nu_p$, the entity is positionally $N$-free; if $g = \nu_v$, the entity is velocitically $N$-free; if $g(<x_1, v_1>, <x_2, v_2>) \mapsto x_1[k] = x_2[k] \land v_1[k] = v_2[k]$, the entity is $N$-free on the $k$-th axis; if $g(<x_1, v_1>, <x_2, v_2>) \mapsto x_1[k] = x_2[k]$, the entity is positionally $N$-free on the $k$-th axis; and if $g(<x_1, v_1>, <x_2, v_2>) \mapsto v_1[k] = v_2[k]$, the entity is velocitically $N$-free on the $k$-th axis.
@@ -1142,6 +1283,10 @@ Too easy to assign exercises.
 
 \begin{remark}
 	For any $M \in \mathbb N$ and $M \le N$, and $\mathcal W'' \subset \mathcal W'$, if an entity is kinematically $N$-free in $\mathcal W'$, it is apparently also kinematically $M$-free in $\mathcal W''$.
+\end{remark}
+
+\begin{remark}
+	$\mathcal W'$ and $\mathcal I'$ can be omitted if they are clear in or irrelevant from the context.
 \end{remark}
 
 \begin{definition}
@@ -1213,7 +1358,7 @@ Too easy to assign exercises.
 \end{theorem}
 
 \begin{proof}
-	Even more trivial.
+	Even more trivial.==
 \end{proof}
 
 \begin{theorem}\label{thm:max-disp}
@@ -1340,3 +1485,4 @@ Too easy to assign exercises.
 \printindex
 
 \end{document}
+ 
