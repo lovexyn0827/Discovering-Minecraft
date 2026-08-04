@@ -95,7 +95,7 @@ Furthermore, a universal model for world and ticking is established, and will le
 The book will be separated to seven chapters, asides from the appendix:
 
 \begin{enumerate}
-	\item Introduction. Mathematical foundations from logic and set theory to floating point arithmetic and computer models which are used throughout following chapters are briefly mentioned here. For a maximum degree of rigor, we will start from first order languages and ZFC axioms of set theory, and gradually to algebraic structures, analysis and so on, where we will establish every definitions and theorems upon. 
+	\item Introduction. Mathematical foundations from logic and set theory to floating point arithmetic and computer models which are used throughout following chapters are briefly mentioned here. For a maximum degree of rigor, we will start from first order languages and ZFC axioms of set theory, and gradually to algebraic structures, analysis and so on, where we will establish every definitions and theorems upon.
 	
 	Covering every mathematical detail of this process is totally out of our scope and will lead the book to a dull construction log. Therefore, the prime goal of this introduction is to clarify ambiguous notations, regenerate intuition, and remind / inform the reader of what is supposed to be acquainted ahead, instead of proving every single lemmas that lead us from bedrocks to the ground. A qualified reader should complete this chapter smoothly without external references.
 	
@@ -150,6 +150,10 @@ Asides from conventional Lemma, Theorm, etc., we've adopted a dedicated typesett
 \section{Set Theory}
 
 \section{Lists and Tuples}
+
+\begin{remark}
+	Lists and tuples are essentially the same type of mathematical objects, and ones are allowed to use the notations interchangeably. Different names are introduced to emphasize the intuition that tuples have predefined lengths while components of lists tend to share same type.
+\end{remark}
 
 \begin{definition}
 	The $k$-th component of a list / vector $L$ is denoted $L[k]$.
@@ -216,11 +220,69 @@ Too easy to assign exercises.
 	The execution of pseudo code $P$ is $E = P[1] \circ \cdots P[|P|]$. The output of $P$ at $S$ is $E(S)$.
 \end{definition}
 
-\begin{remark}
-	We shall adopt the pseudo code convention in CLRS 4e, which we are not going to repeat to save papers.
+\begin{definition}
+	Given a computer state $S$ and a variable name $n$, $\operatorname{VariableFrame}(S, n)$ denotes the largest integer $k$ such that $S[k]$ contains a variable named $n$, $\operatorname{Variable}(S, n)$ denotes the variable with name $n$ in $S[\operatorname{VariableFrame}(S, l)]$
 	
-	Ones may question if it is reasonable not to formalize for the syntax of our pseudo code convention. The answer is fine, anyway, we are not such a enthusiastic in formalism that we want to formalize even typesetting structures simply adopted for manual comprehension instead of being a part in mathematical reliance, and reads should always be able to translate such structures into mathematical definitions (much lengthy or complicated though), and the translation is unique (up to some isomorphism at least).
+	Given a computer state $S$ and an expression $e$, $\operatorname{Eval}(S, n)$ is the value of $e$ at $S$, whose precise definition is omitted.
+\end{definition}
+
+\begin{definition}
+	A \defbf{rvalue} is a mathematical object, and a \defbf{lvalue} is the name of a variable.
+	
+	An \defbf{assign statement} is a statement defined by a pair $(l, r)$ and written as $l \rightarrow r$ in pseudo codes, such that maps a computer state $S$ to $S'$ such that
+	
+	\begin{enumerate}
+		\item $|S'| = |S|$
+		\item $S'[k] = S[k]$ whenever $k \ne s$
+		\item $S'[s] = \left(S[s] - \{\left<l, v, t\right>\}\right) \cup \{\left<l, r, t\right>\}$
+	\end{enumerate}
+	
+	Where $s =  \operatorname{VariableFrame}(S, l)$.
+	
+	A \defbf{compound statement} is a statement denoted by a list $L$ of statements and written as $\{L[1], \dots, L[n]\}$, and the execution of a compound statement equals the execution of
+	
+	\begin{equation*}
+		\operatorname{Concat}\left((S \mapsto \operatorname{Concat}(S, (())), L, S\mapsto S[1:|S| - 1])\right)
+	\end{equation*}
+	
+	A \defbf{conditional statement} is a statement denoted by a pair $(C, T)$ and written as $\mathtt{if}C: T;$. The execution of such a statement at $S$ is equivalent to the execution of $C\circ T$ if $\operatorname{Eval}(S, C) = \mathcal{true}$, or $C$ if $\operatorname{Eval}(S, C) = \mathcal{false}$.
+	
+	A \defbf{branch statement} is a statement denoted by a tuple $(C, T, F)$ and written as $\mathtt{if}C: T; \mathtt{else} F;$. The execution of such a statement at $S$ is equivalent to the execution of $C\circ T$ if $\operatorname{Eval}(S, C) = \mathcal{true}$, or $C\circ F$ if $\operatorname{Eval}(S, C) = \mathcal{false}$.
+	
+	A \defbf{do-until statement} is a statement denoted by a pair $(B, C)$ and written as $\mathtt{do} B \mathtt{until} C;$, whose execution at is equivalent to the execution of $\lim_{n\to\infty} L_k$ where
+	
+	\begin{equation*}
+		L_k = \begin{cases}
+			B \circ C& k = 0\\
+			L_{k - 1} & \operatorname{Eval}((\circ L_{k - 1})(S), C) = \mathtt{false}\\
+			\operatorname{Concat}(L_{k - 1}, (B, C)) & \text{otherwise}
+		\end{cases}
+	\end{equation*}
+	
+	A \defbf{while statement} is a statement denoted by a pair $(B, C)$ and written as $\mathtt{while} C: B;$, whose execution at $S$ is equivalent to the execution of the pseudo code denoted by $\mathtt{if} C:\mathtt{do}B;\mathtt{until} C$.
+	
+	A \defbf{for statement} is a statement denoted by a tuple $(I, C, J, B)$ and written as $\mathtt{for} I; C; J: B;$, whose execution at $S$ is equivalent to the execution of the pseudo code denoted by $I\mathtt{while} C: BJ$.
+	
+	A \defbf{label} is a statement denoted by a variable name $n$ and written $n:$.
+	
+	\defbf{goto statement}s, \defbf{break statement}s and \defbf{continue statement}s are defined as you wish it to be. (You may have to modify existing definitions or make them "code modifiers", which is left as an optional exercise. Also note that our continue / break statements behave like ones in Java programs)
+\end{definition}
+
+\begin{remark}
+	We shall adopt the pseudo code convention in CLRS 4e, with minor modification for symbolic consistence. The definition above is basically a restatement of such convention, slightly less rigorous than expected though.
+	
+	Ones may question if it is reasonable not to formalize the syntax of our pseudo code convention as rigor as other mathematical objects. The answer is fine, anyway, we are not such a enthusiastic in formalism that we want to formalize even typesetting structures simply adopted for manual comprehension instead of being a part in mathematical reliance, and reads should always be able to translate such structures into mathematical definitions (much lengthy or complicated though), and the translation is unique (up to some isomorphism at least).
 \end{remark}
+
+\begin{remark}
+	We could have begun with some assembly-like pseudo codes (probably an adapted version for the JVM instruction set) for the maximal degree of rigor or cleanness, and algorithmic analysis would benefit from it. However, practices in researches on game mechanism have proven the viability and usefulness of structured codes and we'll follow such conventions. 
+	
+	Pure Java language is basically well-defined and its usage is favorable in specific language-dependent topics, but it is not used for general mechanism descriptions due to its inability to have concise mathematical concepts easily embedded in.
+\end{remark}
+
+\begin{definition}
+	\texttt{switch} statements are not included for its rare usage in server-side logic.
+\end{definition}
 
 % ============================ The End Of Section ============================
 
@@ -983,11 +1045,11 @@ Too easy to assign exercises.
 	\item Show that for each floating point set $\mathcal F$, $\mathcal R_{\mathcal F}$ is an odd function.
 	\item Show that for each floating point set $\mathcal F$ and $x, y \in \mathcal F$, $x \pm_{\mathcal R_{\mathcal F}} y = x \pm y$ if $|x \pm y| < |x|, |y|$.
 	\item Evaluate $\sup \{M: \forall x(x\in [-M, M] \cap \mathbb Z \implies \mathcal R_{\mathcal F(e, s)})(x) = x\}$
-	\item Find a simple arithmetic procedure on a floating point set whose value equals Java expression $\mathtt{((0 + 0.08) * 0.98 + 0.08) * 0.98}$ and show that it has an error smaller than $10^{-10}$.
+	\item Find a simple arithmetic procedure on a floating point set whose value equals Java expression $\mathtt{((0 + 0.08) * 0.98 + 0.08) * 0.98}$ and show that it has an error smaller than $10^{-10}$. (\texttt{strictfp} is off)
 	\item Find a stacked arithmetic procedure on a floating point set whose value equals the return value of
 	
 	\begin{lstlisting}[language=java, tabsize=4, numbers=left]
-	double func() {
+	strictfp double func() {
 		double x = 0.0;
 		double v = 1.0;
 		for (int i = 0; i < 4; i++) {
