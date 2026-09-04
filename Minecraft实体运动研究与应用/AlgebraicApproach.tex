@@ -7,12 +7,14 @@
 \usepackage{amssymb}
 \usepackage{mathrsfs}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usepackage{fontspec}
 \usepackage{imakeidx}
 \usepackage{listings}
 \usepackage{xparse}
 \usepackage{algorithm}
 \usepackage{pseudocode}
+\usepackage[backend=bibtex]{biblatex}
 
 \title{Motion Of Entities \\ {\small{An Algebraic Approach} \\ {\small{GTM Graduate Text In Minecraft 784}}}}
 
@@ -26,12 +28,23 @@
 \theoremstyle{remark}\newtheorem*{remark}{Remark}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\dom}{dom}
+\DeclareMathOperator*{\im}{im}
+\DeclareMathOperator*{\Span}{span}
+\DeclareMathOperator*{\rank}{rk}
+\DeclareMathOperator*{\Var}{Var}
+\DeclareMathOperator*{\Hom}{Hom}
 
 \definecolor{gtmyellow}{HTML}{F9CA04}
 
-\NewDocumentCommand{\defbf}{mO{#1}}{\index{#1}{\bf{#2}}}
+\NewDocumentCommand{\defbf}{mO{#1}}{{\index{#1}}{\bf{#2}}}
+
+\newcommand{\true}{\mathrm{T}}
+\newcommand{\false}{\mathrm{F}}
 
 \makeindex
+
+\addbibresource{emaa-bib.bib}
 
 \begin{document}
 
@@ -74,9 +87,9 @@ As an important part of technological Minecraft, motion of entities has always b
 
 Sets of kinematic formulas for specific types of entities of interest like TNTs and terminologies like momentum were put into usage as early as middle 2010s and field experts like cannon designers had their own empirical and mathematical models on the topics they concerned at that time.
 
-However, a unified framework isn't formulated until July 2021 when lovexyn0827 released their 70k words dissertation, the first complete discussion on our topic ever publicly available, which extensively covers from fundamental theoretical grounding and complete kinematic formulas different update orders, to detailed analysis on a range of mechanisms and almost every negligible corner cases ever practically related. Despite its fundamental contribution to theorists, it is commonly considered "too hard to begin with" due to its complex monolithic theoretical framework, and its sheer tediousity is enough to scare readers off. Nevertheless, it marks a mew era of researches on motion of entities.
+However, a unified framework isn't formulated until July 2021 when lovexyn0827 released their 70k words dissertation\cite{2021}, the first complete discussion on our topic ever publicly available, which extensively covers from fundamental theoretical grounding and complete kinematic formulas different update orders, to detailed analysis on a range of mechanisms and almost every negligible corner cases ever practically related. Despite its fundamental contribution to theorists, it is commonly considered "too hard to begin with" due to its complex monolithic theoretical framework, and its sheer tediousity is enough to scare readers off. Nevertheless, it marks a mew era of researches on motion of entities.
 
-A newer book releases a few weeks ago by MCS\&E has adopted an axiomized approach to present mechanisms in a rigorous while pedagogically viable way. Asides from inheriting lovexyn0827's theoretical framework with radical optimization, it has employed its on educational strategies and introduced field analysis to its analytical toolkit to gain new a new insight by visualization and calculation. Well-structured and self-contained though, it lakes proper treatment to many topics like dimensionalities (a.k.a. units), collision detection, floating point errors and piston push, which is essential in engineering practices. Besides, it has ignored the discrete nature of Minecraft before diving to continuous approximations too deep, inspect of which its asymptotic analysis has contributed much to practices.
+A newer book \cite{MCSE} releases a few weeks ago by MCS\&E has adopted an axiomized approach to present mechanisms in a rigorous while pedagogically viable way. Asides from inheriting lovexyn0827's theoretical framework with radical optimization, it has employed its on educational strategies and introduced field analysis to its analytical toolkit to gain new a new insight by visualization and calculation. Well-structured and self-contained though, it lakes proper treatment to many topics like dimensionalities (a.k.a. units), collision detection, floating point errors and piston push, which is essential in engineering practices. Besides, it has ignored the discrete nature of Minecraft before diving to continuous approximations too deep, inspect of which its asymptotic analysis has contributed much to practices.
 
 Therefore, we are writing the book to suggest a complete and mathematical rigorous framework applicable to both continuous approximation and machinery reality. Our approach to kinematics is:
 
@@ -147,46 +160,594 @@ Asides from conventional Lemma, Theorm, etc., we've adopted a dedicated typesett
 
 \section{Logic}
 
+We are going to reintroduce basic grammars of mathematical logic informally, and we shall continue with this fashion in sections to come (for this chapter). For a more formal introduction with complete technological details, see \cite{GTM53-Ch1}. Most definitions is this chapter are not indexed to keep conciseness.
+
+Logical predicates are statements that is either true or false, that is, to have truth value $\true$ or $\false$. Logical predicates are closed if they have definite truth values.
+
+We shall adopt conventional logical operators. Let $p$, $q$ be logical predicates, $p\land q = \true$ iff both $p$ and $q$ is $\true$, $p\lor q = \true$ iff at least one of $p$ and $q$ is true, and $\neg p = \true$ iff $p = \false$, $p\implies q = \neg p \lor q$, $p \iff q = p\implies q \land q\land p$. We shall adopt conventional operator precedence, that is,  $\neg$ evaluates before $\land$, $\lor$, $\implies$ and $\iff$.
+
+For a given logical predicate $p$, $\forall xp$ is true iff $p = \true$ for all $x$'s; $\exists xp$ is true iff there is at least one $x$ such that $p$ is true.
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item Show that $(\neg\exists xp)\iff (\forall x\neg p)$ by proper examples.
+	\item Verify that following logical expressions are true
+	\begin{enumerate}
+		\item $p \lor \neg p$
+		\item $\neg(p \lor q) \iff \neg p \land \neg q$
+		\item $x\ne x \implies x = y$
+	\end{enumerate}
+	\item Translate that $f$ is a continuous and strictly increasing real values function on $\mathbb R$ into an logical expression.
+	\item Translate that for all $x\in S$, there is a unique $y\in T$ such that $x\sim y$ into an logical expression.
+\end{enumerate}
+
 \section{Set Theory}
 
+We shall adopt Zermelo-Fraenkel axioms for set theories with the Axiom of Choice, and the convention that all mathematical objects are exactly all sets shall be conformed.
+
+As a informal restatement, ZFC axioms specifies sets as follows:
+
+\begin{enumerate}
+	\item There is an empty set $\emptyset$ such that $\forall x(x\notin \emptyset)$.
+	\item Two sets (mathematical objects) are equal iff they contain exactly the same members: $a = b \iff (\forall x(x\in a \iff x\in b))$.
+	\item Given any pair of mathematical objects, say $x$ and $y$, there is a set $\{x, y\}$ containing exactly such objects.
+	\item Given a set $S$ of sets, there is a set $\cup S$ containing exactly all objects that is contained by some members of $S$: $\forall (x \in \cup S \iff \exists y (y\in S \land x\in y))$.
+	\item Given any set $S$, there is a set $2^S = \{x: x\subset S\}$ of all subsets of $S$.
+	\item Given a set $S$ and a logical predicate $p$, there is a set $\{x: x\in S \land p(x)\}$.
+	\item Any non-empty set $S$ has a member $x$ disjoint with $S$, that is, $x\cap S = \emptyset$, for regularity.
+	\item There is a set $y$ of countably infinite members: $\exists y(\emptyset \in y \land (x\in y \implies \{x\} \in y))$
+	\item Given a set of disjoint nonempty sets, there is a set containing exactly one member in each disjoint set.
+\end{enumerate}
+
+Note that there are collections of objects which is not sets, which is called $proper classes$, see Exercise \ref{exe:sets-or-pc}. Strictly speaking, proper classes are not valid mathematical objects. It worth a restatement that mathematical objects are exactly sets, and the two terms can thus be used interchangeably, only with intuitive difference that mathematical objects are arbitrary things (perhaps conceptually atomic points) and sets are collections of other elements.
+
+Set operations, i.e. $\cup$, $\cap$, $-$ (minus), $\bigcup_{i \in I}$, , $\bigcap_{i \in I}$, are defined as in the convention.
+
+Given two mathematical objects $x$ and $y$, $\left<x, y\right> = \{\{x\}, \{x, y\}\}$ are ordered pairs with left component $x$ and right component $y$. Given two sets $A$ and $B$, the Cartesian product of them is the denoted $A\times B = \{\left<a, b\right>: a\in A\land b\in B\}$. Subsets of $A\times B$ are binary relations on $A$ and $B$.
+
+Given a binary relation on $A$ and $B$, if $\left<x, y\right>\in R$, $x$ and $y$ are said to conform $R$, which is denoted $xRy$.
+
+Function are binary relations such that left components are different for different ordered pairs contained, that is, for all functions $f$, $xfy \land zfw \implies x = z$. The set of all functions from $A$ to $B$ are denoted $B^A = \{f: f\subset A\times B \land(xfy \land zfw\implies x = z)\}$. 
+
+Given a function $f \in B^A$ and $x\in A$, the image of $x$ under $f$ is theunique $y$ such that $xfy$, namely $f(x)$. Function $f$ are denoted $x\mapsto f(x)(x\in A)$ (e.g. $x\to x^2(x\in\mathbb R)$, where $(x\in \mathbb R)$ etc. can be omitted if clear from the context) if the name is irrelevant or $f: A\to B$ if the domain $A$ and (an enclosure of) range $B$ (instead of specific mapping rules) are to emphasis. Likewise, for any $X\subset A$, $f(X) = \{y:y = f(x)\land x\in S\}$ is the image of $S$ under $f$. The domain $A$ is denoted $\operatorname{dom} f$, and the range of $f$ is $\operatorname{im} f = f(A) \subset B$. If $A'\subset A$, $f_{A'} = \left\{\left<x, y\right>: x\in A'\land y = f(x)\right\}$ is called $f$ restricted to $A'$.
+
+Natural examples of functions are:
+
+\begin{enumerate}
+	\item $I_A: x\mapsto x~(x\in A)$
+	\item $\mathbb 1_{A, B}: x\mapsto \begin{cases}
+		1 & x\in A\\
+		0 & x\in B - A
+	\end{cases}$, where $B$ can be omitted when irrelevant
+\end{enumerate}
+
+A function $f: A\to B$ is surjective if $f(A) = B$, is injective if $f(a)  = f(b) \iff a = b$ for all $a, b \in A$, and is bijective if it is both surjective and injective.
+
+Given functions $f: A\to B$ and $g: B\to C$, $f\circ g = \{\left<x, y\right>: \exists x\exists y\exists z(y = f(x) \land z = f(y))\}$ denotes the function such that for all $x\in A$, $(f\circ g)(x) = g(f(x))$. We are adopting such a left composition notation so that the order in which operators applies is consistent with the left-to-right lexual order in witch they are printed. For repeated composition and inversion, notations like $f^{n}$, $f^{-n}$, etc. are defined as conventionally expected.
+
+Two sets $A$ and $B$ are equipotent iff there is a bijective function $f: A\to B$, that is, especially intuitive for finite sets, two sets have the same number of members. Equipotent sets share the same cardinal, and for a set $A$, $|A|$ is its (unique) cardinal. Cardinals can be thought of as an "extension" of natural numbers: for finite sets, $|A|$ is the number of (distinct) members in $A$; and for infinite sets, more subtle notations are uses for cardinals, such as $\aleph_0$ for the cardinal of the set of all integers and possibly $\aleph_1$ for all real numbers. A set $A$ is countable iff $|A|\le \aleph_0$, or finite if $|A|<\aleph_0$, where the meaning of comparison is obvious for qualified theorists. 
+
+A equivalence relation on set $S$ is a subset $E$ of $S\times S$ such that
+
+\begin{enumerate}
+	\item $\forall x(x\in S\implies \left<x, x\right>\in E)$
+	\item $\forall x\forall y(\left<x, y\right>\in E\implies \left<y, x\right>\in E)$
+	\item $\forall x\forall y \forall z(\left<x, y\right>\in E\land\left<y, z\right>\in E\implies \left<x, z\right>\in E)$
+\end{enumerate}
+
+For any $x\in A$, $\overline{x} = \{y: xSy\} = \{y: ySx\}$ is the equivalence class containing $x$. A partition of set $A$ is a set of disjoint sets $\{A_i\}_{i\in I}$ (indexed by set $I$), such that $A_i\cap A_j \ne \emptyset \iff i = j$ and $\cup(\{A_i\}_{i\in I}) = A$. The set $A/S = \{\overline{x}: x\in A\}$ is a partition of $A$ is called the equivalence classes in $A$, or the quotient set of $A$ and $S$.
+
+A partial order relation on set $S$ is a subset $P$ of $S\times S$ such that
+
+\begin{enumerate}
+	\item $\forall x(x\in S\implies \left<x, x\right>\in P)$
+	\item $\forall x\forall y(\left<x, y\right>\in P\implies (\left<y, x\right>\in P\iff x = y))$
+	\item $\forall x\forall y \forall z(\left<x, y\right>\in P\land\left<y, z\right>\in P\implies \left<x, z\right>\in P)$
+\end{enumerate}
+
+A set $S$ is partially ordered under $P$ if $P$ is a partial order relation on $S$, and then pair $\left<S, P\right>$ is a partially ordered set; in particular, if $P$ is a linear order relation, then $S$ is linearly ordered under $P$ and $\left<S, P\right>$ is a linearly ordered set. 
+
+Given two partially ordered sets $\left<S, P\right>$ and $\left<S', P'\right>$, a isomorphism is a bijective function $f: S\to S'$ such that
+
+\begin{equation*}
+	xPy \iff f(x)P'f(y)
+\end{equation*}
+
+$\left<S, P\right>$ and $\left<S', P'\right>$ are isomorphic (written $\left<S, P\right> \cong \left<S', P'\right>$) if such isomorphism exists.
+
+Followings are the sets which are used throughout the book:
+
+\begin{enumerate}
+	\item $\mathbb N = \{0, 1, 2, \dots\}$ of all natural numbers. Technically, one may have $0 = \emptyset$, and $x + 1 = x\cup\{x\}$ for $x\ge 0$. $\overline{\mathbb N} =\mathbb Q\cup\{+\infty\}$ and $\mathbb N_+ = \mathbb N - \{0\}$ is defined for convenience.
+	\item $\mathbb Z$ of all integers, $\overline{\mathbb Z} =\mathbb Z\cup\{-\infty, +\infty\}$, and $\mathbb Z_n$ for integer $i$'s such that $0\le i< n$.
+	\item $\mathbb Q$ of all rationals numbers, $\overline{\mathbb Q} =\mathbb Q\cup\{+\infty\}$.
+	\item $\mathbb R$ of all real numbers, $\overline{\mathbb R} =\mathbb R\cup\{-\infty, +\infty\}$.
+\end{enumerate}
+
+Ordering and arithmetic on numeric sets are defined naturally; for undefined arithmetical operations such as $+\infty - (+\infty)$ and $+\infty\times 0$, we simply define them as 0 for definitity since we are not going to handle such expressions at all.
+
+\begin{definition}
+	The product of a set $\{A_i\}_{i\in I}$ of sets indexed by $I$ is the set of all function $f$'s from $I$ to $\cup\{A_i\}_{i\in I}$ such that $f(i)\in A_i$, denoted $\prod_{i\in I} A_i$.
+
+	If $I = \mathbb Z_k$, alternative notation $\prod_{i=0}^{k - 1} A_k = \prod_{i\in Z_k} A_i$ is used, likewise $\prod_{i = 0}^{\infty} = \prod_{i\in\mathbb N} A_i$.
+\end{definition}
+
+\begin{definition}
+	Given a finite set $\{A_i\}_{i\in \mathbb Z_k}$ of sets, the canonical representation of $A_0\times \cdots \times A_{k - 1}$ is $\prod_{i\in \mathbb Z_k} A_i$, which is well defined despite the potential ambiguity of association between operator $\times$'s.
+\end{definition}
+
+We shall abuse the notation slightly to pretend that $\left<x_0, x_1\right> = i\mapsto x_i$ in following chapters, since the previous definition that $\left<x, y\right> = \{\{x\}, \{x, y\}\}$ is now useless after defining functions. 
+
+For canonical representations of pairs with pairs inside (e.g. $\left<\left<a, \left<b, c\right>\right>, \left<d, e\right>\right>$), it's tempting to sketch a binary tree for its structure, and define a representation with a inorder traversal sequence. This approach will however result in something not well-defined, since some $A_k$'s may itself be a set of pairs and one may mistake to expand pairs from $A_k$'s which should have been seen atomic, while keeping other pairs unextracted, when sketching their trees. For this, reason, it is essentially impossible to define such a concept, therefore, we shall redefine $A_0\times \cdots \times A_{k - 1}$ as their canonical representation henceforth to avoid specifying how to parse nested pairs inside into "trees" - since $\prod_{i\in \mathbb Z_k} A_i$ contains only structureless functions that is easy and clean to handle. Such a philosophy that "everything is a function" will continue in following chapters and prove beneficial.
+
+Finally, ones must note that notations (languages) are not a part of theoretic frameworks - instead, they are simply tools for ones to typeset statements on papers, conveniently, clearly and (almost) unambiguously. Therefore, redefining them or even defining them with slight ambiguity is acceptable, as long as readers are able to decode such notations with the assistance from intuition in parsing and proper clarifications by authors. Nevertheless, successful publishments are required to define an elegant set of notations to prohibit the possibility for intended readers to misunderstand the main bulk of the theory framework.
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item \label{exe:sets-or-pc} Show or disprove that following collections are sets / proper classes.
+	\begin{enumerate}
+		\item $A\cup B$, where both $A$ and $B$ are sets.
+		\item The collection of all sets.
+		\item The collection of all finite sets.
+		\item $A$ such that $\emptyset \in A \land \forall x(x\in A\implies x\cup\{\{x\}\}\in A)$.
+		\item The collection of all cardinals.
+	\end{enumerate}
+	\item Show or disprove following properties of the Cartesian product operator.
+	\begin{enumerate}
+		\item There is a set $I$ such that $A\times I = I\times A = A$ for all sets $A$.
+		\item For any two sets $A$, $B$, $A\times B$ is indeed a set.
+		\item For any three sets $A$, $B$ and $C$, $A\times (B\times C) = (A\times B) \times C$.
+	\end{enumerate}
+	\item Show that for finite $A$ and $B$
+	\begin{enumerate}
+		\item $|A\times B| = |A||B|$
+		\item $\left|A^B\right| = |A|^{|B|}$
+	\end{enumerate}
+	\item Show or disprove that
+	\begin{enumerate}
+		\item $|\mathbb N| = |\mathbb Z|$
+		\item $|\mathbb N\times \mathbb N| = |\mathbb N|$
+		\item For infinite set $S$, $|S\times S| = |S|$
+		\item $|\{S: S\subset \mathbb N\land |S| = \mathbb N\}| = |\mathbb N|$
+	\end{enumerate}
+	\item State the definition of relation operator $\le$ and $\ge$ for cardinals.
+	\item Show that all countable sets are linearly ordered under some binary relations.
+\end{enumerate}
+
 \section{Lists and Tuples}
+
+\begin{definition}
+	Members of $A^n = \prod_{i=1}^n A$ with $n\in \mathcal N$ or $n=\infty$ are $n$-tuples / $n$-lists on $A$.
+	
+	If $T$ is a $n$-tuple or $n$-list, it is said to have length $n$.
+	
+	Members of $A^n = \prod_{i=1}^\infty A$ with $\in \mathcal N$ are $\infty$-tuples / $\infty$-lists / sequences on $A$.
+\end{definition}
 
 \begin{remark}
 	Lists and tuples are essentially the same type of mathematical objects, and ones are allowed to use the notations interchangeably. Different names are introduced to emphasize the intuition that tuples have predefined lengths while components of lists tend to share same type.
 \end{remark}
 
 \begin{definition}
-	The $k$-th component of a list / vector $L$ is denoted $L[k]$.
+	The length of a list / tuple $L$ is denoted $|L|$.
+\end{definition}
+
+\begin{remark}
+	Verify that lengths of lists / tuples are well-defined.
+\end{remark}
+
+\begin{definition}
+	The $k$-th component of a list / tuple $L$ is denoted $L[k] = L(k - 1)$.
+\end{definition}
+
+\begin{remark}
+	Therefore, list / tuples $L$ can be denotes by $\left<L[1], \dots, L[|k|]\right>$
+	
+	If a function $f$ takes a tuple $\left<x_1, \dots, x_n\right>$ as the only argument, $f(\left<x_1, \dots, x_n\right>)$ is also denoted $f(x_1, \dots, x_n)$ for simplicity.
+\end{remark}
+
+\begin{definition}
+	The sublist / subtuple of a list / tuple $L$ consisting of $L$'s $p$-th, $(p + 1)$-th, $\dots$, $q$-th component is denoted $L[p:q] = L|_{\{k: k\in \mathbb Z\land p \le k \le q\}}$.
 \end{definition}
 
 \begin{definition}
-	The sublist / subvector of a list / vector $L$ consisting of $L$'s $p$-th, $(p + 1)$-th, $\dots$, $q$-th component is denoted $L[p:q]$.
+	The concatenation of a finite sequence of lists / tuple $L_1, \dots, L_k$ is denoted
+	
+	\begin{equation*}
+		\operatorname{Concat}(L_1, \dots, L_k) = \begin{cases}
+			L_k[k - S_{k - 1}] & S_{k - 1}< k \le S_{k}
+		\end{cases}
+	\end{equation*}
+	
+	Where $S_k = \sum_{i = 1}^{k} |L_i|$.
 \end{definition}
 
-
-\begin{definition}
-	The length of a list / vector $L$ is denoted $|L|$.
-\end{definition}
-
-\begin{definition}
-	The concatenation of a finite sequence of lists / vectors $L_1, \dots, L_k$ is denoted $\operatorname{concat}(L_1, \dots, L_k)$.
-\end{definition}
-
-\begin{definition}
-	Given a list $L$, set $\bigcup_{k = 1}^{|L|} \{L[k]\}$ shares the same notation as $L$.
-\end{definition}
+\begin{remark}
+	What advanced mathematics does is to protect ourselves against raw intuition which would lead to concepts hard to handle, or even wrong. For instance, it's trivially easy for one to understand how to list all natural numbers, possibly to pick an optimal one; however, with the scope changed to all smooth functions or random variables in a experiment, doing so gets non-trivially hard since ones are totally ignorant in how exactly such scopes are. Then, advanced but clear Hilbert spaces and axiomized probability theories will com to rescue, allowing ones to represent various functions with infinite-dimensional vectors and random stuff with deterministic functions on the outcome space assigned a probability measure, which are less intuitive at the first glance but clearer to manipulate logically with proper formalization.
+	
+	While formalized frameworks have transformed enormous intellectual struggling to mere deductions and calculations, it may fail to encompass all phenomenons under (current or future) interest, leading to results that is inconsistent with the reality or leaving (formalizable) truths nondeductible at all. Such frameworks could hardly be avoided, but qualified theorists are supposed to guard against them and try their best to make their ones workable in concerned topics nevertheless.
+\end{remark}
 
 \subsection*{Exercises}
 
 Too easy to assign exercises.
 
-\section{Algebra}
+\section{Algebra and Isomorphism}
+
+Finally we will conclude our brief review on set theory with a general definition for homomorphism:
+
+\begin{definition}\label{def:closed-system-hom}
+	A simple system is a tuple $\left<S, O, R\right>$, where $S$ is a set, $O \subset \cup_{k\in \mathbb N_+} S^{(S^k)}$ is a set of operators, and $R\subset \cup_{k\in \mathbb N_+} \{\true, \false\}^{(S^k)}$ a set of relations.
+	
+	Tuple $\left<f, o, r\right>$ is a homomorphism from $\left<S, O, R\right>$ to $\left<S', O', R'\right>$ if $f: S\to S'$, $o: O\to O'$, $r: R\to r'$, $o, r$ are bijective, and for all $k\in \mathbb N_+$, all $\left<x_1, \dots, x_k\right>\in S^k$, all $\phi \in O$ and all $p\in R$ followings are true
+	
+	\begin{enumerate}
+		\item $\phi\in S^{(S^k)}\iff o(\phi)\in S'^{(S'^k)}$
+		\item $p\in \{\true, \false\}^{(S^k)} \iff o(p)\in \{\true, \false\}^{(S'^k)}$
+		\item $\phi\in S^{(S^k)}\implies f(\phi(x_1, \dots, x_k)) = (o(\phi))(f(x_1), \dots, f(x_k))$
+		\item $p\in \{\true, \false\}^{(S^k)}\implies (p(x_1, \dots, x_k) \iff (r(p))(f(x_1), \dots, f(x_k)))$
+	\end{enumerate}
+	
+	A homomorphism $\left<f, o ,r\right>$ is an epimorphism [resp. monomorphism, isomorphism] iff $f$ is surjective [resp. injective, bijective]. If $o, r$ is clear from the context, such homomorphism can be denoted $f$ for simplicity.
+	
+	Two closed systems $S, T$ are isomorphic to each other (under $\left<f, o, r\right>$), notably $S\cong T$, iff there is a isomorphism between them.
+\end{definition}
+
+\begin{remark}
+	This is a generalization of homomorphism between common algebraic structures, and partially ordered sets, and readers can redefine isomorphisms between directed graphs with concepts above, for an exercise.
+	
+	A system is simple since only a single user-defined set $S$ is involved ($\{\true, \false\}$ is as natural as $\emptyset$ and thus not taken into account). However, it is this simplicity that prohibits us from modeling weighted graphs, Markov chains with transition probabilities and FSMs which will introduce more structured sets and then violate the closure (with respect to $S$). (One may propose that if relations / functions are themselves named ,as weights for instance so that weighted graphs are modeled. This approach, however, leaves structures of weights omitted). 
+	
+	Defining more complex systems will require us to handle nested homomorphisms and interdependence of different (sub)systems which is almost out of the scope of this chapter. Nevertheless, let's have a glance on the outline:
+\end{remark}
+
+\begin{definition}
+	A closed system is a tuple $\left<\mathcal M, \Hom\right>$, where $\mathcal M$ is a set of sets and $\Hom$ is a function $\mathcal M^2\to \bigcup_{A, B \in \mathcal M} 2^{\left(B^A\right)}$ such that for all $A, B, C \in \mathcal M$:
+	
+	\begin{enumerate}
+		\item $\Hom(A, B)\subset B^A$
+		\item $f\in \Hom(A, B)\land g\in \Hom(B, C) \implies g\circ f\in \Hom(A, C)$
+		\item $1_A\in \Hom(A, A)$
+		\item For all $L\in \mathcal M^{\mathbb N}$ and all $n\in\mathbb \overline{\mathbb N}$, $\prod_{i=0}^{n} L(i) \in \mathcal M$
+		\item For all $L\in \mathcal M^{\mathbb N}$, all $n\in\mathbb \overline{\mathbb N}$, all $B\in \mathcal M$, and all $\left<f_1, \dots, f_n\right>$ where $f_i\in \prod_{i=0}^{n} \Hom(L(i), B)$ for all $1\le i\le n$, there is a unique $f\in \Hom(\prod_{i=0}^{n} L(i), B)$ such that for $f\circ(L\mapsto L[i]) = f_i$ holds for all $1\le i\le n$.
+	\end{enumerate}
+	
+	Closed system $\left<\mathcal M, \Hom\right>$ is said to be generated by set $S$ and $\Hom_0$ if $\mathcal M$ is the minimal (with respect to set inclusion) superset of $S$ and $\Hom$ is the one such that $\Hom(A, B)\supset \Hom_0(A, B)$ and is minimal for all $A, B\in\mathbb M$.
+	
+	Given two closed systems $\mathscr M = \left<\mathcal M, \Hom_{\mathcal M}\right>$, $\mathscr N = \left<\mathcal N, \Hom_{\mathcal N}\right>$, $\left<f, g, \alpha\right>$ is a homomorphism from $\mathscr M$ to $\mathscr N$ iff followings are true
+	
+	\begin{enumerate}
+		\item $f: \mathcal M\to \mathcal N$
+		\item $g: \mathcal M^2\to \bigcup_{A, B\in \mathcal M} \Hom_{\mathcal N}(f(A), f(B))^{\Hom_{\mathcal M}(A, B)}$
+		\item For all $A, B\in \mathcal M$, $g(A, B): \Hom_{\mathcal M}(A, B) \to \Hom_{\mathcal N}\left(f(A), f(B)\right)$
+		\item $\alpha: \mathcal M\to \bigcup_{A\in\mathcal M} f(A)$
+		\item For all $A$, $\alpha(A): A\to f(A)$
+		\item For all $\varphi\in \Hom_{\mathcal M}(A, B)$, $\alpha(A)\circ (g(A, B))(\varphi) = \varphi\circ \alpha(B)$
+	\end{enumerate}
+	
+	$\mathscr M$, $\mathscr N$ is isomorphic to each other, denoted $\mathscr M\cong \mathscr N$, if $f$ is bijective and for all $A, B\in\mathcal M$, $g(A, B)$'s and $\alpha(A)$'s are bijective.
+\end{definition}
+
+\begin{remark}
+	A closed system is a model for a few sets for different scopes / data types along with some relations that "matters". Such seemingly complicated can be informally rephrased as follows:
+	
+	\begin{enumerate}
+		\item The notation $\Hom$ is natural and intuitive to some extent.
+		\item Sequential operations (denoted by composed functions) are allowed.
+		\item Identities that keeps everything unchanged are trivially included - so that modeling stability and equivalence (between sequences of operators) is possible.
+		\item Composed types denoted by Cartesian products are allowed so that binary operations, etc. are supported by default. Types more complex than tuple-likes (e.g. functions, unions, subsets) can also be included if one wish to.
+		\item It is possible to handle composed types per-component.
+	\end{enumerate}
+	
+	One will find the definition clear and natural with an exercise to model some computer programs you interest. (Such an exercise is not listed and it is up to the readers to teach themselves.)
+	
+	A homomorphism consists of three parts, that is, a $f$ to map scopes to scopes (in another possibly more simply system), a $g$ to map relations to relations, and a $\alpha$ to map concrete objects to objects. A series of conditions are imposed on homomorphisms, with most of which merely for regularity and only the last of which being an essential requirement. Readers familiar with commutative graphs may perfer the representation for $\alpha(A)\circ (g(A, B))(\varphi) = \varphi\circ \alpha(B)$ below:
+	
+	\begin{center}
+		\begin{tikzcd}
+			f(A) \arrow[r, "g(\varphi)"]& f(B)\\
+			A\arrow[u, "\alpha(A)"] \arrow[r, "\varphi"] & B \arrow[u, "\alpha(B)"]
+		\end{tikzcd}
+	\end{center}
+	
+	Which is commutative. We shall use such graphs sometimes in the future for auxiliary ways to dented equivalence of composed functions for experts.
+\end{remark}
+
+\begin{remark}
+	Readers with categorical backgrounds may have recognized that a closed system is essentially an concrete category, or an isomorphic fake at least. However, we are not going to introduce real categories to prevent their overwhelming abstraction from scaring innocent readers off. (Introducing genuine categories as well as existing theories built upon is fine, but useless, since we are only dealing with a few specialized instances of general categories with could be modeled with a simpler definition - meanwhile, such introduction will inevitably lead us to the hell with commutative graphs, (co)products and covariant functors, which are likely beyond the knowledge-base of most first-year graduate students.) 
+	
+	This concept is not used until chapters later, when we are going to discuss equivalence of a standard ticking system with simplified / regulated / abstracted versions.
+	
+	By the way, it leads us to an alternative definition of simple systems based upon closed ones and generic models of FSMs, etc., which the readers can give an attempt to formulate. 
+	
+	Open systems are almost non-processable due to unknown or hard-to-define external environments. Actually, open systems are almost always handled as closures of them and what theorists are doing is to simply pretend that some engineer-accessible parts of such closures are the entire scope.
+\end{remark}
+
+\begin{definition}
+	A $n$-ary operator on set $S$ is a function $f: S^n\to S$. For binary (2-ary) operator $\cdot$ on $S$, for all $x, y\in S$, $x\cdot y$ denotes $\cdot(x, y)$.
+	
+	A general algebraic structure on set $S$ is a simple system $\left<S, O, \emptyset\right>$ where $O$ is a set of $n$-ary operators. Algebraic structure $\left<S, O, \emptyset\right>$ may also be denoted by its characterizing tuple $\left<S, O\right>$.
+	
+	An algebraic structure on set $S$ is a tuple $\left<S, O\right>$ where $O$ is a set of $2$-ary operators.
+	
+	A substructure of $\left<S, O\right>$ is an algebraic structure $\left<S', O'\right>$ with $S'\subset S$ and $\forall *\in O$, there is $*' = *|_{S'}\in O'$.
+\end{definition}
+
+\begin{remark}
+	The alternative notation for images of binary operators will not cause any confusion, since we won't handle boolean algebras where regarding $\cdot$ as a binary relation and a binary operator is both semantically valid.
+	
+	Subgroups, etc. are defined as substructures.
+\end{remark}
+
+\begin{definition}
+	An algebraic structure $\left<S, \{\cdot\}\right>$ is a group if:
+	\begin{enumerate}
+		\item $\forall\left<x,y,z\right>(x, y, z\in S\implies x\cdot (y\cdot z) = (x\cdot y)\cdot z)$
+		\item $\forall x (x\in S\implies\exists e(e\in S\land e\cdot x = x\cdot e = x))$ ($e$ is called the identity of the group and is unique as one can verify)
+		\item $\forall x\left(x\in S\implies \exists x^{-1}(x^{-1}\in S\land x\cdot x^{-1} = x^{-1}\cdot x = e)\right)$ where $e$ is as in 2.
+	\end{enumerate}
+	For convenience, $\left<S, \{\cdot\}\right>$ is also denoted $\left<S, \cdot\right>$ or $S$ if it will cause no confusion. 
+	
+	In particular, $\left<S, \{\cdot\}\right>$ is abelian iff $\forall x\forall y(x, y\in S\implies x\cdot y = y\cdot x)$.
+\end{definition}
+
+\begin{definition}
+	Given groups $\left<S, *\right>$ and $\left<T, \cdot\right>$, function $f: G\to H$ is a homomorphism iff for all $x, y\in S$, $f(x)\cdot f(y) = x*y$. A homomorphism $f$ is a epimorphism [resp. monomorphism, isomorphism] iff $f$ is surjective [resp. injective, bijective]. Two groups are isomorphic iff there is a isomorphism between them.
+	
+	Let $e_T$ denote the identity in group $T$, the kernel of $f$ in $G$ is denoted $\ker f = f^{-1}(e_T)$.
+\end{definition}
+
+\begin{remark}
+	This is a restatement of Definition \ref{def:closed-system-hom} as one can verify. The same applies for rings and modules.
+\end{remark}
+
+\begin{definition}
+	Let $\left<G, \cdot\right>$ be a group, and $H$ a subgroup of $G$, $H$ is normal in $G$ iff $\{g \cdot h\cdot g^{-1}: g\in G\land h\in H\}\subset H$. 
+	
+	A left [resp. right] coset of $H$ in $G$ at $a\in H$ is $aH\{a\cdot h: h\in H\}$ [resp. $Ha = \{h\cdot a: h\in H\}$].
+	
+	The quotient group of $G$ and $H$ normal in $G$ is a group $\left<G / H, \cdot'\right>$ such that $G / H = {aH: a\in G}$ is the set of all left cosets of $H$ in $G$ and $aH\cdot' bH = (a\cdot b)H$ for all $a, b \in G$.
+\end{definition}
+
+\begin{definition}
+	The definition above requires a series of lemmas to justify, but we are not explicitly reference any of them as they are out of the scope.
+\end{definition}
+
+\begin{theorem}
+	Given a homomorphism $G\to H$ between groups, $\ker f$ is normal in $G$ and furthermore $G / \ker f\cong \im f$, where $\ker f$ and $\im f$ are subgroups of $G$.
+\end{theorem}
+
+\begin{definition}
+	An algebraic structure $\left<S, \{+, \cdot\}\right>$ is a ring if:
+	
+	\begin{enumerate}
+		\item $\left<S, +\right>$ is a abelian group
+		\item $\forall \left<x, y, x\right>(x, y, z\in S) \implies (x + y) \cdot z = x\cdot z + y\cdot z$
+		\item $\forall \left<x, y, x\right>(x, y, z\in S) \implies x\cdot (x + y) = z\cdot x + z\cdot y$
+		\item $\exists 1(1\in S\land \forall x(x\in S\implies 1\cdot x = x\cdot 1 = x))$
+	\end{enumerate}
+	
+	Where $0$ is the additive identity and $1$ is the multiplicative identity of $\left<S, \{+, \cdot\}\right>$.
+	
+	A ring is commutative iff $\forall x\forall y(x, y\in S\implies x\cdot y = y\cdot x)$, is a integral domain iff $\forall x\forall y(x, y\in S\implies (x\cdot y = 0\implies x = 0\lor y = 0))$ where $0$ is the identity of $\left<S, +\right>$, is a division ring iff $\left<S - \{0\}, \{+, \cdot\}\right>$ is a group, and is a field iff it is a commutative division ring.
+	
+	Likewise, one can denote $\left<S, \{+, \cdot\}\right>$ with $\left<S, +, \cdot\right>$ or $S$ for convenience as long as no confusion will result.
+\end{definition}
+
+\begin{remark}
+	$+$ and $\cdot$ is not distinguishable with notation $\left<S, \{+, \cdot\}\right>$, but $\left<S, +, \cdot\right>$ will clarify the ordering.
+\end{remark}
+
+\begin{definition}
+	Given rings $\left<S, \#, \&\right>$ and $\left<T, +, \cdot\right>$, function $f: G\to H$ is a homomorphism iff for all $x, y\in S$, $f(x)\cdot f(y) = x\& y$ and $f(x) + f(y) = x \# y$. Isomorphism, etc. are defined likewise.
+\end{definition}
+
+\begin{definition}
+	Given a ring $\left<R, +_R, \cdot\right>$, an abelian group $\left<M, +_M\right>$ is a $R$-module under scalar multiplication $f: R\times M \to M$ iff for all $r, s\in R$ and $u, v \in M$, followings are true
+	
+	\begin{enumerate}
+		\item $f(r, u +_M v) = f(r, u) +_M f(r, v)$
+		\item $f(r +_R s, u) = f(r, u) +_M f(s, u)$
+		\item $f(r\cdot s, u) = f(r, f(s, u))$
+	\end{enumerate}
+	
+	If $R$ is a division ring, $\left<M, +_M\right>$ is a $R$-vector space under $f$.
+\end{definition}
+
+\begin{remark}
+	It is clear that modules are generalizations for vector spaces if one denote $f(r, u)$ by $ru$. $+_R$ and $+_M$ will share the notation $+$ in following texts if no ambiguity will result.
+\end{remark}
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item Give an example for each of following: group, non-abelian group, commutable ring, field, non-commutative division ring, non-commutative integral field, $R$-module over a non-commutative ring.
+	\item List all subgroup of $\left<\mathbb Z_12, +_{12}\right>$, where $+_{12}: \left<x, y\right>\mapsto (x + y)\mod 12$.
+\end{enumerate}
 
 \section{Linear Algebra}
 
+\begin{definition}
+	Given a vector space $\left<V, +\right>$, a subset $S\subset V$, the subspace generated by $S$ is $\Span S = \cap\{U: U\subset V\land S\subset U\land U \text{ is a subspace of $V$}\}$.
+	
+	An vector space $V$ is finite dimensional if there is a finite set $S$ such that $\Span S = V$.
+	
+	Let $0_R$ denote the additive identity of ring $\left<R, +, \cdot\right>$, $0_V$ denote the identity of $R$-vector space $\left<V, +\right>$ with scalar multiplication $f$, a subset $S\in V$ is linearly independent iff for all $n\in \mathbb N_+$ and lists $C$ on $R$ and $L$ on $S$, both with length $n$, $f(C[1], L[1]) + \cdot + f(C[n], L[n]) = 0_V \iff C[1] = \cdot = C[n] = 0_R$. Any linearly independent set $S$ such that $\Span S = V$ is a basis of $V$, and the cardinal $|S|$ is the number of dimensions of $V$ when well-defined, denote $\dim V$.
+\end{definition}
+
+\begin{remark}
+	The definition, again, requires numerous lemmas to justify, but qualified readers should feel them intuitive.
+\end{remark}
+
+\begin{remark}
+	Definition for matrices, ranks, etc. are omitted for simplicity, what we shall define is following notations:
+	
+	\begin{enumerate}
+		\item $A^t$, for transposition
+		\item $A^*$, for adjoint operators
+		\item $A_{ij}$, for the element at the $i$-th row and $j$-th column of $A$. Note that the numbering of rows / columns starts from 1.
+		\item $A_{i\cdot}$, $A_{\cdot j}$ for the matrix consisting of elements from the $i$-th row / $j$-th column of $A$, with a corresponding shape.
+		\item $\rank{T}$ for the rank of object $T$. 
+	\end{enumerate}
+\end{remark}
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item Define $\mathbb R$-vector space $\mathbb R^d$ for $d\in \mathbb N_+$.
+	\item Show that subspaces of the same finite-dimensional vector spaces are isomorphic iff they have the same number of dimensions.
+	\item Define $\mathbb R$-vector space $\mathbb R^\{m, n\}$ for $m, n\in\mathbb N_+$.
+\end{enumerate}
+
 \section{Elementary Analysis}
 
+\begin{definition}
+	The set $\mathbb R$ of real numbers is an set equipotent with $2^{\mathbb N}$ and $\mathbb Q\subset R$. The closed system for real numbers is $\left<\mathbb R, \{+, \cdot\}, \{\le\}\right>$ such that
+	
+	\begin{enumerate}
+		\item $\left<\mathbb R, +, \cdot\right>$ is a field with additive identity $0$ and multiplicative identity $1$
+		\item $\left<\mathbb R, <\right>$ is linearly ordered
+		\item For all $x, y, z\in \mathbb R$, $x < y\implies x + z < y + z$
+		\item For all $x, y, z\in \mathbb R$, $x < y \land 0 < z\implies x\cdot z < y\cdot z$
+		\item For all $S\subset \mathbb R$, let $S' = \{x: x\in \mathbb R\land \forall y(y\in S\implies y \le x)\}$ be the set of upper bounds of $S$, then, there exist a unique minimal member $s = \sup S\in S'$ of $S'$ such that $\forall z(z\in S'\implies s \le z)$.
+	\end{enumerate} 
+\end{definition}
+
+\begin{remark}
+	We are not going to explicitly specify how to construct all real numbers, since the structure with respect to $+$, $\cdot$ and $<$ is unique and what real numbers are are transparent in analysis.
+	
+	Relation operators $<$, $>$ and $\ge$ are defined as the conventionally are.
+\end{remark}
+
+\begin{definition}
+	Let $a, b\in \mathbb R$, $[a, b] = \{x: a\le x\land x\le b\}$, $(a, b)$, $(a, b]$ and $[a, b)$ are finite intervals with length $|b - a|$.
+\end{definition}
+
+\begin{remark}
+	Intervals involving infinities are defined as how they conventionally are.
+\end{remark}
+
+\begin{definition}
+	Let $f$ be a function with $\dom f\in \mathbb R$, $f$ converges to  $l$ at $x_0$, denoted $f(x)\to l$ as $x\to x_0$ or $\lim_{x\to x_0} f(x) = l$, provided that $\forall \varepsilon(\epsilon \ge 0\implies\exists \delta\forall x(\delta > 0\land (|x - x_0|\le \delta\land x\in \dom f \implies |f(x) - l|<\varepsilon)))$.
+\end{definition}
+
+\begin{remark}
+	(Uniform) continuity, derivative, and limits involving infinity are defined as they conventionally are. Note that functions are continuous on $I$ iff $f(x)\to f(x_0)$ as $x\to x_0$ and $f$ is defined on $I$.
+\end{remark}
+
+\begin{definition}
+	Given interval $I$, $C^0I$ denotes the set of functions such that $f^{(n)}$, the $n$-th derivative of $f$, is continuous on $I$.
+\end{definition}
+
+\begin{remark}
+	Riemann integrals shall be defined.
+\end{remark}
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item State the definition of $\inf S$ for $S\in \mathbb R$.
+	\item Show or disprove that every differentiable functions on $\mathbb R$ are continuous / uniformly continuous of $\mathbb R$.
+	\item Show that for any function $f\in C^0[a, b]$ with $a, b\in \mathbb R$, $f([a, b])$ are finite intervals.
+\end{enumerate}
+
 \section{Probability Theory}
+
+\begin{definition}
+	A set $\mathcal S$ of sets is a $\sigma$-algebra on set $S$ iff
+	
+	\begin{enumerate}
+		\item $\mathcal S\subset 2^S$
+		\item $\emptyset \in \mathcal S$
+		\item For all $A \in \mathcal S$, $S - A \in \mathcal S$
+		\item For all sequences $\left<A_0, A_1, \dots\right>$ on $\mathcal S$, $\bigcup_{i\in\mathbb N} A_i\in \mathcal S$
+	\end{enumerate}
+	
+	A sigma generated by a set $P$ is the minimal (with respect to set inclusion) one containing $P$. The Borel sets on $\mathbb R^n$ denoted $\mathcal R_n$ is generated by all open sets in $\mathbb R^n$.
+	
+	A measurable space is a pair $\left<S, \mathcal S\right>$ with $\mathcal S$ being a $\sigma$-algebra on set $S$.
+	
+	$\mu$ is a measure on $\left<S, \mathcal S\right>$ (or on $S$ for simplicity) iff
+	
+	\begin{enumerate}
+		\item $\mu: \mathcal S\to [0, +\infty]$
+		\item $\mu(\emptyset) = 0$
+		\item For all sequences $\left<A_0, A_1, \dots\right>$ on $\mathcal S$, $\sum_{i\in\mathbb N}\mu(A_i) = \mu(\bigcup_{i\in\mathbb N} A_i)$
+	\end{enumerate}
+	
+	A function $S\to T$ is measureable with respect to $\left<S, \mathcal S\right>$ and $\left<T, \mathcal T\right>$ if for each $A\in \mathcal T$, $f^{-1}(A) \in \mathcal S$.
+\end{definition}
+
+\begin{remark}
+	Lebesgue integral $\int_A f(x)\mathrm{d}\mu$ shall be defined.
+\end{remark}
+
+\begin{definition}
+	A probability space is a tuple $\left<\Omega, \mathcal H, \mathbb P\right>$, such that
+	
+	\begin{enumerate}
+		\item $\left<\Omega, \mathcal H\right>$ is a measureable space;
+		\item $\mathbb P$ is a measure space on $\left<\Omega, \mathcal H\right>$;
+		\item $\mathbb P(\Omega) = 1$.
+	\end{enumerate}
+	
+	Members of $\Omega$ are call outcomes, and members of $\mathcal H$ are events. Two events are independent iff $\mathbb P(A\cap B) = \mathbb P(A) \mathbb P(B)$.
+\end{definition}
+
+\begin{remark}
+	Classical properties for the probability measure $\mathbb P$ like finite additivity are not restated.
+\end{remark}
+
+\begin{definition}
+	Given a probability space $\left<\Omega, \mathcal H, \mathbb P\right>$ and a measureable space $\left<S, \mathcal S\right>$, $X: \Omega \to S$ is a random variable.
+	
+	If $X: \Omega\to \mathbb R^d$, $F_X: \left<x_1, \dots, x_d\right> \to \mathbb P\{\omega: (X(\omega))[i] < x_i\}$ for $x_1, \\in \mathbb R$ is the cdf of $X$.	
+	
+	Random variables $X_1, \dots: \omega\to \mathbb R$ with cdf $F_{X_1}, \dots$ are independent iff $F_{\left<X_1, \dots\right>}(x_1, \dots) = F_{X_1}(x_2)\cdot F_{X_2}(x_2)\cdots$ for all $x, y\in \mathcal R$.
+	
+	Expectation of random variable $X$ is $\mathbb EX = \int_\Omega X(\omega) \mathbb P(\mathrm d\omega)$, variance of $X$ is $\Var X = \mathbb E(X - \mathcal E X)^2$.
+\end{definition}
+
+\begin{remark}
+	Note that $S$ could be virtually any set, like $\{0, 1\}$, $\{\true, \false\}$, $\mathbb R$, $\mathbb R^n$, or even $\mathbb R^{\mathbb R}$, which will be further exploited by the next definition
+\end{remark}
+
+\begin{definition}
+	Given a probability space $\left<\Omega, \mathcal H, \mathbb P\right>$, a measureable space $\left<S, \mathcal S\right>$, and a linearly ordered set $\left<\mathbb T, \le\right>$, a stochastic process with state space $S$ is a random variable $P: \Omega\to S^{\mathbb T}$.
+	
+	A stopping time with respect to $P$ is a random variable $T: \Omega\to \mathbb T$ such that for each $t\in \mathbb T$ there is a function $f: S^{\{u: u< t\}}\to \mathbb T$ such that $T(\omega) = f(u\to (X(\omega))(u))$.
+	
+	If $S$ is linearly ordered by $\leq$, $P$ is a submartingale [resp. supermartingale, martingale] iff for all stopping time $T\le U$, $(\mathbb EP)(t)\leq  (\mathbb EP)(u)$ [resp. $(\mathbb EP)(u)\leq  (\mathbb EP)(t)$, $(\mathbb EP)(t) =  (\mathbb EP)(u)$]
+\end{definition}
+
+\subsection*{Exercise}
+
+\begin{enumerate}
+	\item Construct a probability space for:
+	\begin{enumerate}
+		\item $n$ independent sequential Bernoulli experiments all with a probability $p$ of success. By the way, define a binomial random variable upon.
+		\item The process of picking balls (one by one) from a box with $x$ red balls, $y$ black balls and nothing else, until the box is emptied.
+		\item A standardized normal distribution (in $\mathbb R$ and $\mathbb R^2$) to be define upon.
+	\end{enumerate}
+	\item Define two non-constant stopping times in any of the probability spaces you have constructed, and then an martingale.
+	\item Show that given iid. $X_1, \dots, X_n$, with $\mathbb E X_1 = a$, for all $\varepsilon > 0$, 
+	\begin{equation*}
+		\lim_{n\to \infty} \mathbb P\left\{\left|\frac1n \sum_{i = 1}^n X_i - a\right|\le \mathcal \varepsilon\right\} = 1
+	\end{equation*}
+	\item State a version of the Central Limit Theorem and sketch a outline for the proof.
+	\item Show that Lebesgue integrals on finite closed interval $I$ exists for all functions that is continuous on $I$ except for countably many points.
+	\item Show that a stochastic $X$ is a Poisson (Google it if necessary!) if $X(t) - ct$ is a martingale.
+	\item Let $X$ be an real-valued stochastic process indexed by $\mathbb N$, let $\oplus: \left<x, y\right>\to \operatorname{round}(x + y)$ where $\operatorname{round}(x) = \begin{cases}
+		\lfloor x\rfloor & x - \lfloor x\rfloor \le 0.5\\
+		\lceil x\rceil & x - \lfloor x\rfloor > 0.5
+	\end{cases}$ be an binary operator, $S_k = X(0) \oplus X(1) \oplus \cdots \oplus X(k)$, $T_k = X(0) + X(1) + \cdots + X(k)$, 
+	\begin{enumerate}
+		\item Give examples of $X$ such that $S_k - T_k$ is an submartingale, supermartingale and matringale, then prove.
+		\item For one or two examples you have given, find a function $f: \mathbb N\to \mathbb R$ such that $(S_k - T_k)^2 / f(n)$ is an martingale. (Or give a proof of non-existence.)
+	\end{enumerate}
+\end{enumerate}
 
 \section{Floating Point Numbers}
 
@@ -1185,7 +1746,7 @@ Deferred into the next section.
 	Given a update step generator $\mathcal G$, a micro-time $\tau$ and function $\mu$ with domain $\mathcal M$, the tick generator \defbf{induced tick generator}[induced] by $\mathcal G$ with \defbf{tick start point} $\tau$ module $\mu$ is
 	
 	\begin{equation*}
-		(w, I) \mapsto \operatorname{Concat}\left(\lim_{k\to \infty} L_k, (\left<w, t\right> \mapsto w)\right)
+		(w, I) \mapsto \operatorname{Concat}\left(\lim_{k\to \infty} L_k, (\left<w, t\right> \mapsto w)\right)===
 	\end{equation*}
 	
 	Where
@@ -1401,6 +1962,30 @@ Deferred into the next section.
 
 \section{JVM World Spaces}
 
+\begin{definition}
+	A \defbf{JVM name} is a string.
+	
+	A \defbf{field ID} is a tuple $\left<N, T, M\right>$, where $N$ (the name) and $T$ (the type) are all JVM names, and $M$ is a set of field modifiers  which is not explicitly defined.
+	
+	A \defbf{method ID} is a tuple $\left<N, R, P, M\right>$, where $N$ (the name), $R$ (the returned type) are JVM names, $P$ (the parameter types) is a list of JVM names, and $M$ is a set of field modifiers.
+	
+	A \defbf{class} is a tuple $\left<N, P, I, F, M\right>$, where $N$ (the name) and $P$ (the parent class) are JVM names, $I$ (implemented interfaces) is a list of JVM names, $F$ (fields) is a set of field IDs, and $M$ (methods) is a set of method IDs.
+
+	A \defbf{object} is a tuple $\left<i, C, f\right>$, where $i$ (the identity) is an integer, $C$ is a class and $f$ is a function from fields IDs in $C$ to identities of objects. Object $\left<i, C, f\right>$ is said to be of class $C$ (or of class $N$ if $C = \left<N, P, I, F, M\right>$).
+	
+	A \defbf{JVM stack} is a computer state.
+	
+	A \defbf{thread state} is a tuple $\left<N, T, S\right>$ where $N$ (the name) is a JVM name, $T$ (the underlying object) is a object of class \texttt{java.lang.Thread}, and $S$ is a JVM stack.
+	
+	A \defbf{method definition} is a tuple $\left<I, C\right>$ where $I$ is a method ID and $C$ is a list of JVM instructions which is not explicitly defined.
+	
+	A \defbf{JVM state} is a tuples $\left<H, C, M, T\right>$, where $H$ (the heap) is a set of objects, $C$ is a set of classes, $M$ is a set of method definitions, and $T$ is a set of thread states.
+\end{definition}
+
+\begin{remark}
+	We will left irrelevant technical details omitted since it is simply a rephrasing of \cite{JVMS}. Qualified readers should have the ability to complete all omitted definitions and all regular conditions, at needs, referencing \cite{JVMS}. 
+\end{remark}
+
 % ============================ The End Of Section ============================
 
 \section{The Minecraft World}
@@ -1515,6 +2100,12 @@ Deferred into the next section.
 \begin{enumerate}
 	\item Finish this section on your own.
 \end{enumerate}
+
+\begin{remark}
+	Characterization of Minecraft tick specifier and kinematic spaces under our methodology, although seemingly rigorous and flawless, has their own inconsistencies with raw reality, thus working only under some regularity conditions stated below - and failing otherwise.
+	
+	It is fine that case. FTC requires existence of derivative, but becomes FTC; CLT requires even more, but is arguably the most important conclusion of classic probability, since their regularity condition are almost always (at least approximately) meet in intended practices. The same applies for classic frameworks of motion of entities, our mere advantage over them lies only in that looser requiremenrs like non existence of cosmoc rays and \texttt{java.lang.Errors}, that such condition is almost (if does) always clearly specified and handled with proper runners, and that consequence of failure is again handlable with an augmented (probably more ugly if one fail to enter the relam of GUT) framework by offering more freedom to / less abstraction in runners.
+\end{remark}
 
 % ============================ The End Of Section ============================
 
@@ -1803,7 +2394,7 @@ Deferred into the next section.
 
 % ============================ The End Of Section ============================
 
-\chapter{References}
+\printbibliography
 
 \printindex
 
